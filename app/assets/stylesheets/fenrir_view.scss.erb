@@ -1,0 +1,19 @@
+<% FenrirView.configuration.included_stylesheets.each do |included_stylesheet| %>
+  <%= require_asset included_stylesheet %>
+<% end %>
+<% if Dir.exist?(FenrirView.configuration.components_path) %>
+  <% depend_on FenrirView.configuration.components_path.to_s %>
+  <% Dir.glob(FenrirView.configuration.components_path.join('*')).each do |component_dir|
+    component = File.basename component_dir
+    begin
+      require_asset "#{component}/#{component}.scss"
+    rescue Sprockets::FileNotFound
+      Rails.logger.debug("FenrirView: stylesheet not found for component '#{component}'")
+  %>
+/* FenrirView: stylesheet not found for component '<%= component %>' */
+  <%
+    end
+  end %>
+<% else %>
+  <% depend_on Rails.root.join('app').to_s %>
+<% end %>

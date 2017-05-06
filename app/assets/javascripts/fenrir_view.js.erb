@@ -1,0 +1,16 @@
+<% if Dir.exist?(FenrirView.configuration.components_path) %>
+  <% depend_on FenrirView.configuration.components_path.to_s %>
+  <% Dir.glob(FenrirView.configuration.components_path.join('*')).each do |component_dir|
+    component = File.basename component_dir
+    begin
+      require_asset "#{component}/#{component}.js"
+    rescue Sprockets::FileNotFound
+      Rails.logger.debug("FenrirView: javascript not found for component '#{component}'")
+  %>
+/* FenrirView: javascript not found for component '<%= component %>' */
+  <%
+    end
+  end %>
+<% else %>
+  <% depend_on Rails.root.join('app').to_s %>
+<% end %>
