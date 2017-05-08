@@ -1,7 +1,6 @@
 module FenrirView
-  class StyleguideController < ::ApplicationController
-    layout "fenrir_view"
-
+  class StyleguideController < FenrirController
+    
     def show
       @component = FenrirView::Component.new(params[:id])
     end

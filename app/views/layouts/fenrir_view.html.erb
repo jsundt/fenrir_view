@@ -13,9 +13,23 @@
   </div>
   <div class="mv-flex-wrapper">
     <div class="mv-sidebar">
+      <h3>DOCS</h3>
+      <ul>
+        <% @page.docs.each do |doc| %>
+          <li>
+            <ul>
+              <% doc.sections.each do |section| %>
+                <li>
+                  <%= link_to section.title, fenrir_docs_path(section: doc.name, page: section.path) %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
       <h3>COMPONENTS</h3>
       <ul>
-        <%- mv_components.each do |component| %>
+        <% @page.components.each do |component| %>
           <li>
             <%= link_to component.title, styleguide_path(id: component.name) %>
           </li>

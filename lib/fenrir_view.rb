@@ -2,6 +2,7 @@ require "fenrir_view/version"
 require "fenrir_view/configuration"
 require "fenrir_view/presenter"
 require "fenrir_view/component"
+require "fenrir_view/docs"
 
 module FenrirView
   def self.configuration

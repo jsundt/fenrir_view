@@ -31,7 +31,7 @@ module FenrirView
       end
 
       def stylesheet_engine
-        app_generators[:stylesheet_engine] || "css"
+        app_generators[:stylesheet_engine] || "scss"
       end
 
       def javascript_engine
