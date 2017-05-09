@@ -8,19 +8,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="mv-header">
-    <div class="mv-header__logo">STYLEGUIDE</div>
-  </div>
   <div class="mv-flex-wrapper">
-    <div class="mv-sidebar">
-      <h3>DOCS</h3>
+    <div class="mv-sidebar" style="overflow-y:scroll;">
       <ul>
         <% @page.docs.each do |doc| %>
-          <li>
+          <li class="mv-ul-section">
             <ul>
               <% doc.sections.each do |section| %>
                 <li>
-                  <%= link_to section.title, fenrir_docs_path(section: doc.name, page: section.path) %>
+                  <%= link_to section.title, fenrir_docs_path(section: doc.name, page: section.path), class: section.id == 0 ? 'mv-big-link' : '' %>
                 </li>
               <% end %>
             </ul>

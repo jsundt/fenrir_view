@@ -23,6 +23,18 @@ module FenrirView
             'welcome': 'Overview',
             'principles': 'Design Principles',
           },
+          'guidelines': {
+            'welcome': 'Design Language',
+            'colors': 'Color Palette',
+            'typography': 'Typography Hierarchy',
+          },
+          'blocks': {
+            'welcome': 'Building blocks',
+            'wrappers': 'Wrappers',
+            'objects': 'Objects',
+            'grid': 'Grids',
+            'utilities': 'Utilities',
+          },
         }
       end
     end
