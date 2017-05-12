@@ -42,10 +42,26 @@ module FenrirView
 
     def stubs_extra_info
       if styleguide_stubs.is_a?(Hash) && styleguide_stubs.key?(:meta)
-        styleguide_stubs[:meta]
+        styleguide_stubs[:meta].symbolize_keys
       else
         {}
       end
+    end
+
+    def meta_description
+      stubs_extra_info[:description]
+    end
+
+    def meta_status
+      stubs_extra_info[:status]
+    end
+
+    def meta_used_by?
+      stubs_extra_info[:used_by].any?
+    end
+
+    def meta_used_by
+      stubs_extra_info[:used_by].join(', ')
     end
 
     def stubs_correct_format?
