@@ -51,6 +51,7 @@ module FenrirView
 
     initializer "fenrir_view.assets" do |app|
       Rails.application.config.assets.paths << FenrirView.configuration.components_path
+      # Rails.application.config.assets.precompile += [ /(^inline[^_\/]|\/[^_])[^\/]*.(css)$/ ] # precompile any CSS or JS file that doesn't start with _
       Rails.application.config.assets.precompile += %w( fenrir_view/styleguide.css
                                                         fenrir_view/styleguide.js )
     end
@@ -66,6 +67,7 @@ module FenrirView
       ActiveSupport.on_load :action_controller do
         helper FenrirView::ApplicationHelper
         helper FenrirView::ComponentHelper
+        helper FenrirView::AssetsHelper
       end
     end
   end
