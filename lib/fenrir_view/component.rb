@@ -1,8 +1,9 @@
 module FenrirView
   class Component
-    attr_reader :name
+    attr_reader :variant, :name
 
-    def initialize(name)
+    def initialize(variant, name)
+      @variant = variant
       @name = name
     end
 
@@ -29,7 +30,7 @@ module FenrirView
     end
 
     def stubs_file
-      FenrirView.configuration.components_path.join(name, "#{name}.yml")
+      FenrirView.configuration.system_path.join(variant, name, "#{name}.yml")
     end
 
     def stubs?

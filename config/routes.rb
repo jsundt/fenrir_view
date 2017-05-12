@@ -3,5 +3,7 @@ FenrirView::Engine.routes.draw do
 
   resources :styleguide, only: [:index, :show], path: FenrirView.configuration.styleguide_path
 
+  get "styleguide/:variant/:id", to: 'styleguide#show', as: 'components'
+
   get 'docs/:section(/:page)', to: 'docs#show', as: 'fenrir_docs'
 end

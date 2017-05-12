@@ -23,14 +23,18 @@
           </li>
         <% end %>
       </ul>
-      <h3>COMPONENTS</h3>
-      <ul>
-        <% @page.components.each do |component| %>
-          <li>
-            <%= link_to component.title, styleguide_path(id: component.name) %>
-          </li>
+        <% @page.components.each do |section, data| %>
+          <h3 class="c-text--caption"><%= section %></h3>
+          <% unless data.empty? %>
+            <ul>
+              <% data.each do |item| %>
+                <li>
+                  <%= link_to item.title, components_path(variant: section, id: item.name) %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
         <% end %>
-      </ul>
     </div>
     <div class="mv-main">
       <%= yield %>

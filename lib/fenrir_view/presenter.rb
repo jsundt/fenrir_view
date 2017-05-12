@@ -3,10 +3,11 @@ module FenrirView
     class_attribute :_properties, instance_accessor: false
     self._properties = {}
 
-    attr_reader :slug, :properties
+    attr_reader :slug, :variant, :properties
 
-    def initialize(slug, properties = {})
+    def initialize(slug, variant, properties = {})
       @slug = slug
+      @variant = variant
       @properties = default_properties.deep_merge(properties)
     end
 
@@ -31,7 +32,7 @@ module FenrirView
 
     class << self
       def component_for(*args)
-        klass = "#{args.first.to_s.camelize}Component".safe_constantize
+        klass = "#{args.first.to_s.camelize}Facade".safe_constantize
         klass ||= self
         klass.new(*args)
       end
