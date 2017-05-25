@@ -22,29 +22,6 @@ module FenrirView
       end
     end
 
-    initializer "fenrir_view.docs_pages" do |app|
-      FenrirView.configure do |c|
-        c.docs_pages ||= {
-          'overview': {
-            'welcome': 'Overview',
-            'principles': 'Design Principles',
-          },
-          'guidelines': {
-            'welcome': 'Design Language',
-            'colors': 'Color Palette',
-            'typography': 'Typography Hierarchy',
-          },
-          'blocks': {
-            'welcome': 'Building blocks',
-            'wrappers': 'Wrappers',
-            'objects': 'Objects',
-            'grid': 'Grids',
-            'utilities': 'Utilities',
-          },
-        }
-      end
-    end
-
     initializer "fenrir_view.load_classes", before: :set_autoload_paths do |app|
       FenrirView.configuration.system_variants.each do |variant|
         system_paths = "#{FenrirView.configuration.system_path}/#{variant}/{*}"

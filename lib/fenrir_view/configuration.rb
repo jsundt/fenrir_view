@@ -5,7 +5,6 @@ module FenrirView
     attr_accessor :system_variants
     attr_reader :system_path
     attr_reader :docs_path
-    attr_accessor :docs_pages
 
     def initialize
       @included_stylesheets = []

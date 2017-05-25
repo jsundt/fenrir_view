@@ -1,10 +1,11 @@
 module FenrirView
   class StyleguideFacade
     def initialize()
+      @docs = doc_pages
     end
 
     def docs
-      FenrirView.configuration.docs_pages.map do |key, value|
+      @docs.map do |key, value|
         FenrirView::Docs.new(key, value)
       end
     end
@@ -23,6 +24,16 @@ module FenrirView
       end
 
       components
+    end
+
+    private
+
+    def doc_pages
+      @docs = YAML.load_file(docs_index_file)
+    end
+
+    def docs_index_file
+      FenrirView.configuration.system_path.join('docs', "index.yml")
     end
   end
 end

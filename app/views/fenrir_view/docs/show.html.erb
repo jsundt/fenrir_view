@@ -1,1 +1,6 @@
-<%= render @doc %>
+<%= begin
+    render @doc
+  rescue ActionView::MissingTemplate => e
+    render 'fenrir_view/docs/missing'
+  end
+%>
