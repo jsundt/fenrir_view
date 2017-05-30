@@ -1,6 +1,8 @@
 /*
 *= require_self
-*= require fenrir_view
+*= require elements
+*= require components
+*= require modules
 *= require fenrir_view/prism
 */
 

@@ -1,0 +1,15 @@
+<% FenrirView.configuration.included_stylesheets.each do |included_stylesheet| %>
+  <%= require_asset included_stylesheet %>
+<% end %>
+
+<% if Dir.exist?(FenrirView.configuration.system_path.join("modules")) %>
+  <% depend_on FenrirView.configuration.system_path.join("modules").to_s %>
+  <% Dir.glob(FenrirView.configuration.system_path.join("modules/*")).each do |module_dir| %>
+    <% module_name = File.basename module_dir %>
+    <% module_asset = "#{module_name}/#{module_name}.scss" %>
+
+    @import '<%= module_asset %>';
+  <% end %>
+<% else %>
+  /* FenrirView: Modules directory not found! */  
+<% end %>
