@@ -1,5 +1,6 @@
 <% if Dir.exist?(FenrirView.configuration.system_path) %>
   <% depend_on FenrirView.configuration.system_path.to_s %>
+  
   <% Dir.glob(FenrirView.configuration.system_path.join('*')).each do |variant_dir|
     Dir.glob("#{variant_dir}/*").each do |component_dir|
       component = File.basename component_dir

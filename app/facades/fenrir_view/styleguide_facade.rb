@@ -14,11 +14,8 @@ module FenrirView
       components = {}
 
       FenrirView.configuration.system_variants.each do |variant|
-        dirs = FenrirView.configuration.system_path.join(variant, '*')
-
         components[variant] = []
-
-        Dir.glob(dirs).map do |dir|
+        Dir.glob(FenrirView.pattern(variant)).map do |dir|
           components[variant] << FenrirView::Component.new( variant, File.basename(dir) )
         end
       end

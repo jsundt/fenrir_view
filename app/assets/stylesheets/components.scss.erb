@@ -4,11 +4,13 @@
 
 <% if Dir.exist?(FenrirView.configuration.system_path.join("components")) %>
   <% depend_on FenrirView.configuration.system_path.join("components").to_s %>
-  <% Dir.glob(FenrirView.configuration.system_path.join("components/*")).each do |component_dir| %>
+
+  <% Dir.glob( FenrirView.pattern("components") ).each do |component_dir| %>
     <% component_name = File.basename component_dir %>
     <% component_asset = "#{component_name}/#{component_name}.scss" %>
 
-    @import '<%= component_asset %>';
+    /* imported component: <%= component_name %> */
+    @import '<%= component_asset %>'; 
   <% end %>
 <% else %>
   /* FenrirView: Components directory not found! */  

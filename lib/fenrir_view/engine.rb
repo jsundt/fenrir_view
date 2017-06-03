@@ -24,6 +24,11 @@ module FenrirView
 
     initializer "fenrir_view.load_classes", before: :set_autoload_paths do |app|
       FenrirView.configuration.system_variants.each do |variant|
+        # Load system patterns
+        system_paths = "#{FenrirView.root}/lib/fenrir_view/design_system/#{variant}/{*}"
+        app.config.autoload_paths += Dir[system_paths]
+
+        # Load sandbox patterns
         system_paths = "#{FenrirView.configuration.system_path}/#{variant}/{*}"
         app.config.autoload_paths += Dir[system_paths]
       end
@@ -34,6 +39,7 @@ module FenrirView
 
     initializer "fenrir_view.assets" do |app|
       FenrirView.configuration.system_variants.each do |variant|
+        Rails.application.config.assets.paths << "#{FenrirView.root}/lib/fenrir_view/design_system/#{variant}/"
         Rails.application.config.assets.paths << "#{FenrirView.configuration.system_path}/#{variant}/"
       end
 
@@ -46,6 +52,7 @@ module FenrirView
     initializer "fenrir_view.append_view_paths" do |app|
       ActiveSupport.on_load :action_controller do
         FenrirView.configuration.system_variants.each do |variant|
+          append_view_path "#{FenrirView.root}/lib/fenrir_view/design_system/#{variant}/"
           append_view_path "#{FenrirView.configuration.system_path}/#{variant}/"
         end
         append_view_path FenrirView.configuration.docs_path

@@ -4,10 +4,12 @@
 
 <% if Dir.exist?(FenrirView.configuration.system_path.join("modules")) %>
   <% depend_on FenrirView.configuration.system_path.join("modules").to_s %>
-  <% Dir.glob(FenrirView.configuration.system_path.join("modules/*")).each do |module_dir| %>
+
+  <% Dir.glob( FenrirView.pattern("modules") ).each do |module_dir| %>
     <% module_name = File.basename module_dir %>
     <% module_asset = "#{module_name}/#{module_name}.scss" %>
 
+    /* imported module: <%= component_name %> */
     @import '<%= module_asset %>';
   <% end %>
 <% else %>
