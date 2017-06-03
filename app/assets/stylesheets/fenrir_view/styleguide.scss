@@ -1,21 +1,31 @@
 /*
 *= require_self
-*= require elements
-*= require components
-*= require modules
 *= require fenrir_view/prism
 */
 
-/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
 
-body{
-  font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+@import 'fenrir/tools';  //At the very top, scss functions for fonts and colors
+
+@import 'base/config';   // Your project settings
+@import 'fenrir/awoken'; // Initiate the framework test
+
+@import 'elements';
+@import 'components';
+@import 'modules';
+
+@import 'fenrir/utilities'; // Generate utility classes for use in html files
+
+
+.reset-ul {
+  list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-/* FlEX WRAPPER */
+.block-link {
+  display: block;
+}
+
+
 
 .mv-flex-wrapper{
   display: flex;
@@ -34,10 +44,10 @@ body{
 }
 
 .mv-sidebar h3{
-  font-weight: bold;
-  font-size: 16px;
-  margin-top: 25px;
-  color: #444;
+  // font-weight: bold;
+  // font-size: 16px;
+  // margin-top: 25px;
+  // color: #444;
 }
 
 .mv-sidebar ul{
@@ -51,22 +61,22 @@ body{
 }
 
 .mv-sidebar ul li a{
-  color: #555;
-  font-size: 15px;
-  text-decoration: none;
-  font-weight: 300;
-  display: block;
-  padding: 2px 0;
+  // color: #555;
+  // font-size: 15px;
+  // text-decoration: none;
+  // font-weight: 300;
+  // display: block;
+  // padding: 2px 0;
 }
 
 .mv-sidebar .mv-big-link {
-  font-size: 20px;
-  text-decoration: none;
-  font-weight: 300;
+  // font-size: 20px;
+  // text-decoration: none;
+  // font-weight: 300;
 }
 
 .mv-sidebar ul li a:hover{
-  color: #000;
+  // color: #000;
 }
 
 /* MAIN */
@@ -74,7 +84,7 @@ body{
   box-sizing: border-box;
   width: 82%;
   float: left;
-  /*padding: 30px 60px;*/
+  // padding: 30px 60px;
 }
 .mv-main__header{
   margin-bottom: 40px;
@@ -88,6 +98,10 @@ body{
 
 .mv-main__description {
 }
+
+
+
+
 
 /* COMPONENT */
 .mv-component{

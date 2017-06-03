@@ -11,15 +11,16 @@
   <div class="mv-flex-wrapper">
     <div class="mv-sidebar" style="overflow-y:scroll;max-height: 100vh;">      
       <% @page.docs.each do |doc| %>
-        <h2><%= doc.title %></h2>
+        <h2 class="c-text--lead u-color--coolgray"><%= doc.title %></h2>
 
-        <ul>
+        <ul class="u-margin-b-50 reset-ul">
           <% doc.sections.each do |section| %>
-            <li class="mv-ul-section">
-              <ul>
+            <li>
+              <ul class="u-margin-b-25 reset-ul">
                 <% section.pages.each do |page| %>
                   <li>
-                    <%= link_to page.title, fenrir_docs_path(section: section.path, page: page.path), class: page.id == 0 ? 'mv-big-link' : '' %>
+                    <%= link_to page.title, fenrir_docs_path(section: section.path, page: page.path), 
+                    class: page.id == 0 ? 'c-text--product block-link' : 'c-text--note block-link' %>
                   </li>
                 <% end %>
               </ul>
@@ -28,16 +29,16 @@
         </ul>
       <% end %>
 
-      <h2>UI Patterns</h2>
+      <h2 class="c-text--lead u-color--coolgray">UI Patterns</h2>
 
       <% @page.components.each do |section, data| %>
-        <h3 class="mv-big-link"><%= section.titleize %></h3>
+        <h3 class="c-text--product"><%= section.titleize %></h3>
 
         <% unless data.empty? %>
-          <ul>
+          <ul class="reset-ul">
             <% data.each do |item| %>
               <li>
-                <%= link_to item.title, components_path(variant: section, id: item.name) %>
+                <%= link_to item.title, components_path(variant: section, id: item.name), class: 'c-text--note block-link' %>
               </li>
             <% end %>
           </ul>
