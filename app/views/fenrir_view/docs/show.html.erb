@@ -1,5 +1,5 @@
 <%= begin
-    render @doc
+    render @partial
   rescue ActionView::MissingTemplate => e
     render 'fenrir_view/docs/missing'
   end

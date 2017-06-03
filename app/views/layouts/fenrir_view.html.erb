@@ -11,7 +11,7 @@
   <div class="mv-flex-wrapper">
     <div class="mv-sidebar" style="overflow-y:scroll;max-height: 100vh;">      
       <% @page.docs.each do |doc| %>
-        <h2 class="c-text--lead u-color--coolgray"><%= doc.title %></h2>
+        <h2 class="c-text--label"><%= doc.title %></h2>
 
         <ul class="u-margin-b-50 reset-ul">
           <% doc.sections.each do |section| %>
@@ -19,8 +19,10 @@
               <ul class="u-margin-b-25 reset-ul">
                 <% section.pages.each do |page| %>
                   <li>
+                    <% page_class = current_page?(fenrir_docs_path(section: section.path, page: page.path)) ? ' u-color--success' : '' %>
+
                     <%= link_to page.title, fenrir_docs_path(section: section.path, page: page.path), 
-                    class: page.id == 0 ? 'c-text--product block-link' : 'c-text--note block-link' %>
+                    class: ( page.id == 0 ? 'c-text--product block-link' : 'c-text--note block-link' ) + page_class %>
                   </li>
                 <% end %>
               </ul>
@@ -29,7 +31,7 @@
         </ul>
       <% end %>
 
-      <h2 class="c-text--lead u-color--coolgray">UI Patterns</h2>
+      <h2 class="c-text--label">UI Patterns</h2>
 
       <% @page.components.each do |section, data| %>
         <h3 class="c-text--product"><%= section.titleize %></h3>
@@ -37,11 +39,15 @@
         <% unless data.empty? %>
           <ul class="reset-ul">
             <% data.each do |item| %>
+              <% page_class = current_page?(components_path(variant: section, id: item.name)) ? ' u-color--success' : '' %>
+            
               <li>
-                <%= link_to item.title, components_path(variant: section, id: item.name), class: 'c-text--note block-link' %>
+                <%= link_to item.title, components_path(variant: section, id: item.name), class: 'c-text--note block-link' + page_class %>
               </li>
             <% end %>
           </ul>
+        <% else %>
+          <p class="c-text--note u-margin-b-25 u-color--coolgray">Nothing to see :(</p>
         <% end %>
       <% end %>
     </div>

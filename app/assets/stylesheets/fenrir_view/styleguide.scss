@@ -23,6 +23,12 @@
 
 .block-link {
   display: block;
+  padding: 2px 0;
+
+  &:hover {
+    color: color('primary');
+    text-decoration: none;
+  }
 }
 
 

@@ -9,7 +9,7 @@ module FenrirView
     end
 
     def show
-      @doc = "/#{ @section.to_s }/#{ @doc.to_s }"
+      @partial = "/#{ @section.to_s }/#{ @doc.to_s }"
     end
 
     private
@@ -17,7 +17,6 @@ module FenrirView
     def fallback_section
       @section = doc_sections.include?(params[:section]&.to_sym) ? params[:section] : doc_sections.first
       @doc = params[:page] ? params[:page] : @docs[@docs.keys.first][@section].first[0]
-      
     end
 
     def doc_sections
