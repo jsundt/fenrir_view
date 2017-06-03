@@ -9,32 +9,40 @@
 </head>
 <body>
   <div class="mv-flex-wrapper">
-    <div class="mv-sidebar" style="overflow-y:scroll;">
-      <ul>
-        <% @page.docs.each do |doc| %>
-          <li class="mv-ul-section">
-            <ul>
-              <% doc.sections.each do |section| %>
-                <li>
-                  <%= link_to section.title, fenrir_docs_path(section: doc.name, page: section.path), class: section.id == 0 ? 'mv-big-link' : '' %>
-                </li>
-              <% end %>
-            </ul>
-          </li>
-        <% end %>
-      </ul>
-        <% @page.components.each do |section, data| %>
-          <h3 class="c-text--caption"><%= section %></h3>
-          <% unless data.empty? %>
-            <ul>
-              <% data.each do |item| %>
-                <li>
-                  <%= link_to item.title, components_path(variant: section, id: item.name) %>
-                </li>
-              <% end %>
-            </ul>
+    <div class="mv-sidebar" style="overflow-y:scroll;max-height: 100vh;">      
+      <% @page.docs.each do |doc| %>
+        <h2><%= doc.title %></h2>
+
+        <ul>
+          <% doc.sections.each do |section| %>
+            <li class="mv-ul-section">
+              <ul>
+                <% section.pages.each do |page| %>
+                  <li>
+                    <%= link_to page.title, fenrir_docs_path(section: section.path, page: page.path), class: page.id == 0 ? 'mv-big-link' : '' %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
           <% end %>
+        </ul>
+      <% end %>
+
+      <h2>UI Patterns</h2>
+
+      <% @page.components.each do |section, data| %>
+        <h3 class="mv-big-link"><%= section.titleize %></h3>
+
+        <% unless data.empty? %>
+          <ul>
+            <% data.each do |item| %>
+              <li>
+                <%= link_to item.title, components_path(variant: section, id: item.name) %>
+              </li>
+            <% end %>
+          </ul>
         <% end %>
+      <% end %>
     </div>
     <div class="mv-main">
       <%= yield %>

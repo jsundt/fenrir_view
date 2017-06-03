@@ -1,7 +1,5 @@
 module FenrirView
   class Docs
-    attr_reader :name
-
     def initialize(name, sections)
       @name = name
       @sections = sections
@@ -12,11 +10,32 @@ module FenrirView
     end
 
     def sections
-      @sections.map.with_index do |value, index|
+      @sections.map do |key, value|
+        FenrirView::DocSection.new(key, value)
+      end
+    end
+  end
+
+  class DocSection
+    def initialize(name, pages)
+      @name = name
+      @pages = pages
+    end
+
+    def title
+      @name.humanize
+    end
+
+    def path
+      @name
+    end
+
+    def pages
+      @pages.map.with_index do |(key, value), index|
         OpenStruct.new({
           id: index,
-          title: value[1],
-          path: value[0]
+          title: value.humanize,
+          path: key
         })
       end
     end

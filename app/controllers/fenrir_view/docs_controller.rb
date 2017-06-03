@@ -9,22 +9,30 @@ module FenrirView
     end
 
     def show
-      unless @docs.keys.include?(params[:section]) || params[:page].nil?
-        redirect_to fenrir_docs_path(section: @section, page: @doc)
-      end
-
-      @doc = "/#{ @section }/#{ @doc }"
+      @doc = "/#{ @section.to_s }/#{ @doc.to_s }"
     end
 
     private
 
     def fallback_section
-      @section = @docs.keys.include?(params[:section]) ? params[:section] : @docs.first[0]
-      @doc = params[:page] ? params[:page] : @docs[@section].first[0]
+      @section = doc_sections.include?(params[:section]&.to_sym) ? params[:section] : doc_sections.first
+      @doc = params[:page] ? params[:page] : @docs[@docs.keys.first][@section].first[0]
+      
+    end
+
+    def doc_sections
+      @sections = []
+
+      @docs.keys.each do |key|
+        @sections += @docs[key].keys
+      end
+
+      @sections
     end
 
     def doc_pages
-      @docs = YAML.load_file(docs_index_file)
+      yml_docs = YAML.load_file(docs_index_file)
+      @docs = JSON.parse(JSON[yml_docs], symbolize_names: true)
     end
 
     def docs_index_file
