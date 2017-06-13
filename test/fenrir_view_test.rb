@@ -13,7 +13,7 @@ class FenrirViewTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_match(/\.header {/, response.body)
     refute_match(/Sprockets::FileNotFound/, response.body)
-    assert_match(/FenrirView: stylesheet not found for component 'paragraph'/, response.body)
+    assert_match(/FenrirView: Component: paragraph not found! Looked at: 'paragraph\/paragraph.scss'/, response.body)
   end
 
   test "javascripts are properly served" do

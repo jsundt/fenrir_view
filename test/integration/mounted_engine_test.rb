@@ -4,11 +4,6 @@ class MountedEngineTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  test "Has the styleguide route" do
-    get "/fenrir_view/styleguide"
-    assert_response :success
-  end
-
   test "Custom path can be applied to styleguide resource" do
     styleguide_path = FenrirView.configuration.styleguide_path
 

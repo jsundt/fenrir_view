@@ -17,7 +17,10 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
     component = FenrirView::Component.new("components", "header")
     expected_stub =
       {
-        meta: "There is this different classes",
+        meta: {
+          status: "Testing",
+          description: "There is this different classes"
+        },
         stubs:
           [
             {
