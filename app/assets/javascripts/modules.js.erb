@@ -1,0 +1,14 @@
+<% if Dir.exist?( FenrirView.pattern_type("modules") ) %>
+  <% Dir.glob( FenrirView.patterns_for("modules") ).each do |module_dir| %>
+    <% module_name = File.basename module_dir %>
+    <% module_asset = "#{module_name}/#{module_name}.js" %>
+    <% begin %>
+      <%= require_asset module_asset %>
+    <% rescue Sprockets::FileNotFound %>
+      <% Rails.logger.debug("FenrirView: javascript not found for modules/'#{module_name}', looked in: #{module_asset}") %>
+      /* FenrirView: javascript not found for module '<%= module_name %>', looked for: '<%= module_asset %>' */
+    <% end %>
+  <% end %>
+<% else %>
+  /* FenrirView: modules directory not found! */
+<% end %>

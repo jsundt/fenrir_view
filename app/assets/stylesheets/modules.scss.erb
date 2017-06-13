@@ -1,12 +1,15 @@
 <% if Dir.exist?( FenrirView.pattern_type("modules") ) %>
-  <% depend_on FenrirView.pattern_type("modules") %>
-
   <% Dir.glob( FenrirView.patterns_for("modules") ).each do |module_dir| %>
     <% module_name = File.basename module_dir %>
     <% module_asset = "#{module_name}/#{module_name}.scss" %>
+    <% begin %>
+      <% depend_on module_asset %>
 
-    /* imported module: <%= module_name %> */
-    @import '<%= module_asset %>';
+      /* imported module: <%= module_name %> */
+      @import '<%= module_asset %>';
+    <% rescue Sprockets::FileNotFound %>
+      /* FenrirView: Module: <%= module_name %> not found! Looked at: '<%= component_asset %>' */
+    <% end %>
   <% end %>
 <% else %>
   /* FenrirView: Modules directory not found! */  
