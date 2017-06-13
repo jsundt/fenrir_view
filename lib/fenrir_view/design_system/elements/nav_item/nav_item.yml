@@ -1,0 +1,18 @@
+
+:meta:
+  status: "testing"
+  description: "A navigation link"
+  used_by:
+  - "Sidebars"
+  - "Top navigation"
+
+:stubs:
+-
+  :title: "Home Page"
+  :link: "/"
+  :current_page: '/product'
+
+-
+  :title: "Product Page"
+  :link: "/product"
+  :current_page: '/product'
