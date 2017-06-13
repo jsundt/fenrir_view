@@ -1,7 +1,7 @@
 class MountedEngineTest < ActionDispatch::IntegrationTest
   test "Has been mounted successfully" do
     get "/fenrir_view"
-    assert_response :success
+    assert_response :redirect
   end
 
   test "Has the styleguide route" do

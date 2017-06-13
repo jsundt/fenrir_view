@@ -7,15 +7,8 @@ class FenrirViewTest < ActionDispatch::IntegrationTest
     assert_equal ::Rails::Engine, FenrirView::Engine.superclass
   end
 
-  test "global stylesheets are properly served" do
-    get "/assets/fenrir_view.css"
-
-    assert_response :success
-    assert_match(/Global Stylesheet Beginning/, response.body)
-  end
-
   test "stylesheets are properly served" do
-    get "/assets/fenrir_view.css"
+    get "/assets/components.css"
 
     assert_response :success
     assert_match(/\.header {/, response.body)
@@ -24,7 +17,7 @@ class FenrirViewTest < ActionDispatch::IntegrationTest
   end
 
   test "javascripts are properly served" do
-    get "/assets/fenrir_view.js"
+    get "/assets/components.js"
 
     assert_response :success
     assert_match(/console\.log\("header"\)/, response.body)
@@ -33,14 +26,14 @@ class FenrirViewTest < ActionDispatch::IntegrationTest
   end
 
   test "shows styleguide" do
-    get "/fenrir_view"
+    get "/fenrir_view/docs/overview/index"
 
     assert_response :success
     assert_match(/Select one of the components from the side to view its examples and documentation/, response.body)
   end
 
   test "shows specific component" do
-    get "/fenrir_view/styleguide/header"
+    get "/fenrir_view/styleguide/components/header"
 
     assert_response :success
     assert_match(/Header/, response.body)
@@ -48,14 +41,14 @@ class FenrirViewTest < ActionDispatch::IntegrationTest
   end
 
   test "shows specific component that uses a main app url okay" do
-    get "/fenrir_view/styleguide/header"
+    get "/fenrir_view/styleguide/components/header"
 
     assert_response :success
     assert_match(/href=\"\/products\/2\"/, response.body)
   end
 
   test "shows a hint message if the component stub file is empty" do
-    get "/fenrir_view/styleguide/breadcrumbs"
+    get "/fenrir_view/styleguide/components/breadcrumbs"
 
     assert_response :success
     assert_match(/Hint/, response.body)
@@ -64,7 +57,7 @@ class FenrirViewTest < ActionDispatch::IntegrationTest
   end
 
   test "shows a hint message if the component stub file is not found" do
-    get "/fenrir_view/styleguide/something"
+    get "/fenrir_view/styleguide/components/something"
 
     assert_response :success
     assert_match(/Hint/, response.body)

@@ -2,19 +2,19 @@ require "test_helper"
 
 class FenrirViewComponentTest < ActiveSupport::TestCase
   def test_name
-    component = FenrirView::Component.new("header")
+    component = FenrirView::Component.new("components", "header")
 
     assert_equal "header", component.name
   end
 
   def test_humanized_title
-    component = FenrirView::Component.new("social_media_icons")
+    component = FenrirView::Component.new("components", "social_media_icons")
 
     assert_equal "Social media icons", component.title
   end
 
   def test_styleguide_stubs
-    component = FenrirView::Component.new("header")
+    component = FenrirView::Component.new("components", "header")
     expected_stub =
       {
         meta: "There is this different classes",
@@ -36,7 +36,7 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
   end
 
   def test_component_stubs
-    component = FenrirView::Component.new("header")
+    component = FenrirView::Component.new("components", "header")
     expected_stub =
       [
         {
@@ -54,12 +54,12 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
   end
 
   def test_component_stubs?
-    component_with_stubs = FenrirView::Component.new("header")
-    component_with_empty_stub_file = FenrirView::Component.new("breadcrumbs")
+    component_with_stubs = FenrirView::Component.new("components", "header")
+    component_with_empty_stub_file = FenrirView::Component.new("components", "breadcrumbs")
     component_without_stub_file =
-      FenrirView::Component.new("social_media_icons")
+      FenrirView::Component.new("components", "social_media_icons")
     compoenet_with_stubs_but_incorrect_format =
-      FenrirView::Component.new("card")
+      FenrirView::Component.new("components", "card")
     assert_equal true, component_with_stubs.component_stubs?
     assert_equal false, component_without_stub_file.component_stubs?
     assert_equal false, component_with_empty_stub_file.component_stubs?
@@ -68,12 +68,12 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
   end
 
   def test_stubs_extra_info
-    component_with_extra_info = FenrirView::Component.new("header")
+    component_with_extra_info = FenrirView::Component.new("components", "header")
     component_with_empty_stub_file =
-      FenrirView::Component.new("breadcrumbs")
+      FenrirView::Component.new("components", "breadcrumbs")
     component_without_stub_file =
-      FenrirView::Component.new("paragraph")
-    expected_extra_info_stub = "There is this different classes"
+      FenrirView::Component.new("components", "paragraph")
+    expected_extra_info_stub = { status: "Testing", description: "There is this different classes" }
 
     assert_equal expected_extra_info_stub, component_with_extra_info.
       stubs_extra_info
@@ -82,13 +82,13 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
   end
 
   def test_stubs_extra_info?
-    component_with_stubs = FenrirView::Component.new("header")
+    component_with_stubs = FenrirView::Component.new("components", "header")
     component_with_empty_stub_file =
-      FenrirView::Component.new("breadcrumbs")
+      FenrirView::Component.new("components", "breadcrumbs")
     component_without_stub_file =
-      FenrirView::Component.new("social_media_icons")
+      FenrirView::Component.new("components", "social_media_icons")
     component_with_stubs_but_no_extra_info =
-      FenrirView::Component.new("card")
+      FenrirView::Component.new("components", "card")
 
     assert_equal true, component_with_stubs.stubs_extra_info?
     assert_equal false, component_without_stub_file.stubs_extra_info?
@@ -98,12 +98,12 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
   end
 
   def test_stubs_correct_format?
-    component_with_correct_stubs = FenrirView::Component.new("header")
-    component_with_empty_stub_file = FenrirView::Component.new("breadcrumbs")
+    component_with_correct_stubs = FenrirView::Component.new("components", "header")
+    component_with_empty_stub_file = FenrirView::Component.new("components", "breadcrumbs")
     component_without_stub_file =
-      FenrirView::Component.new("social_media_icons")
+      FenrirView::Component.new("components", "social_media_icons")
     component_with_stubs_but_old_syntax =
-      FenrirView::Component.new("card")
+      FenrirView::Component.new("components", "card")
 
     assert_equal true, component_with_correct_stubs.stubs_correct_format?
     assert_equal false, component_without_stub_file.stubs_correct_format?
@@ -113,16 +113,16 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
   end
 
   def test_stubs_file
-    component = FenrirView::Component.new("header")
+    component = FenrirView::Component.new("components", "header")
 
-    expected_stubs_file = Rails.root.join("app/components/header/header.yml")
+    expected_stubs_file = Rails.root.join("app/design_system/components/header/header.yml")
     assert_equal expected_stubs_file, component.stubs_file
   end
 
   def test_stubs?
-    component_with_stubs = FenrirView::Component.new("header")
-    component_without_stub_file = FenrirView::Component.new("social_media_icons")
-    component_with_empty_stub_file = FenrirView::Component.new("breadcrumbs")
+    component_with_stubs = FenrirView::Component.new("components", "header")
+    component_without_stub_file = FenrirView::Component.new("components", "social_media_icons")
+    component_with_empty_stub_file = FenrirView::Component.new("components", "breadcrumbs")
 
     assert_equal true, component_with_stubs.stubs?
     assert_equal false, component_without_stub_file.stubs?
