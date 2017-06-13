@@ -12,10 +12,10 @@
     <div class="sidebar-wrapper">
       <div class="section-nav js-scrollbar" id="styleguide-nav" data-turbolinks-permanent>
 
-        <h1 class="c-text--lead u-padding-y-50" style="margin-left:15px;">Design System</h1>
+        <h1 class="c-text--lead u-padding-y-50" style="margin-left:15px;">Charlie Design System</h1>
 
         <% @page.docs.each do |doc| %>
-          <h2 class="c-text--label" style="margin-left:15px;"><%= doc.title %></h2>
+          <h2 class="sidebar-section__title"><%= doc.title %></h2>
 
           <ul class="u-margin-b-50 reset-ul">
             <% doc.sections.each do |section| %>
@@ -32,7 +32,7 @@
           </ul>
         <% end %>
 
-        <h2 class="c-text--label" style="margin-left:15px;">UI Patterns</h2>
+        <h2 class="sidebar-section__title">UI Patterns</h2>
 
         <% @page.components.each do |section, data| %>
           <h3 class="c-text--product" style="margin-left:15px;"><%= section.titleize %></h3>
