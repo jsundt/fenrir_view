@@ -1,0 +1,19 @@
+<div class="c-modal js-modal">
+  <div class="c-modal__header u-padding-y-25 <%= style %>">
+    <h1 class="c-text--lead"><%= title %></h1>
+  </div>
+
+  <div class="w-slice u-padding-y-25 u-bg--white-115">
+    <% if has_content? %>
+      <p class="c-text--product"><%= modal_body %></p>
+    <% elsif has_partial? %>
+      <%= render modal_body %>
+    <% end %>
+  </div>
+
+  <div class="c-modal__actions u-padding-y-25 u-bg--silver">
+    <% user_actions.each do |action| %>
+      <%= render_element('button', action) %>
+    <% end %>
+  </div>
+</div>

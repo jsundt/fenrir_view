@@ -1,0 +1,24 @@
+
+:meta:
+  status: ""
+  description: "Modal dialog box."
+
+:stubs:
+-
+  :title: "Delete document type"
+  :content: "Are you sure you want to delete this document type? This will also delete the 14 related documents."
+  :style: "u-bg--danger"
+  :actions:
+    :confirm:
+      :title: "Delete"
+      :link: "/delete/5"
+      :style: "u-bg--to-danger"
+
+-
+  :title: "Office information"
+  :content: "General information about something would go in this field. \n\n maybe we'd escape some characthers to make them slightly more fancy."
+
+-
+  :title: "Add a new team"
+  :html_content: "fenrir_view/examples/modal/modal_form"
+  :style: "u-bg--primary"

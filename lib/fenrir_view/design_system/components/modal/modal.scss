@@ -1,0 +1,21 @@
+
+
+
+//-----------------------------------\\
+// Component: Modal
+//-----------------------------------\\
+
+.c-modal {
+  @include w-card;
+}
+
+  .c-modal__header {
+    @include w-slice;
+    border-bottom: 2px solid transparent;
+  }
+
+  .c-modal__actions {
+    @include w-slice;
+    border-top: 1px solid transparent;
+    justify-content: space-between;
+  }
