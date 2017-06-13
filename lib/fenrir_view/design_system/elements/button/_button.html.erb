@@ -1,0 +1,5 @@
+<% if trigger? %>
+  <%= content_tag :button, title, html_options %>
+<% else %>
+  <%= link_to title, link, html_options %>
+<% end %>

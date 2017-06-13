@@ -1,0 +1,31 @@
+
+// Button Element
+
+.e-button {
+  @include c-text--label;
+  @include w-btn;
+  padding: 5px 15px;
+  min-height: 45px;
+  opacity: 1;
+  background-color: color('primary');
+  border-color: color('primary', 115);
+  color: color('white');
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: color('primary', 115);
+    border-color: color('primary', 130);
+    color: color('white');
+  }
+}
+
+
+// Button layout variants
+
+.e-button--block {
+  width: 100%;
+}

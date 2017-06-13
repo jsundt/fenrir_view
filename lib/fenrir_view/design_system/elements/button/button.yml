@@ -1,0 +1,24 @@
+
+:meta:
+  status: "testing elements in pattern library"
+  description: "A navigation link or action trigger"
+
+:stubs:
+-
+  :title: "Get Started!"
+  :link: "/"
+
+-
+  :title: "Cancel"
+  :link: "/product"
+  :style: "u-bg--silver u-bg--to-success"
+
+-
+  :title: "Delete Time Off"
+  :link: "/delete-time-off"
+  :style: "u-bg--danger"
+  :remote: true
+
+-
+  :title: "JS Action"
+  :trigger: "js-trigger-modal"
