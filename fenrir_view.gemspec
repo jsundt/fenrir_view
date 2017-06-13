@@ -7,11 +7,11 @@ require "fenrir_view/version"
 Gem::Specification.new do |s|
   s.name        = "fenrir_view"
   s.version     = FenrirView::VERSION
-  s.authors     = ["Ignacio Gutierrez", "Esteban Pastorino"]
-  s.email       = ["nachojgutierrez@gmail.com", "ejpastorino@gmail.com"]
+  s.authors     = ["Jørgen Sundt"]
+  s.email       = ["jorgen@charliehr.com"]
   s.homepage    = "http://github.com/jsundt/fenrir_view"
-  s.summary     = "Living styleguide, based on Mountain View by Ignacio Gutierrez and Esteban Pastorino."
-  s.description = "Living styleguide, based on Mountain View by Ignacio Gutierrez and Esteban Pastorino."
+  s.summary     = "Charlie's design documentation and living pattern library."
+  s.description = "Based on the Mountain View rails gem by Ignacio Gutierrez and Esteban Pastorino."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]

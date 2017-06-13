@@ -3,11 +3,12 @@
 */
 
 
-@import 'fenrir/tools';  //At the very top, scss functions for fonts and colors
+@import 'fenrir/tools'; //Setup scss functions used by the system
 
-@import 'fenrir_view/config';   // Your project settings
+@import 'fenrir_view/config'; // project settings and overrides
 
-@import 'fenrir/awoken'; // Initiate the framework test
+@import 'fenrir/awoken'; // Initialize the css framework
+
 
 // Mixins
 @import 'mixins/typography';
