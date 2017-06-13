@@ -15,7 +15,7 @@ module FenrirView
 
       FenrirView.configuration.system_variants.each do |variant|
         components[variant] = []
-        Dir.glob(FenrirView.pattern(variant)).map do |dir|
+        Dir.glob(FenrirView.patterns_for(variant)).map do |dir|
           components[variant] << FenrirView::Component.new( variant, File.basename(dir) )
         end
       end
@@ -30,7 +30,7 @@ module FenrirView
     end
 
     def docs_index_file
-      FenrirView.configuration.system_path.join('docs', "index.yml")
+      FenrirView.configuration.docs_path.join("index.yml")
     end
   end
 end

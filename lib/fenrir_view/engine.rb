@@ -18,18 +18,13 @@ module FenrirView
 
     initializer "fenrir_view.docs_path" do |app|
       FenrirView.configure do |c|
-        c.docs_path ||= app.root.join("app", "design_system", "docs")
+        c.docs_path ||= FenrirView.configuration.system_path.join("docs")
       end
     end
 
     initializer "fenrir_view.load_classes", before: :set_autoload_paths do |app|
       FenrirView.configuration.system_variants.each do |variant|
-        # Load system patterns
-        system_paths = "#{FenrirView.root}/lib/fenrir_view/design_system/#{variant}/{*}"
-        app.config.autoload_paths += Dir[system_paths]
-
-        # Load sandbox patterns
-        system_paths = "#{FenrirView.configuration.system_path}/#{variant}/{*}"
+        system_paths = "#{FenrirView.patterns_for(variant)}"
         app.config.autoload_paths += Dir[system_paths]
       end
 
@@ -39,12 +34,9 @@ module FenrirView
 
     initializer "fenrir_view.assets" do |app|
       FenrirView.configuration.system_variants.each do |variant|
-        Rails.application.config.assets.paths << "#{FenrirView.root}/lib/fenrir_view/design_system/#{variant}/"
         Rails.application.config.assets.paths << "#{FenrirView.configuration.system_path}/#{variant}/"
       end
 
-      # Rails.application.config.assets.paths << FenrirView.configuration.system_path
-      # Rails.application.config.assets.precompile += [ /(^inline[^_\/]|\/[^_])[^\/]*.(css)$/ ] # precompile any CSS or JS file that doesn't start with _
       Rails.application.config.assets.precompile += %w( fenrir_view/styleguide.css
                                                         fenrir_view/styleguide.js )
     end
@@ -52,7 +44,6 @@ module FenrirView
     initializer "fenrir_view.append_view_paths" do |app|
       ActiveSupport.on_load :action_controller do
         FenrirView.configuration.system_variants.each do |variant|
-          append_view_path "#{FenrirView.root}/lib/fenrir_view/design_system/#{variant}/"
           append_view_path "#{FenrirView.configuration.system_path}/#{variant}/"
         end
         append_view_path FenrirView.configuration.docs_path

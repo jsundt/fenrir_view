@@ -1,7 +1,7 @@
-<% if Dir.exist?(FenrirView.configuration.system_path.join("components")) || Dir.exists?(File.join(FenrirView.root, "lib", "fenrir_view", "design_system", "components")) %>
-  <%# depend_on FenrirView.configuration.system_path.join("components").to_s %>
+<% if Dir.exist?( FenrirView.pattern_type("components") ) %>
+  <% depend_on FenrirView.pattern_type("components") %>
 
-  <% Dir.glob( FenrirView.pattern("components") ).each do |component_dir| %>
+  <% Dir.glob( FenrirView.patterns_for("components") ).each do |component_dir| %>
     <% component_name = File.basename component_dir %>
     <% component_asset = "#{component_name}/#{component_name}.scss" %>
 

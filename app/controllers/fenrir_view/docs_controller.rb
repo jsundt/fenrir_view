@@ -35,7 +35,7 @@ module FenrirView
     end
 
     def docs_index_file
-      FenrirView.configuration.system_path.join('docs', "index.yml")
+      FenrirView.configuration.docs_path.join("index.yml")
     end
   end
 end

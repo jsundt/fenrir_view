@@ -30,11 +30,7 @@ module FenrirView
     end
 
     def stubs_file
-      if FenrirView.configuration.system_path.join(variant, name).directory?
-        FenrirView.configuration.system_path.join(variant, name, "#{name}.yml")
-      else
-        File.join(FenrirView.root, 'lib', 'fenrir_view', 'design_system', variant, name, "#{name}.yml")
-      end
+      FenrirView.pattern_type(variant).join(name, "#{name}.yml")
     end
 
     def stubs?
