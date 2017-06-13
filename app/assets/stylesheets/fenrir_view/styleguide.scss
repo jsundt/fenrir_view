@@ -1,14 +1,29 @@
 /*
-*= require_self
 *= require fenrir_view/prism
 */
 
 
 @import 'fenrir/tools';  //At the very top, scss functions for fonts and colors
 
-@import 'base/config';   // Your project settings
+@import 'fenrir_view/config';   // Your project settings
+
 @import 'fenrir/awoken'; // Initiate the framework test
 
+// Mixins
+@import 'mixins/typography';
+@import 'mixins/svg';
+@import 'mixins/wrappers';
+
+
+// Objects
+@import 'objects/box';
+@import 'objects/buttons';
+@import 'objects/icons';
+@import 'components/typography';
+@import 'objects/wrappers';
+
+
+// System
 @import 'elements';
 @import 'components';
 @import 'modules';
@@ -20,91 +35,6 @@
   list-style: none;
   padding: 0;
 }
-
-.block-link {
-  display: block;
-  padding: 2px 0;
-
-  &:hover {
-    color: color('primary');
-    text-decoration: none;
-  }
-}
-
-
-
-.mv-flex-wrapper{
-  display: flex;
-}
-
-/* SIDEBAR */
-.mv-sidebar{
-  background: #fff;
-  width: 18%;
-  box-sizing: border-box;
-  display: block;
-  float: left;
-  padding: 30px 20px;
-  flex:1;
-  min-height: 100vh;
-}
-
-.mv-sidebar h3{
-  // font-weight: bold;
-  // font-size: 16px;
-  // margin-top: 25px;
-  // color: #444;
-}
-
-.mv-sidebar ul{
-}
-
-.mv-sidebar ul li{
-}
-
-.mv-ul-section {
-  margin-bottom: 30px;
-}
-
-.mv-sidebar ul li a{
-  // color: #555;
-  // font-size: 15px;
-  // text-decoration: none;
-  // font-weight: 300;
-  // display: block;
-  // padding: 2px 0;
-}
-
-.mv-sidebar .mv-big-link {
-  // font-size: 20px;
-  // text-decoration: none;
-  // font-weight: 300;
-}
-
-.mv-sidebar ul li a:hover{
-  // color: #000;
-}
-
-/* MAIN */
-.mv-main{
-  box-sizing: border-box;
-  width: 82%;
-  float: left;
-  // padding: 30px 60px;
-}
-.mv-main__header{
-  margin-bottom: 40px;
-}
-
-.mv-main__header h1{
-  font-weight: 100;
-  font-size: 55px;
-  color: #333;
-}
-
-.mv-main__description {
-}
-
 
 
 

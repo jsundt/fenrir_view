@@ -1,4 +1,6 @@
 module FenrirView
+
+
   class Docs
     def initialize(name, sections)
       @name = name
@@ -35,7 +37,8 @@ module FenrirView
         OpenStruct.new({
           id: index,
           title: value.humanize,
-          path: key
+          section_path: path,
+          page_path: key
         })
       end
     end

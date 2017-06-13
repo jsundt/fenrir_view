@@ -8,51 +8,52 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="mv-flex-wrapper">
-    <div class="mv-sidebar" style="overflow-y:scroll;max-height: 100vh;">      
-      <% @page.docs.each do |doc| %>
-        <h2 class="c-text--label"><%= doc.title %></h2>
+  <div class="content-wrap js-content-wrap u-padding-y-0">
+    <div class="sidebar-wrapper">
+      <div class="section-nav js-scrollbar" id="styleguide-nav" data-turbolinks-permanent>
 
-        <ul class="u-margin-b-50 reset-ul">
-          <% doc.sections.each do |section| %>
-            <li>
-              <ul class="u-margin-b-25 reset-ul">
-                <% section.pages.each do |page| %>
-                  <li>
-                    <% page_class = current_page?(fenrir_docs_path(section: section.path, page: page.path)) ? ' u-color--success' : '' %>
+        <h1 class="c-text--lead u-padding-y-50" style="margin-left:15px;">Design System</h1>
 
-                    <%= link_to page.title, fenrir_docs_path(section: section.path, page: page.path), 
-                    class: ( page.id == 0 ? 'c-text--product block-link' : 'c-text--note block-link' ) + page_class %>
-                  </li>
-                <% end %>
-              </ul>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
+        <% @page.docs.each do |doc| %>
+          <h2 class="c-text--label" style="margin-left:15px;"><%= doc.title %></h2>
 
-      <h2 class="c-text--label">UI Patterns</h2>
-
-      <% @page.components.each do |section, data| %>
-        <h3 class="c-text--product"><%= section.titleize %></h3>
-
-        <% unless data.empty? %>
-          <ul class="reset-ul">
-            <% data.each do |item| %>
-              <% page_class = current_page?(components_path(variant: section, id: item.name)) ? ' u-color--success' : '' %>
-            
+          <ul class="u-margin-b-50 reset-ul">
+            <% doc.sections.each do |section| %>
               <li>
-                <%= link_to item.title, components_path(variant: section, id: item.name), class: 'c-text--note block-link' + page_class %>
+                <ul class="u-margin-b-25 reset-ul">
+                  <% section.pages.each do |page| %>
+                    <li>
+                      <%= render_element 'nav_item', title: page.title, link: fenrir_docs_path(section: page.section_path, page: page.page_path), current_page: request.original_fullpath, style: page.id == 0 ? 'c-text--product' : nil %>
+                    </li>
+                  <% end %>
+                </ul>
               </li>
             <% end %>
           </ul>
-        <% else %>
-          <p class="c-text--note u-margin-b-25 u-color--coolgray">Nothing to see :(</p>
         <% end %>
-      <% end %>
-    </div>
-    <div class="mv-main">
-      <%= yield %>
+
+        <h2 class="c-text--label" style="margin-left:15px;">UI Patterns</h2>
+
+        <% @page.components.each do |section, data| %>
+          <h3 class="c-text--product" style="margin-left:15px;"><%= section.titleize %></h3>
+
+          <% unless data.empty? %>
+            <ul class="reset-ul">
+              <% data.each do |item| %>
+                <li>
+                  <%= render_element 'nav_item', title: item.title, link: components_path(variant: section, id: item.name), current_page: request.original_fullpath %>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="c-text--note u-margin-b-25 u-color--coolgray" style="margin-left:15px;">Nothing to see :(</p>
+          <% end %>
+        <% end %>
+
+      </div>
+      <div class="section-wrap js-page-wrapper js-scrollbar">
+        <%= yield %>
+      </div>
     </div>
   </div>
 </body>

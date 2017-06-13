@@ -30,7 +30,11 @@ module FenrirView
     end
 
     def stubs_file
-      FenrirView.configuration.system_path.join(variant, name, "#{name}.yml")
+      if FenrirView.configuration.system_path.join(variant, name).directory?
+        FenrirView.configuration.system_path.join(variant, name, "#{name}.yml")
+      else
+        File.join(FenrirView.root, 'lib', 'fenrir_view', 'design_system', variant, name, "#{name}.yml")
+      end
     end
 
     def stubs?
@@ -58,7 +62,7 @@ module FenrirView
     end
 
     def meta_used_by?
-      stubs_extra_info[:used_by].any?
+      stubs_extra_info[:used_by].present?
     end
 
     def meta_used_by

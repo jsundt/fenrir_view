@@ -1,17 +1,13 @@
-<% FenrirView.configuration.included_stylesheets.each do |included_stylesheet| %>
-  <%= require_asset included_stylesheet %>
-<% end %>
-
-<% if Dir.exist?(FenrirView.configuration.system_path.join("components")) %>
-  <% depend_on FenrirView.configuration.system_path.join("components").to_s %>
+<% if Dir.exist?(FenrirView.configuration.system_path.join("components")) || Dir.exists?(File.join(FenrirView.root, "lib", "fenrir_view", "design_system", "components")) %>
+  <%# depend_on FenrirView.configuration.system_path.join("components").to_s %>
 
   <% Dir.glob( FenrirView.pattern("components") ).each do |component_dir| %>
     <% component_name = File.basename component_dir %>
     <% component_asset = "#{component_name}/#{component_name}.scss" %>
 
     /* imported component: <%= component_name %> */
-    @import '<%= component_asset %>'; 
+    @import '<%= component_asset %>';
   <% end %>
 <% else %>
-  /* FenrirView: Components directory not found! */  
+  /* FenrirView: Components directory not found! */
 <% end %>

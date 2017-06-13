@@ -1,10 +1,14 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12">
-      <h1 class="c-text--headline"><%= @component.title %></h1>
+<div class="u-bg--silver u-padding-y-50">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="c-text--headline"><%= @component.title %></h1>
+      </div>
     </div>
   </div>
+</div>
 
+<div class="container-fluid u-padding-y-50">
 <% if @component.stubs? %>
   <% if @component.stubs_correct_format? %>
     <% if @component.stubs_extra_info? %>
@@ -21,26 +25,57 @@
     <% end %>
     <% if @component.component_stubs? %>
       <% @component.component_stubs.each_with_index do |component_properties, index| %>
-        <div class="row u-padding-b-100">
+        <div class="row u-margin-y-100 u-bg--white">
           <div class="col-xs-12 col-lg-6">
-            <%= render_component @component.name, component_properties.clone %>
+            <%= render_ui @component.name, @component.variant, component_properties.clone %>
           </div>
           <div class="col-xs-12 col-lg-6">
             <div class="mv-component__description">
               <h1 class="c-text--title"><%= @component.title %> <%= index + 1 %></h1>
               <div class="mv-component__description__definition">
-                <code class="language-ruby">&lt;%= render_component("<%= @component.name %>", {properties as below}) %&gt;</code>
+                <code class="language-ruby">&lt;%= render_ui("<%= @component.name %>", "<%= @component.variant %>", {properties as below}) %&gt;</code>
               </div>
 
               <% formatted = JSON.pretty_generate component_properties %>
               <div class="mv-component__description__properties">
                 <code class="language-ruby"><%= formatted.gsub(/\"(\S+)?\":/, '\1:') %></code>
               </div>
+
+              <div class="mv-component__description__properties">
+                <code class="language-html"><xmp><%= render_ui(@component.name, @component.variant, component_properties.clone) %></xmp></code>
+              </div>
             </div>
           </div>
         </div>
       <% end %>
     <% end %>
+  <% elsif @component.variant == "views" %>
+    <div class="row">
+      <div class="col-xs-12">
+        <p><%= @component.meta_description %></p>
+        <p class="c-text--caption">Status: <%= @component.meta_status %></p>
+
+        <% if @component.meta_used_by? %>
+          <p class="c-text--note">Used by: <%= @component.meta_used_by %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row u-margin-y-100 u-bg--white">
+      <div class="col-xs-12">
+        <%= render_ui @component.name, @component.variant %>
+      </div>
+    </div>
+
+    <div class="row u-margin-y-100 u-bg--white">
+      <div class="mv-component__description">
+        <h1 class="c-text--title"><%= @component.title %> html source</h1>
+
+        <div class="mv-component__description__properties">
+          <code class="language-html"><xmp><%= render_ui(@component.name, @component.variant) %></xmp></code>
+        </div>
+      </div>
+    </div>
   <% else %>
     <div class="mv-hint">
       <h2><span>Hint:</span>You have Stubs but they don't follow the correct format</h2>
