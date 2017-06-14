@@ -118,7 +118,7 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
   def test_stubs_file
     component = FenrirView::Component.new("components", "header")
 
-    expected_stubs_file = Rails.root.join("app/design_system/components/header/header.yml")
+    expected_stubs_file = Rails.root.join("lib/design_system/components/header/header.yml")
     assert_equal expected_stubs_file, component.stubs_file
   end
 

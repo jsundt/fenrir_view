@@ -1,6 +1,6 @@
 :meta:
-  status: "Testing"
-  description: "There is this different classes"
+  :status: "Testing"
+  :description: "There is this different classes"
 :stubs:
   -
     :id: 1
