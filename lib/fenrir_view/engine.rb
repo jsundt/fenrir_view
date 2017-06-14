@@ -6,7 +6,7 @@ module FenrirView
 
     initializer "fenrir_view.system_path" do |app|
       FenrirView.configure do |c|
-        c.system_path ||= app.root.join("app", "design_system")
+        c.system_path ||= app.root.join("lib", "design_system")
       end
     end
 
