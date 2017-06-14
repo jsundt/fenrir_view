@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12">
-        <h1 class="c-text--headline"><%= @component.title %></h1>
+        <h1 class="o-text--headline"><%= @component.title %></h1>
       </div>
     </div>
   </div>
@@ -15,10 +15,10 @@
       <div class="row">
         <div class="col-xs-12">
           <p><%= @component.meta_description %></p>
-          <p class="c-text--caption">Status: <%= @component.meta_status %></p>
+          <p class="o-text--caption">Status: <%= @component.meta_status %></p>
 
           <% if @component.meta_used_by? %>
-            <p class="c-text--note">Used by: <%= @component.meta_used_by %></p>
+            <p class="o-text--note">Used by: <%= @component.meta_used_by %></p>
           <% end %>
         </div>
       </div>
@@ -31,7 +31,7 @@
           </div>
           <div class="col-xs-12 col-lg-6">
             <div class="mv-component__description">
-              <h1 class="c-text--title"><%= @component.title %> <%= index + 1 %></h1>
+              <h1 class="o-text--title"><%= @component.title %> <%= index + 1 %></h1>
               <div class="mv-component__description__definition">
                 <code class="language-ruby">&lt;%= render_ui("<%= @component.variant %>", "<%= @component.name %>", {properties as below}) %&gt;</code>
               </div>
@@ -53,10 +53,10 @@
     <div class="row">
       <div class="col-xs-12">
         <p><%= @component.meta_description %></p>
-        <p class="c-text--caption">Status: <%= @component.meta_status %></p>
+        <p class="o-text--caption">Status: <%= @component.meta_status %></p>
 
         <% if @component.meta_used_by? %>
-          <p class="c-text--note">Used by: <%= @component.meta_used_by %></p>
+          <p class="o-text--note">Used by: <%= @component.meta_used_by %></p>
         <% end %>
       </div>
     </div>
@@ -69,7 +69,7 @@
 
     <div class="row u-margin-y-100 u-bg--white">
       <div class="mv-component__description">
-        <h1 class="c-text--title"><%= @component.title %> html source</h1>
+        <h1 class="o-text--title"><%= @component.title %> html source</h1>
 
         <div class="mv-component__description__properties">
           <code class="language-html"><xmp><%= render_ui(@component.variant, @component.name) %></xmp></code>

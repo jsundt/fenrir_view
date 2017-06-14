@@ -12,7 +12,7 @@
     <div class="sidebar-wrapper">
       <div class="section-nav js-scrollbar" id="styleguide-nav" data-turbolinks-permanent>
 
-        <h1 class="c-text--lead u-padding-y-50" style="margin-left:15px;">Charlie Design System</h1>
+        <h1 class="o-text--lead u-padding-y-50" style="margin-left:15px;">Charlie Design System</h1>
 
         <% @page.docs.each do |doc| %>
           <h2 class="sidebar-section__title"><%= doc.title %></h2>
@@ -23,7 +23,7 @@
                 <ul class="u-margin-b-25 reset-ul">
                   <% section.pages.each do |page| %>
                     <li>
-                      <%= render_element 'nav_item', title: page.title, link: fenrir_docs_path(section: page.section_path, page: page.page_path), current_page: request.original_fullpath, style: page.id == 0 ? 'c-text--product' : nil %>
+                      <%= render_element 'nav_item', title: page.title, link: fenrir_docs_path(section: page.section_path, page: page.page_path), current_page: request.original_fullpath, style: page.id == 0 ? 'o-text--product' : nil %>
                     </li>
                   <% end %>
                 </ul>
@@ -35,7 +35,7 @@
         <h2 class="sidebar-section__title">UI Patterns</h2>
 
         <% @page.components.each do |section, data| %>
-          <h3 class="c-text--product" style="margin-left:15px;"><%= section.titleize %></h3>
+          <h3 class="o-text--product" style="margin-left:15px;"><%= section.titleize %></h3>
 
           <% unless data.empty? %>
             <ul class="reset-ul">
@@ -46,7 +46,7 @@
               <% end %>
             </ul>
           <% else %>
-            <p class="c-text--note u-margin-b-25 u-color--coolgray" style="margin-left:15px;">Nothing to see :(</p>
+            <p class="o-text--note u-margin-b-25 u-color--coolgray" style="margin-left:15px;">Nothing to see :(</p>
           <% end %>
         <% end %>
 

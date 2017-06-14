@@ -9,21 +9,6 @@
 
 @import 'fenrir/awoken'; // Initialize the css framework
 
-
-// Mixins
-@import 'mixins/typography';
-@import 'mixins/svg';
-@import 'mixins/wrappers';
-
-
-// Objects
-@import 'objects/box';
-@import 'objects/buttons';
-@import 'objects/icons';
-@import 'components/typography';
-@import 'objects/wrappers';
-
-
 // System
 @import 'elements';
 @import 'components';
@@ -38,7 +23,7 @@
 }
 
 .sidebar-section__title {
-  @include c-text--caption;
+  @include o-text--caption;
   padding-top: 15px;
   padding-left: 15px;
   margin-bottom: 5px;
