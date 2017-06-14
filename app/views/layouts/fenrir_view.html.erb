@@ -36,7 +36,7 @@
                 <ul class="u-margin-b-25 reset-ul">
                   <% section.pages.each do |page| %>
                     <li>
-                      <%= render_element 'nav_item', title: page.title, link: fenrir_docs_path(section: page.section_path, page: page.page_path), current_page: request.original_fullpath, style: page.id == 0 ? 'o-text--product' : nil %>
+                      <%= ui_element 'nav_item', title: page.title, link: fenrir_docs_path(section: page.section_path, page: page.page_path), current_page: request.original_fullpath, style: page.id == 0 ? 'o-text--product' : nil %>
                     </li>
                   <% end %>
                 </ul>
@@ -54,7 +54,7 @@
             <ul class="reset-ul">
               <% data.each do |item| %>
                 <li>
-                  <%= render_element 'nav_item', title: item.title, link: components_path(variant: section, id: item.name), current_page: request.original_fullpath %>
+                  <%= ui_element 'nav_item', title: item.title, link: components_path(variant: section, id: item.name), current_page: request.original_fullpath %>
                 </li>
               <% end %>
             </ul>
