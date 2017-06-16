@@ -1,5 +1,5 @@
 /*
-*= require fenrir_view/prism
+** Used by styleguide pages
 */
 
 
@@ -8,6 +8,8 @@
 @import 'fenrir_view/config'; // project settings and overrides
 
 @import 'fenrir/awoken'; // Initialize the css framework
+
+@import 'fenrir_view/prism';
 
 // System
 @import 'elements';
@@ -32,58 +34,6 @@
   color: color('coolgray');
 }
 
-
-
-
-/* COMPONENT */
-.mv-component{
-  margin-bottom: 150px;
-}
-
-.mv-component__item{
-}
-
-.mv-component__meta{
-  padding: 25px;
-  margin-bottom: 20px;
-  background: #F7F7F7;
-  border: 1px solid #E4E4E4;
-}
-
-.mv-component__meta p{
-  color: #000;
-}
-
-.mv-component__description{
-  padding: 25px;
-  background: #F7F7F7;
-  border: 1px solid #E4E4E4;
-  margin-top: 30px;
-}
-
-.mv-component__description h2{
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.mv-component__description__definition{
-  margin-bottom: 20px;
-}
-
-.mv-component__description__definition code,
-.mv-component__description__properties code {
-  background: none !important;
-  font-size: 14px;
-}
-
-.mv-component__description__properties{
-  background: #fff !important;
-  border: 1px solid #e4e4e4;
-  max-height: 230px;
-  overflow: auto;
-  font-size: 13px;
-  padding: 30px 20px;
-}
 
 
 /* HINT */
