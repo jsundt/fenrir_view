@@ -11,6 +11,10 @@ module FenrirView
       @name.humanize
     end
 
+    def stubs_title(index)
+      styleguide_stubs[:stubs][index][:name] || "#{ title } #{ index + 1 }"
+    end
+
     def styleguide_stubs
       YAML.load_file(stubs_file) || {}
     rescue Errno::ENOENT
