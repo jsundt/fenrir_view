@@ -25,11 +25,11 @@ module FenrirView
     initializer "fenrir_view.load_classes", before: :set_autoload_paths do |app|
       FenrirView.configuration.system_variants.each do |variant|
         system_paths = "#{FenrirView.patterns_for(variant)}"
-        app.config.autoload_paths += Dir[system_paths]
+        app.config.eager_load_paths += Dir[system_paths]
       end
 
       docs_path = "#{FenrirView.configuration.docs_path}/{*}"
-      app.config.autoload_paths += Dir[docs_path]
+      app.config.eager_load_paths += Dir[docs_path]
     end
 
     initializer "fenrir_view.assets" do |app|
