@@ -8,33 +8,8 @@
 
 $sidebar-bg: #fff;
 
-$padding: 50px;
-
 $br: 8px;
 $br-50: $br / 2;
 $br-100: $br;
 
 $enable-wrapper-classes: true;
-
-$component-sizes: (
-  '0': 0,
-  '20': ($padding / 5),
-  '25': 15px,
-  '50': ($padding / 2),
-  '100': $padding,
-  '200': ($padding * 2),
-  '300': ($padding * 3),
-);
-
-
-// 360 xxxl
-// 240 xxl
-// 180 xl
-// 120 lg
-// 90 md
-// 60 md
-// 45 sm
-// 30 xs
-// 22–23 ?
-// 15 xxs
-// 10 xxxs
