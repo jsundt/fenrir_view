@@ -1,4 +1,4 @@
-<div class="u-bg--silver u-padding-y-50">
+<div class="u-bg--silver u-padding--y-50">
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12">
@@ -8,11 +8,11 @@
   </div>
 </div>
 
-<div class="container-fluid u-padding-b-100">
+<div class="container-fluid u-padding--b-100">
 <% if @component.stubs? %>
   <% if @component.stubs_correct_format? %>
     <% if @component.stubs_extra_info? %>
-      <div class="row u-padding-y-50">
+      <div class="row u-padding--y-50">
         <div class="col-xs-12">
           <p><%= @component.meta_description %></p>
           <p class="o-text--caption">Status: <%= @component.meta_status %></p>
@@ -27,7 +27,7 @@
       <% @component.component_stubs.each_with_index do |component_properties, index| %>
         <% properties = component_properties[:props] %>
 
-        <div class="row u-padding-y-100 <%= index % 2 == 0 ? 'u-bg--white' : 'u-bg--white-115' %>">
+        <div class="row u-padding--y-100 <%= index % 2 == 0 ? 'u-bg--white' : 'u-bg--white-115' %>">
 
           <div class="col-xs-12 col-lg-6">
             <% if component_properties[:yield] %>
@@ -97,13 +97,13 @@
       </div>
     </div>
 
-    <div class="row u-margin-y-100 u-bg--white">
+    <div class="row u-margin--y-100 u-bg--white">
       <div class="col-xs-12">
         <%= render_ui @component.variant, @component.name %>
       </div>
     </div>
 
-    <div class="row u-margin-y-100 u-bg--white">
+    <div class="row u-margin--y-100 u-bg--white">
       <div class="mv-component__description">
         <h1 class="o-text--title"><%= @component.title %> html source</h1>
 
