@@ -48,9 +48,11 @@
                 <% helper_start = "ui_element" %>
               <% when "components" %>
                 <% helper_start = "ui_component" %>
+              <% when "module" %>
+                <% helper_start = "ui_module" %>
               <% else %>
                 <% helper_start = "render_ui" %>
-                <code class="language-ruby">&lt;%= render_ui("<%= @component.variant %>", "<%= @component.name %>", {properties as below}) %&gt;
+                <code class="language-ruby">&lt;%= render_ui("<%= @component.variant %>", "<%= @component.name %>", {properties as below}) %&gt;</code>
               <% end %>
 
               <% if component_properties[:yield] %>
@@ -104,11 +106,13 @@
     </div>
 
     <div class="row u-margin--y-100 u-bg--white">
-      <div class="mv-component__description">
-        <h1 class="o-text--title"><%= @component.title %> html source</h1>
+      <div class="col-xs-12">
+        <div class="mv-component__description">
+          <h1 class="o-text--title"><%= @component.title %> html source</h1>
 
-        <div class="mv-component__description__properties">
-          <code class="language-html"><xmp><%= render_ui(@component.variant, @component.name) %></xmp></code>
+          <div class="mv-component__description__properties">
+            <pre><code class="language-html"><xmp><%= render_ui(@component.variant, @component.name) %></xmp></code></pre>
+          </div>
         </div>
       </div>
     </div>
