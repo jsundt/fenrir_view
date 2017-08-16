@@ -1,5 +1,5 @@
 module FenrirView
-  module ApplicationHelper
+  module StyleguideHelper
     def method_missing(method, *args, &block)
       if method.to_s.end_with?("_path") || method.to_s.end_with?("_url")
         if main_app.respond_to?(method)

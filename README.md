@@ -8,4 +8,6 @@ _Hey! What is a living style guide?_ A living style guide is a style guide that 
 
 
 ## Credits
-This library was inspired by [Rizzo](http://rizzo.lonelyplanet.com/styleguide/ui-components/cards), a wonderful living style guide created by the guys at LonelyPlanet. [More info here](http://engineering.lonelyplanet.com/2014/05/18/a-maintainable-styleguide.html)
+This gem is based on [mountain view rails](https://github.com/devnacho/mountain_view)
+
+Mountain view was inspired by [Rizzo](http://rizzo.lonelyplanet.com/styleguide/ui-components/cards), a wonderful living style guide created by the guys at LonelyPlanet. [More info here](http://engineering.lonelyplanet.com/2014/05/18/a-maintainable-styleguide.html)

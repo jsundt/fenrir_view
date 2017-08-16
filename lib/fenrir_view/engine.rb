@@ -52,9 +52,7 @@ module FenrirView
 
     initializer "fenrir_view.add_helpers" do
       ActiveSupport.on_load :action_controller do
-        helper FenrirView::ApplicationHelper
-        helper FenrirView::ComponentHelper
-        helper FenrirView::AssetsHelper
+        ::ActionController::Base.helper FenrirView::ComponentHelper
       end
     end
   end
