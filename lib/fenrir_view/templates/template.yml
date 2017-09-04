@@ -1,0 +1,18 @@
+:meta:
+  status: "work in progress" # 'deprecated', 'work in progress', 'in review', 'in use'
+  description: ""
+
+:stubs:
+-
+  :name: "Example of pattern"
+  :props:
+    :title: "Pattern name"
+
+-
+  :name: "Example of pattern with tags"
+  :props:
+    :title: "Tagged pattern"
+    :design_system_tags:
+    - :title: "Super tag"
+      :icon: "app__success"
+      :style: "u-bg--success"

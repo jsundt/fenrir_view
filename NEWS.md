@@ -3,6 +3,9 @@
 Changes worth mentioning.
 
 ---
+## 0.17.4 - 2017-09-04
+- [Feature] Added a new pattern generator
+
 ## 0.17.3 - 2017-08-16
 - [Improvement] Upgrade gem with changes from [mountain view 0.12.2](https://github.com/devnacho/mountain_view)
 

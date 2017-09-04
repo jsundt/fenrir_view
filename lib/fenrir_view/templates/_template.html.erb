@@ -1,0 +1,11 @@
+<div class="<%= css_class_name %>">
+  <%%= title %>
+
+  <%% if tags? %>
+    <%% design_system_tags.each do |tag_hash| %>
+      <%%= ui_element("tag", tag_hash) %>
+    <%% end %>
+  <%% end %>
+
+  <%%= properties[:yield] %>
+</div>
