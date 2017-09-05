@@ -2,14 +2,14 @@ require "rails/generators/base"
 
 module FenrirView
   module Generators
-    class PatternGenerator < Rails::Generators::Base
+    class NewPatternGenerator < Rails::Generators::Base
       source_root File.expand_path('../../../fenrir_view/templates', __FILE__)
 
-      desc "Generates all files needed for a design system pattern"
+      desc "Generates all files needed for a design system ui pattern"
 
       argument :type, required: true,
                       type: :string,
-                      desc: "Pattern type: elements || components || modules"
+                      desc: "Pattern type: element || component || module"
       argument :name, required: true,
                       type: :string,
                       desc: "Pattern name, e.g: header, widget"
@@ -37,11 +37,11 @@ module FenrirView
 
       def pattern_type_name
         case type
-        when 'element', 'elements'
+        when 'e', 'element', 'elements'
           'elements'
-        when 'component', 'components'
+        when 'c', 'component', 'components'
           'components'
-        when 'module', 'modules'
+        when 'm', 'module', 'modules'
           'modules'
         else
           raise ArgumentError.new("ERROR: Pattern type was: #{ type }, should be: 'element', 'component', or 'module'!")

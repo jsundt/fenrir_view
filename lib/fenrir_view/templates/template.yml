@@ -3,13 +3,11 @@
   description: ""
 
 :stubs:
--
-  :name: "Example of pattern"
+- :name: "Example of pattern"
   :props:
     :title: "Pattern name"
 
--
-  :name: "Example of pattern with tags"
+- :name: "Example of pattern with tags"
   :props:
     :title: "Tagged pattern"
     :design_system_tags:
