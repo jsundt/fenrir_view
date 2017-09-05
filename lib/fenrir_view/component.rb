@@ -101,7 +101,7 @@ module FenrirView
     private
 
     def meta_status_code
-      code = stubs_extra_info[:status].downcase
+      code = stubs_extra_info[:status]&.downcase
 
       if status_codes.include?(code)
         code
