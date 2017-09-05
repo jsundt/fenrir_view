@@ -58,7 +58,28 @@ module FenrirView
     end
 
     def meta_status
-      stubs_extra_info[:status]
+      case meta_status_code
+      when 'work in progress'
+        {
+          bg: "u-bg--warning",
+          code: meta_status_code,
+        }
+      when 'in review'
+        {
+          bg: "u-bg--primary",
+          code: meta_status_code,
+        }
+      when 'in use'
+        {
+          bg: "u-bg--silver",
+          code: meta_status_code,
+        }
+      else
+        {
+          bg: "u-bg--danger",
+          code: meta_status_code,
+        }
+      end
     end
 
     def meta_used_by?
@@ -75,6 +96,24 @@ module FenrirView
 
     def stubs_are_a_hash_with_info?
       styleguide_stubs.is_a?(Hash) && styleguide_stubs.key?(:stubs)
+    end
+
+    private
+
+    def meta_status_code
+      code = stubs_extra_info[:status].downcase
+
+      if status_codes.include?(code)
+        code
+      elsif code.present?
+        "Unknown status: #{ code }"
+      else
+        'missing'
+      end
+    end
+
+    def status_codes
+      ['deprecated', 'work in progress', 'in review', 'in use']
     end
   end
 end
