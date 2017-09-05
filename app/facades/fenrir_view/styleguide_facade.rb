@@ -15,7 +15,8 @@ module FenrirView
 
       FenrirView.configuration.system_variants.each do |variant|
         components[variant] = []
-        Dir.glob(FenrirView.patterns_for(variant)).map do |dir|
+
+        sorted_components_for(variant).map do |dir|
           components[variant] << FenrirView::Component.new( variant, File.basename(dir) )
         end
       end
@@ -24,6 +25,10 @@ module FenrirView
     end
 
     private
+
+    def sorted_components_for(pattern_variant)
+      Dir.glob(FenrirView.patterns_for(pattern_variant)).sort_by!{ |pattern| File.basename(pattern) }
+    end
 
     def doc_pages
       @docs = YAML.load_file(docs_index_file)
