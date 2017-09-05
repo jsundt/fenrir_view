@@ -32,7 +32,6 @@ module FenrirView
         log "Your pattern will be available at: /design_system/styleguide/#{ pattern_type_name }/#{ pattern_name }"
       end
 
-
       private
 
       def pattern_type_name
@@ -58,6 +57,10 @@ module FenrirView
 
       def css_class_name
         "#{ pattern_type_prefix }-#{ pattern_name.dasherize }"
+      end
+
+      def js_class_name
+        "js-#{ pattern_name.dasherize }"
       end
 
       def new_component_folder
