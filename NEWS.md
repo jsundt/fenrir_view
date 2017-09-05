@@ -3,8 +3,9 @@
 Changes worth mentioning.
 
 ---
-## 0.17.4 - 2017-09-04
+## 0.18.0 - 2017-09-04
 - [Feature] New pattern rails generator using a set of default templates
+- [Improvement] Changed styleguide to better show status of patterns
 
 ## 0.17.3 - 2017-08-16
 - [Improvement] Upgrade gem with changes from [mountain view 0.12.2](https://github.com/devnacho/mountain_view)
