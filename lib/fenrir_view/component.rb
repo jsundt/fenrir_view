@@ -11,6 +11,10 @@ module FenrirView
       @name.humanize
     end
 
+    def default_properties_as_json
+      JSON.pretty_generate(component_facade.properties).gsub(/\"(\S+)?\":/, '\1:')
+    end
+
     def stubs_title(index)
       styleguide_stubs[:stubs][index][:name] || "#{ title } #{ index + 1 }"
     end
@@ -99,6 +103,10 @@ module FenrirView
     end
 
     private
+
+    def component_facade
+      @component_facade ||= FenrirView::Presenter.component_for(variant, name, {})
+    end
 
     def meta_status_code
       code = stubs_extra_info[:status]&.downcase

@@ -3,6 +3,10 @@
 Changes worth mentioning.
 
 ---
+## 0.19.0 - 2017-09-08
+- [Feature] Index showing one example of each component
+- [Improvement] Default properties visible on component pages
+
 ## 0.18.0 - 2017-09-04
 - [Feature] New pattern rails generator using a set of default templates
 - [Improvement] Changed styleguide to better show status of patterns

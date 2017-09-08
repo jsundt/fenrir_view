@@ -45,7 +45,7 @@
           </ul>
         <% end %>
 
-        <h2 class="sidebar-section__title">UI Patterns</h2>
+        <h2 class="sidebar-section__title"><%= link_to("UI Patterns", component_index_path) %></h2>
 
         <% @page.components.each do |section, data| %>
           <h3 class="o-text--product" style="margin-left:15px;"><%= section.titleize %></h3>

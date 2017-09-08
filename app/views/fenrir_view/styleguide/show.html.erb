@@ -14,12 +14,16 @@
   <% if @component.stubs_correct_format? %>
     <% if @component.stubs_extra_info? %>
       <div class="row u-padding--y-50">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-6">
           <p><%= @component.meta_description %></p>
 
           <% if @component.meta_used_by? %>
             <p class="o-text--note">Used by: <%= @component.meta_used_by %></p>
           <% end %>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <p>Default Properties:</p>
+<pre><code class="language-json"><%= @component.default_properties_as_json %></code></pre>
         </div>
       </div>
     <% end %>
