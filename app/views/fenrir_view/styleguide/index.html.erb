@@ -1,35 +1,47 @@
-<div class="mv-main__header">
-  <h1>Styleguide</h1>
+<div class="u-padding--y-50">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="o-text--headline">Pattern Library</h1>
+      </div>
+    </div>
+  </div>
 </div>
 
-<% if @page.components.any? %>
-  <div class="mv-main__description">
-    Select one of the components from the side to view its examples and documentation.
-  </div>
-<% else %>
-  <div class="mv-hint">
-    <h2><span>Hint:</span>You haven't created any components yet</h2>
-    <ul>
-      <li>
-        You can generate your first component by running:
-        <br>
-        <pre>rails generate fenrir_view:component component-name</pre>
-      </li>
-      <li>
-        Or manually create the following files:
-        <br>
-        <pre>
-app/
-  components/
-    header/
-      _header.html.erb
-      header.css
-      header.js
-      header.yml
-        </pre>
-      </li>
-    </ul>
-  </div>
-<% end %>
+<div class="container">
+  <% @page.components.each do |variant, components| %>
+    <% unless variant == 'views' %>
+      <% components.each do |component| %>
+        <section class="row u-bg-zebra--silver-50 u-padding--y-50">
+          <div class="col-xs-12 col-md-6">
+            <% if component.component_stubs? %>
+              <% component.component_stubs.take(1).each do |component_properties| %>
+                <% properties = component_properties[:props] %>
 
+                <% if component_properties[:yield] %>
+                  <%= render_ui component.variant, component.name, properties.clone do %>
+                    <%= component_properties[:yield].html_safe %>
+                  <% end %>
+                <% else %>
+                  <%= render_ui component.variant, component.name, properties.clone %>
+                <% end %>
 
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <h1 class="o-text--title"><%= component.title %></h1>
+            <p class="o-text--product <%= component.meta_status[:bg] %>">Status: <%= component.meta_status[:code] %></p>
+            <p class="o-text--body"><%= component.meta_description %></p>
+
+            <%= ui_element("button", {
+              title: "View all variants",
+              link: components_path(variant: variant, id: component.name),
+              style: "u-bg--silver"
+            }) %>
+          </div>
+        </section>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
