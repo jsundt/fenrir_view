@@ -3,6 +3,9 @@
 Changes worth mentioning.
 
 ---
+## 0.20.0 - 2018-04-27
+- [Feature] Components render nothing if properties equal false
+
 ## 0.19.0 - 2017-09-08
 - [Feature] Index showing one example of each component
 - [Improvement] Default properties visible on component pages
