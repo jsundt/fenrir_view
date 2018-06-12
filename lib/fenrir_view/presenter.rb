@@ -42,7 +42,7 @@ module FenrirView
         if v.blank?
           raise "An instance of #{slug} is missing the required property: #{k}" if property_validations[:required].presence
         elsif property_validations && property_validations[:valid_types].present?
-          raise "An instance of #{slug} has the wrong type: '#{v.class}' for property: '#{k}'. Should be one of: #{property_validations[:valid_types]}" if property_validations[:valid_types].include?(v.class)
+          raise "An instance of #{slug} has the wrong type: '#{v.class}' for property: '#{k}' (value: '#{v}'). Should be one of: #{property_validations[:valid_types]}" if !property_validations[:valid_types].include?(v.class)
         end
       end
     end
