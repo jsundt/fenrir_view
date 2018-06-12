@@ -1,6 +1,6 @@
 class <%= pattern_name.camelize %>Facade < FenrirView::Presenter
   ### Required properties
-  property :title
+  property :title, required: true, valid_types: [String]
 
   ### Optional properties
   property :style
