@@ -26,23 +26,24 @@ module FenrirView
     private
 
     def validate_properties
-      validations_for_component = self.class._properties
-      return unless validations_for_component.any?
+      class_properties = self.class._properties
+      instance_properties = properties
+      return unless class_properties.any?
 
-      if !properties.is_a?(Hash) && properties != false
-        raise "An instance of #{slug} has properties as #{properties.class.name}. Should be Hash or false."
-      elsif validations_for_component.keys != properties.keys
-        unknown_keys = properties.keys.reject { |key| validations_for_component.include?(key) }
+      if !instance_properties.is_a?(Hash) && instance_properties != false
+        raise "An instance of #{slug} has properties as #{instance_properties.class.name}. Should be Hash or false."
+      elsif class_properties.keys != instance_properties.keys
+        unknown_keys = instance_properties.keys.reject { |key| class_properties.include?(key) }
         raise "#{self.class.name} has unkown keys: #{unknown_keys.join(', ')}"
       end
 
-      properties.each do |k, v|
-        property_validations = validations_for_component[k]
+      instance_properties.each do |property, value|
+        property_validations = class_properties[property]
 
         if property_validations
-          raise "An instance of #{slug} is missing the required property: #{k}" if v.blank? && property_validations[:required].presence
-          raise "An instance of #{slug} has the wrong type: '#{v.class}' for property: '#{k}' (value: '#{v}'). Should be one of: #{property_validations[:one_of_type]}" unless property_validations[:one_of_type]&.include?(v.class)
-          raise "An instance of #{slug} has the wrong value for property: '#{k}' (value: '#{v}'). Should be one of: #{property_validations[:one_of]}" unless property_validations[:one_of]&.include?(v)
+          raise "An instance of #{slug} is missing the required property: #{property}" if value.blank? && property_validations[:required].presence
+          raise "An instance of #{slug} has the wrong type: '#{value.class}' for property: '#{property}' (value: '#{value}'). Should be one of: #{property_validations[:one_of_type]}" unless property_validations[:one_of_type]&.include?(value.class)
+          raise "An instance of #{slug} has the wrong value for property: '#{property}' (value: '#{value}'). Should be one of: #{property_validations[:one_of]}" unless property_validations[:one_of]&.include?(value)
         end
       end
     end
