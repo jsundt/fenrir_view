@@ -105,7 +105,7 @@ module FenrirView
     private
 
     def component_facade
-      @component_facade ||= FenrirView::Presenter.component_for(variant, name, {})
+      @component_facade ||= FenrirView::Presenter.component_for(variant, name, {}, false)
     end
 
     def meta_status_code
