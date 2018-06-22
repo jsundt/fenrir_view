@@ -39,10 +39,10 @@ module FenrirView
       properties.each do |k, v|
         property_validations = validations_for_component[k]
 
-        if v.blank?
-          raise "An instance of #{slug} is missing the required property: #{k}" if property_validations[:required].presence
-        elsif property_validations && property_validations[:valid_types].present?
-          raise "An instance of #{slug} has the wrong type: '#{v.class}' for property: '#{k}' (value: '#{v}'). Should be one of: #{property_validations[:valid_types]}" if !property_validations[:valid_types].include?(v.class)
+        if property_validations
+          raise "An instance of #{slug} is missing the required property: #{k}" if v.blank? && property_validations[:required].presence
+          raise "An instance of #{slug} has the wrong type: '#{v.class}' for property: '#{k}' (value: '#{v}'). Should be one of: #{property_validations[:one_of_type]}" unless property_validations[:one_of_type]&.include?(v.class)
+          raise "An instance of #{slug} has the wrong value for property: '#{k}' (value: '#{v}'). Should be one of: #{property_validations[:one_of]}" unless property_validations[:one_of]&.include?(v)
         end
       end
     end
