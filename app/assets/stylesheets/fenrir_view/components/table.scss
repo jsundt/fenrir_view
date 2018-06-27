@@ -1,0 +1,19 @@
+.fenrir-table {
+  width: 100%;
+}
+
+  .fenrir-table__row {
+    background-color: color('white');
+
+    &:nth-child(even) {
+      background-color: color('white', 115);
+    }
+
+    &:hover {
+      background-color: color('coolgray');
+    }
+  }
+
+    .fenrir-table__cell {
+      padding: 2px 7px;
+    }

@@ -24,14 +24,22 @@ module FenrirView
       "#{slug}/#{slug}"
     end
 
+    def component_property_rule_descriptions
+      property_types.component_property_rule_descriptions
+    end
+
     private
 
     def validate_properties
-      ::FenrirView::PropertyTypes.new(
+      property_types.validate_properties
+    end
+
+    def property_types
+      @property_types ||= ::FenrirView::PropertyTypes.new(
         component_class: self.class,
         component_properties: self.class._properties,
         instance_properties: properties,
-      ).validate_properties
+      )
     end
 
     def default_properties

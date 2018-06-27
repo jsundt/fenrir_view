@@ -8,6 +8,7 @@ module FenrirView
       @instance_properties = instance_properties
     end
 
+    ALL_TYPES = [:default, :required, :one_of_type, :one_of, :note]
     VALIDATION_TYPES = [:required, :one_of_type, :one_of]
 
     def validate_properties
@@ -16,7 +17,7 @@ module FenrirView
       raise unknown_keys if instance_has_unknown_keys?
 
       @instance_properties.each do |property, value|
-        property_validations = @component_properties[property].except(:default)
+        property_validations = @component_properties[property].except(:default, :note)
 
         property_validations.each do |validation_type, validation_rule|
           case validation_type
@@ -31,6 +32,25 @@ module FenrirView
 
         raise unknown_validation(property_validations) if property_validations.except(*VALIDATION_TYPES).any?
       end
+    end
+
+    def component_property_rule_descriptions
+      prop_map = {}
+
+      @component_properties.map do |prop|
+        name = prop[0]
+        data = prop[1]
+
+        prop_map[name] = {
+          default: data[:default] || 'nil',
+          required: data[:required] ? 'Required' : 'Optional',
+          one_of_type: data[:one_of_type]&.join(', ') || 'Any type',
+          one_of: data[:one_of]&.join(', ') || 'Any value',
+          note: data[:note] || '',
+        }
+      end
+
+      prop_map
     end
 
     private
@@ -62,7 +82,7 @@ module FenrirView
 
     def unknown_validation(property_validations)
       unkown_validations = property_validations.except(*VALIDATION_TYPES)
-      ArgumentError.new("#{@component_class.name} has unkown property validations: #{unkown_validations.keys.join(', ')}. Should be one of: #{VALIDATION_TYPES.join(', ')}")
+      ArgumentError.new("#{@component_class.name} has unkown property validations: #{unkown_validations.keys.join(', ')}. Should be one of: #{ALL_TYPES.join(', ')}")
     end
   end
 end
