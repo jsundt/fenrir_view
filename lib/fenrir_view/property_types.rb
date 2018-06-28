@@ -17,7 +17,8 @@ module FenrirView
       raise unknown_keys if instance_has_unknown_keys?
 
       @instance_properties.each do |property, value|
-        property_validations = @component_properties[property].except(:default, :note)
+        properties = @component_properties[property]
+        property_validations = properties.slice(*VALIDATION_TYPES)
 
         property_validations.each do |validation_type, validation_rule|
           case validation_type
@@ -30,7 +31,7 @@ module FenrirView
           end
         end
 
-        raise unknown_validation(property_validations) if property_validations.except(*VALIDATION_TYPES).any?
+        raise unknown_validation(properties.except(*ALL_TYPES)) if properties.except(*ALL_TYPES).any?
       end
     end
 
@@ -80,8 +81,7 @@ module FenrirView
       ArgumentError.new("An instance of #{@component_class.name} has the wrong value for property: '#{property}' (value: '#{value}'). Should be one of: #{validation_rule.join(', ')}")
     end
 
-    def unknown_validation(property_validations)
-      unkown_validations = property_validations.except(*VALIDATION_TYPES)
+    def unknown_validation(unkown_validations)
       ArgumentError.new("#{@component_class.name} has unkown property validations: #{unkown_validations.keys.join(', ')}. Should be one of: #{ALL_TYPES.join(', ')}")
     end
   end
