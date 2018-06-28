@@ -3,7 +3,7 @@ module FenrirView
     def render_ui(variant, slug, properties = {}, &block)
       return nil if properties == false
 
-      component = FenrirView::Presenter.component_for(variant, slug, properties)
+      component = FenrirView::Presenter.component_for(variant, slug, properties, validate: true)
       component.render(controller.view_context) do
         capture(&block) if block_given?
       end
