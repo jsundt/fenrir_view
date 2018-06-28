@@ -38,10 +38,7 @@ module FenrirView
     def component_property_rule_descriptions
       prop_map = {}
 
-      @component_properties.map do |prop|
-        name = prop[0]
-        data = prop[1]
-
+      @component_properties.map do |name, data|
         prop_map[name] = {
           default: data[:default] || 'nil',
           required: data[:required] ? 'Required' : 'Optional',

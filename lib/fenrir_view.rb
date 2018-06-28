@@ -1,9 +1,11 @@
-require "fenrir_view/version"
-require "fenrir_view/configuration"
-require "fenrir_view/property_types"
-require "fenrir_view/presenter"
-require "fenrir_view/component"
-require "fenrir_view/docs"
+# frozen_string_literal: true
+
+require 'fenrir_view/version'
+require 'fenrir_view/configuration'
+require 'fenrir_view/property_types'
+require 'fenrir_view/presenter'
+require 'fenrir_view/component'
+require 'fenrir_view/docs'
 
 module FenrirView
   def self.pattern_type(variant)
@@ -23,4 +25,4 @@ module FenrirView
   end
 end
 
-require "fenrir_view/engine" if defined?(Rails)
+require 'fenrir_view/engine' if defined?(Rails)
