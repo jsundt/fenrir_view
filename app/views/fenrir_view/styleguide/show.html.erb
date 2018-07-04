@@ -16,43 +16,28 @@
   <% if @component.stubs_correct_format? %>
     <% if @component.stubs_extra_info? %>
       <div class="row u-padding--y-50">
-        <div class="col-xs-12 <%= 'col-md-6 col-lg-8' if @component.meta_used_by? %>">
-          <p>Component Properties:</p>
+        <div class="col-xs-12">
+          <h2 class="o-text--lead">Component Properties:</h2>
 
-          <table class="fenrir-table">
-            <thead>
-              <tr class="fenrir-table__row">
-                <th class="fenrir-table__cell">Key</th>
-                <th class="fenrir-table__cell">Default value</th>
-                <th class="fenrir-table__cell">Required property?</th>
-                <th class="fenrir-table__cell">Valid types</th>
-                <th class="fenrir-table__cell">Valid values</th>
-                <th class="fenrir-table__cell">Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% empty_prop_values = ['', 'nil', 'Any type', 'Any value', 'Optional'] %>
+          <% @component.default_properties_and_validations.each do |property, options| %>
+            <div class="u-bg-zebra--silver-50">
+              <div onClick="showPropertyValidations(this)" class="properties-list__item">
+                <h3 class="o-text--product">
+                  <span class="u-text--bold"><%= property %></span><span class="u-opacity--70"><%= options[:info] %></span>
+                </h3>
+              </div>
 
-              <% @component.default_properties_and_validations.each do |property, options| %>
-                <tr class="fenrir-table__row">
-                  <td class="fenrir-table__cell"><%= property %></td>
-                  <% options.each do |option| %>
-                    <td class="fenrir-table__cell <%= 'u-color--coolgray' if empty_prop_values.include?(option[1]) %>"><%= option[1] %></td>
-                  <% end %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-        <% if @component.meta_used_by? %>
-          <div class="col-xs-12 col-md-6 col-lg-4">
-            <p>Component notes:</p>
-
-            <div class="w-card u-bg--white">
-                <p class="o-text--note">Used by: <%= @component.meta_used_by %></p>
+              <div class="properties-list__details is-hidden">
+                <p><%= options[:note] %></p>
+                <% if options[:validations].any? %>
+                  <pre><code class="language-json">validations: <%= JSON.pretty_generate(options[:validations]).gsub(/\"(\S+)?\":/, '\1:') %></code></pre>
+                <% else %>
+                  <p>No validations set</p>
+                <% end %>
+              </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     <% end %>
     <% if @component.component_stubs? %>
