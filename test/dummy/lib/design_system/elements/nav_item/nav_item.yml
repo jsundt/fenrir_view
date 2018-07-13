@@ -1,0 +1,19 @@
+:meta:
+  status: "deprecated"
+  description: "A navigation link used by styleguide sidebar"
+  used_by:
+  - "Sidebars"
+  - "Top navigation"
+
+:stubs:
+-
+  :props:
+    :title: "Home Page"
+    :link: "/"
+    :current_page: '/product'
+
+-
+  :props:
+    :title: "Product Page"
+    :link: "/product"
+    :current_page: '/product'

@@ -1,0 +1,16 @@
+//---------------------------------------//
+// This file should stay empty,
+// as it's testing fenrir defaults...
+//---------------------------------------//
+
+$sidebar-bg: #fff;
+
+$br: 8px;
+$br-50: $br / 2;
+$br-100: $br;
+
+$enable-wrapper-classes: true;
+
+$border-colors: (
+  'primary': color('primary'),
+);

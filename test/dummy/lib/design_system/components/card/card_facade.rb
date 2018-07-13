@@ -1,4 +1,4 @@
-class CardComponent < FenrirView::Presenter
+class CardFacade < FenrirView::Presenter
   include ActionView::Helpers::TagHelper
 
   properties :title, :description, :link, :image_url, :location

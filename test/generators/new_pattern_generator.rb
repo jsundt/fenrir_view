@@ -1,7 +1,7 @@
 require "test_helper"
 
-class ComponentGeneratorTest < Rails::Generators::TestCase
-  tests FenrirView::Generators::ComponentGenerator
+class NewPatternGeneratorTest < Rails::Generators::TestCase
+  tests FenrirView::Generators::NewPattern
 
   destination File.expand_path("../../tmp", __FILE__)
   setup :prepare_destination

@@ -21,17 +21,21 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
           status: "Testing",
           description: "There is this different classes"
         },
-        stubs:
-          [
-            {
+        stubs: [
+          {
+            props: {
               id:  1,
               title: "20 Mountains you didn't know they even existed",
               subtitle: "Buzzfeed title"
             },
-            { id: 2,
+          },
+          {
+            props: {
+              id: 2,
               title: "You won't believe what happened to this man at Aspen"
-            }
-          ]
+            },
+          },
+        ],
       }
 
     assert_instance_of Hash, component.styleguide_stubs
@@ -43,14 +47,18 @@ class FenrirViewComponentTest < ActiveSupport::TestCase
     expected_stub =
       [
         {
-          id: 1,
-          title: "20 Mountains you didn't know they even existed",
-          subtitle: "Buzzfeed title"
+          props: {
+            id: 1,
+            title: "20 Mountains you didn't know they even existed",
+            subtitle: "Buzzfeed title"
+          },
         },
         {
-          id: 2,
-          title: "You won't believe what happened to this man at Aspen"
-        }
+          props: {
+            id: 2,
+            title: "You won't believe what happened to this man at Aspen"
+          },
+        },
       ]
     assert_instance_of Array, component.component_stubs
     assert_equal expected_stub, component.component_stubs

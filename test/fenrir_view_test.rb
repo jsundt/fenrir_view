@@ -26,14 +26,14 @@ class FenrirViewTest < ActionDispatch::IntegrationTest
   end
 
   test "shows styleguide" do
-    get "/fenrir_view/docs/overview/index"
+    get "/design_system/docs/overview/index"
 
     assert_response :success
     assert_match(/Select one of the components from the side to view its examples and documentation/, response.body)
   end
 
   test "shows specific component" do
-    get "/fenrir_view/styleguide/components/header"
+    get "/design_system/styleguide/components/header"
 
     assert_response :success
     assert_match(/Header/, response.body)
@@ -41,28 +41,28 @@ class FenrirViewTest < ActionDispatch::IntegrationTest
   end
 
   test "shows specific component that uses a main app url okay" do
-    get "/fenrir_view/styleguide/components/header"
+    get "/design_system/styleguide/components/header"
 
     assert_response :success
     assert_match(/href=\"\/products\/2\"/, response.body)
   end
 
   test "shows a hint message if the component stub file is empty" do
-    get "/fenrir_view/styleguide/components/breadcrumbs"
+    get "/design_system/styleguide/components/breadcrumbs"
 
     assert_response :success
     assert_match(/Hint/, response.body)
     assert_match(/You should write stub examples here:/, response.body)
-    assert_match(/app\/components\/breadcrumbs\/breadcrumbs.yml/, response.body)
+    assert_match(/design_system\/components\/breadcrumbs\/breadcrumbs.yml/, response.body)
   end
 
   test "shows a hint message if the component stub file is not found" do
-    get "/fenrir_view/styleguide/components/something"
+    get "/design_system/styleguide/components/something"
 
     assert_response :success
     assert_match(/Hint/, response.body)
     assert_match(/You should write stub examples here:/, response.body)
-    assert_match(/app\/components\/something\/something.yml/, response.body)
+    assert_match(/design_system\/components\/something\/something.yml/, response.body)
   end
 
   private

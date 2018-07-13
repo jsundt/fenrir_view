@@ -15,4 +15,4 @@ if ActiveSupport::TestCase.method_defined?(:fixture_path=)
 end
 # for generators
 require "rails/generators/test_case"
-require "generators/fenrir_view/component_generator"
+require "generators/fenrir_view/new_pattern_generator"
