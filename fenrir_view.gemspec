@@ -18,4 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'rails', '>= 3.2.0'
+  s.add_development_dependency 'rspec-rails', '~> 3.7.2'
+  s.add_development_dependency 'guard-rspec'
+  s.add_development_dependency 'simplecov'
 end
