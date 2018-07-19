@@ -22,6 +22,12 @@ module FenrirView
       end
     end
 
+    initializer "fenrir_view.property_validation" do |app|
+      FenrirView.configure do |c|
+        c.property_validation ||= !Rails.env.production?
+      end
+    end
+
     initializer "fenrir_view.load_classes", before: :set_autoload_paths do |app|
       FenrirView.configuration.system_variants.each do |variant|
         system_paths = "#{FenrirView.patterns_for(variant)}"

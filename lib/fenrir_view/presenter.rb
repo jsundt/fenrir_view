@@ -5,10 +5,12 @@ module FenrirView
 
     attr_reader :variant, :slug, :properties
 
-    def initialize(variant, slug, properties = {})
+    def initialize(variant, slug, properties = {}, validate: true)
       @variant = variant
       @slug = slug
       @properties = default_properties.deep_merge(properties)
+
+      validate_properties if FenrirView.configuration.property_validation && validate
     end
 
     def render(context, &block)
@@ -22,7 +24,23 @@ module FenrirView
       "#{slug}/#{slug}"
     end
 
+    def component_property_rule_descriptions
+      property_types.component_property_rule_descriptions
+    end
+
     private
+
+    def validate_properties
+      property_types.validate_properties
+    end
+
+    def property_types
+      @property_types ||= ::FenrirView::PropertyTypes.new(
+        component_class: self.class,
+        component_properties: self.class._properties,
+        instance_properties: properties,
+      )
+    end
 
     def default_properties
       self.class._properties.inject({}) do |sum, (k, v)|

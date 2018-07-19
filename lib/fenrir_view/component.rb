@@ -15,6 +15,10 @@ module FenrirView
       JSON.pretty_generate(component_facade.properties).gsub(/\"(\S+)?\":/, '\1:')
     end
 
+    def default_properties_and_validations
+      component_facade.component_property_rule_descriptions
+    end
+
     def stubs_title(index)
       styleguide_stubs[:stubs][index][:name] || "#{ title } #{ index + 1 }"
     end
@@ -105,7 +109,7 @@ module FenrirView
     private
 
     def component_facade
-      @component_facade ||= FenrirView::Presenter.component_for(variant, name, {})
+      @component_facade ||= FenrirView::Presenter.component_for(variant, name, {}, validate: false)
     end
 
     def meta_status_code

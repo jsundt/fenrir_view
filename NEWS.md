@@ -3,6 +3,9 @@
 Changes worth mentioning.
 
 ---
+## 0.21.0 - 2018-07-13
+- [Feature] Validate properties for each instance of each component in dev and test enviroments
+
 ## 0.20.0 - 2018-04-27
 - [Feature] Components render nothing if properties equal false
 

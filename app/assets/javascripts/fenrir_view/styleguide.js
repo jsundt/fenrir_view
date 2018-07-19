@@ -8,3 +8,7 @@
 //= require elements
 //= require components
 //= require modules
+
+var showPropertyValidations = (e) => {
+  e.nextElementSibling.classList.toggle('is-hidden');
+};
