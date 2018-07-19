@@ -9,6 +9,6 @@
 //= require components
 //= require modules
 
-var showPropertyValidations = (e) => {
+function showPropertyValidations(e) {
   e.nextElementSibling.classList.toggle('is-hidden');
 };
