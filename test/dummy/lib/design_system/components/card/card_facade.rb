@@ -1,7 +1,11 @@
 class CardFacade < FenrirView::Presenter
   include ActionView::Helpers::TagHelper
 
-  properties :title, :description, :link, :image_url, :location
+  property :title, required: true
+  property :description
+  property :link
+  property :image_url
+  property :location
   property :data, default: []
 
   def title
