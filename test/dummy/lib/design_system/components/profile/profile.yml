@@ -1,0 +1,11 @@
+:meta:
+  status: "in use"
+
+:stubs:
+- :name: "Regular profile"
+  :props:
+    :name: "Johnny"
+
+- :name: "Regular profile 2"
+  :props:
+    :name: "Steve"

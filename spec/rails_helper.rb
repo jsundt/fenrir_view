@@ -9,5 +9,6 @@ end
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../test/dummy/config/environment', __FILE__)
 
-require 'rails/all'
+require 'selenium-webdriver'
+require 'rspec/rails'
 require 'spec_helper'
