@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FenrirView
   class Configuration
     attr_accessor :styleguide_path
