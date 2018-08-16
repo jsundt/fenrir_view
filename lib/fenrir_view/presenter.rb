@@ -1,7 +1,9 @@
 module FenrirView
   class Presenter
     class_attribute :_properties, instance_accessor: false
-    self._properties = {}
+    self._properties = {
+      yield: {}
+    }
 
     attr_reader :variant, :slug, :properties
 

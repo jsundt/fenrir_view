@@ -1,5 +1,9 @@
 system_info:
   overview:
-    index: "Welcome"
-    downloads: "Downloads"
-    changes: "Change Log"
+    index: 'Welcome'
+  spec:
+    index: 'Test cases'
+    missing: 'No file'
+    examples: 'Example usage'
+    broken: 'Broken propties'
+

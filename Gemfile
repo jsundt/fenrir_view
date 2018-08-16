@@ -17,6 +17,12 @@ rails = case rails_version
 
 gem "rails", rails
 
+gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 6.0'
+
+gem 'sass-rails', '~> 5.0', '>= 5.0.6'
+gem 'fenrir', git: 'https://github.com/jsundt/fenrir', branch: "master"
+
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing

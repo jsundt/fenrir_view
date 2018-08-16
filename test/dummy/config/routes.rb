@@ -1,5 +1,5 @@
 Dummy::Application.routes.draw do
-  mount FenrirView::Engine => "/fenrir_view"
+  mount FenrirView::Engine => "/design_system"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

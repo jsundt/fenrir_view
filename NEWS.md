@@ -3,6 +3,9 @@
 Changes worth mentioning.
 
 ---
+## 0.21.2 – 2018-08-16
+- [Improvement] Changed out rails tests for RSpec and added system tests
+
 ## 0.21.0 - 2018-07-13
 - [Feature] Validate properties for each instance of each component in dev and test enviroments
 
