@@ -128,10 +128,13 @@ RSpec.describe FenrirView::PropertyTypes do
         end
 
         it 'raises error when validation rule is not an array' do
-          # TODO: Add check?
           expect { 
-            mock_component['The best title', { one_of: 'The best title' }] 
-          }.to raise_error
+            mock_component['The best title', { one_of_type: 'The best title' }] 
+          }.to raise_error('An instance of CardFacade has a one_of_type validation with a value of \'The best title\', but it should be of type: Array of Classes')
+
+          expect { 
+            mock_component['The best title', { one_of_type: String }] 
+          }.to raise_error('An instance of CardFacade has a one_of_type validation with a value of \'String\', but it should be of type: Array of Classes')
         end
 
         it 'raises error if property is wrong type' do
