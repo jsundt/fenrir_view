@@ -37,10 +37,15 @@ module FenrirView
           raise wrong_validation_format(validation_type, validation_rule, 'Array') unless validation_rule.is_a?(Array)
           raise invalid_property_value(property, value, validation_rule) if value.present? && !validation_rule.include?(value)
         when :array_of
-          raise invalid_property_type(property, value, validation_rule) if value.present? && !value.is_a?(Array)
+          raise wrong_validation_format(validation_type, validation_rule, 'Hash of validations') unless validation_rule.is_a?(Hash)
 
-          value.each_with_index do |v, i|
-            validate_property("#{property}[#{i}]", v, property_validations[:array_of])
+          if value.present?
+            raise invalid_property_type(property, value, ['Array']) unless value.is_a?(Array)
+
+            # Loop over each value in the array and apply the specified rules on each item
+            value.each_with_index do |v, i|
+              validate_property("#{property}[#{i}]", v, property_validations[:array_of])
+            end
           end
         when :hash_of
           raise invalid_property_type(property, value, validation_rule) if value.present? && !value.is_a?(Hash)

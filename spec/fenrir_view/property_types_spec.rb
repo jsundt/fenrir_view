@@ -176,19 +176,26 @@ RSpec.describe FenrirView::PropertyTypes do
       describe 'array_of' do
         let(:simple_validations) { { array_of: { one_of: ['The best title', 'The second best title', 'Valid title'] } } }
 
-        # TODO: How does a required array of work? Or doesn't it?
-
         it 'returns if property has proper values' do
           expect {
             mock_component[['The best title', 'The second best title'], simple_validations]
           }.not_to raise_error
         end
 
+        it 'raises error if validation rule is not a hash' do
+          expect {
+            mock_component[['The best title', 'The second best title'], { array_of: ['The best title', 'The second best title'] }]
+          }.to raise_error('An instance of CardFacade has a array_of validation with a value of \'["The best title", "The second best title"]\', but it should be of type: Hash of validations')
+        end
+
         it 'raises error if value is not an array' do
-          # TODO: figure out funny business
+          expect {
+            mock_component[title_property, simple_validations]
+          }.to raise_error('An instance of CardFacade has the wrong type: \'String\' for property: \'title\'. The value is: \'The best title\', Should be one of: Array')
+
           expect {
             mock_component[{ data: title_property }, simple_validations]
-          }.to raise_error
+          }.to raise_error('An instance of CardFacade has the wrong type: \'Hash\' for property: \'title\'. The value is: \'{:data=>"The best title"}\', Should be one of: Array')
         end
 
         it 'raises error if array values do not pass validations' do
@@ -206,7 +213,6 @@ RSpec.describe FenrirView::PropertyTypes do
         end
 
         it 'does not raise if value is nil' do
-          # TODO: figure out funny business
           expect { mock_component[nil, simple_validations] }.not_to raise_error
         end
       end
