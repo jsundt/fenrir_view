@@ -118,7 +118,12 @@ RSpec.describe FenrirView::PropertyTypes do
           expect { mock_component[[title_property], array_validations] }.not_to raise_error
         end
 
-        xit 'raises error when validation rule is not an array'
+        it 'raises error when validation rule is not an array' do
+          # TODO: Add check?
+          expect { 
+            mock_component['The best title', { one_of: 'The best title' }] 
+          }.to raise_error
+        end
 
         it 'raises error if property is wrong type' do
           expect { mock_component[title_property, array_validations] }.to raise_error("An instance of CardFacade has the wrong type: 'String' for property: 'title'. The value is: 'The best title', Should be one of: Array")
@@ -137,7 +142,12 @@ RSpec.describe FenrirView::PropertyTypes do
           expect { mock_component['The second best title', title_validations] }.not_to raise_error
         end
 
-        xit 'raises error when validation rule is not an array' # TODO: Add to validator
+        it 'raises error when validation rule is not an array' do
+          # TODO: Add check?
+          expect { 
+            mock_component['The best title', { one_of: 'The best title' }] 
+          }.to raise_error
+        end
 
         it 'raises error if value is not one of the allowed values' do
           expect { mock_component['Terrible title', title_validations] }.to raise_error("An instance of CardFacade has the wrong value for property: 'title' (value: 'Terrible title'). Should be one of: The best title, The second best title")
@@ -159,10 +169,10 @@ RSpec.describe FenrirView::PropertyTypes do
           }.not_to raise_error
         end
 
-        xit 'raises error if value is not an array' do
+        it 'raises error if value is not an array' do
           # TODO: figure out funny business
           expect {
-            mock_component[{ title: title_property }, simple_validations]
+            mock_component[{ data: title_property }, simple_validations]
           }.to raise_error
         end
 
@@ -180,7 +190,7 @@ RSpec.describe FenrirView::PropertyTypes do
           }.to raise_error("An instance of CardFacade has the wrong value for property: 'title[0]' (value: '1'). Should be one of: The best title, The second best title, Valid title")
         end
 
-        xit 'does not raise if value is nil' do
+        it 'does not raise if value is nil' do
           # TODO: figure out funny business
           expect { mock_component[nil, simple_validations] }.not_to raise_error
         end
@@ -200,10 +210,15 @@ RSpec.describe FenrirView::PropertyTypes do
           expect { mock_component[{ id: 1, title: title_property }, simple_validations] }.not_to raise_error
         end
 
-        xit 'raises error if value is not a hash' do
+        it 'raises error if value is not a hash' do
           # TODO: figure out funny business
-          expect { mock_component['The best title', simple_validations] }.to raise_error
-          expect { mock_component[['id', 1], simple_validations] }.to raise_error
+          expect { 
+            mock_component['The best title', simple_validations] 
+          }.to raise_error
+
+          expect { 
+            mock_component[['id', 1], simple_validations] 
+          }.to raise_error
         end
 
         it 'raises error if hash values do not pass validations' do
@@ -212,7 +227,7 @@ RSpec.describe FenrirView::PropertyTypes do
           expect { mock_component[{ title: title_property }, simple_validations] }.to raise_error("An instance of CardFacade is missing the required property: title[id]")
         end
 
-        xit 'does not raise if value is nil' do
+        it 'does not raise if value is nil' do
           # TODO: figure out funny business
           expect { mock_component[nil, simple_validations] }.not_to raise_error
         end
