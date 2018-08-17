@@ -28,7 +28,8 @@ module FenrirView
       property_validations.slice(*VALIDATION_KEYS).each do |validation_type, validation_rule|
         case validation_type
         when :required
-          raise required_property_missing(property, value) if value.blank?
+          raise wrong_validation_format(validation_type, validation_rule, 'Boolean') unless !!validation_rule == validation_rule
+          raise required_property_missing(property, value) if value.blank? && !!validation_rule
         when :one_of_type
           raise invalid_property_type(property, value, validation_rule) if value.present? && !validation_rule.include?(value.class)
         when :one_of
@@ -98,6 +99,10 @@ module FenrirView
     def unknown_keys
       unknown_keys = @instance_properties.keys.reject { |key| @component_properties.include?(key) }
       ArgumentError.new("#{@component_class.name} has unkown keys: #{unknown_keys.join(', ')}. Should be one of: #{@component_properties.keys.join(', ')}")
+    end
+
+    def wrong_validation_format(rule, current_value, valid_type)
+      ArgumentError.new("An instance of #{@component_class.name} has a #{rule} validation with a value of '#{current_value}', but it should be of type: #{valid_type}")
     end
 
     def deprecated_property(property)
