@@ -3,6 +3,9 @@
 Changes worth mentioning.
 
 ---
+## 0.21.3 – 2018-08-17
+- [Improvement] Fix pending property types tests
+
 ## 0.21.2 – 2018-08-16
 - [Improvement] Changed out rails tests for RSpec and added system tests
 
