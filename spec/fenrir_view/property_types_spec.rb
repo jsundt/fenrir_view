@@ -291,22 +291,21 @@ RSpec.describe FenrirView::PropertyTypes do
         it 'raises when you pass bad values in any part of a nested rule' do
           expect { mock_component[{ id: 1, title: title_property }, complex_validations] }.to raise_error("An instance of CardFacade is missing the required property: title[buttons]")
 
-          # TODO: figure out funny business
-          # expect { mock_component[{
-          #   id: 1,
-          #   title: title_property,
-          #   buttons: {
-          #     title: 'Edit',
-          #     link: '/edit',
-          #     style: 'primary',
-          #   },
-          # }, complex_validations] }.to raise_error
-          #
-          # expect { mock_component[{
-          #   id: 1,
-          #   title: title_property,
-          #   buttons: [['new', 'edit', 'delete']],
-          # }, complex_validations] }.to raise_error
+          expect { mock_component[{
+            id: 1,
+            title: title_property,
+            buttons: {
+              title: 'Edit',
+              link: '/edit',
+              style: 'primary',
+            },
+          }, complex_validations] }.to raise_error('An instance of CardFacade has the wrong type: \'Hash\' for property: \'title[buttons]\'. The value is: \'{:title=>"Edit", :link=>"/edit", :style=>"primary"}\', Should be one of: Array')
+          
+          expect { mock_component[{
+            id: 1,
+            title: title_property,
+            buttons: [['new', 'edit', 'delete']],
+          }, complex_validations] }.to raise_error('An instance of CardFacade has the wrong type: \'Array\' for property: \'title[buttons][0]\'. The value is: \'["new", "edit", "delete"]\', Should be one of: Hash')
 
           expect { mock_component[{
             id: 1,
