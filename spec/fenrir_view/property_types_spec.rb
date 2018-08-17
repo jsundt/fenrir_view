@@ -229,17 +229,18 @@ RSpec.describe FenrirView::PropertyTypes do
 
         it 'returns if property has proper values' do
           expect { mock_component[{ id: 1, title: title_property }, simple_validations] }.not_to raise_error
+
+          expect { mock_component[{ id: 2 }, simple_validations] }.not_to raise_error
         end
 
         it 'raises error if value is not a hash' do
-          # TODO: figure out funny business
           expect { 
             mock_component['The best title', simple_validations] 
-          }.to raise_error
+          }.to raise_error('An instance of CardFacade has the wrong type: \'String\' for property: \'title\'. The value is: \'The best title\', Should be one of: Hash')
 
           expect { 
             mock_component[['id', 1], simple_validations] 
-          }.to raise_error
+          }.to raise_error('An instance of CardFacade has the wrong type: \'Array\' for property: \'title\'. The value is: \'["id", 1]\', Should be one of: Hash')
         end
 
         it 'raises error if hash values do not pass validations' do
@@ -249,7 +250,6 @@ RSpec.describe FenrirView::PropertyTypes do
         end
 
         it 'does not raise if value is nil' do
-          # TODO: figure out funny business
           expect { mock_component[nil, simple_validations] }.not_to raise_error
         end
       end
