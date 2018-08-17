@@ -34,6 +34,7 @@ module FenrirView
           raise wrong_validation_format(validation_type, validation_rule, 'Array of Classes') unless validation_rule.is_a?(Array)
           raise invalid_property_type(property, value, validation_rule) if value.present? && !validation_rule.include?(value.class)
         when :one_of
+          raise wrong_validation_format(validation_type, validation_rule, 'Array') unless validation_rule.is_a?(Array)
           raise invalid_property_value(property, value, validation_rule) if value.present? && !validation_rule.include?(value)
         when :array_of
           raise invalid_property_type(property, value, validation_rule) if value.present? && !value.is_a?(Array)
