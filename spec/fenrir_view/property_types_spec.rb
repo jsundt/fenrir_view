@@ -98,9 +98,18 @@ RSpec.describe FenrirView::PropertyTypes do
       describe 'required' do
         let(:title_validations) { { required: true } }
 
-        it 'returns if property is present' do
+        it 'component returns if required property is present' do
           expect { mock_component[title_property, title_validations] }.not_to raise_error
           expect(mock_component[title_property, title_validations]).to eq({ required: true })
+        end
+
+        it 'property value can be nil if required rule is false or not present' do
+          expect { mock_component[nil, { required: false }] }.not_to raise_error
+          expect { mock_component[nil, {}] }.not_to raise_error
+        end
+
+        it 'raises error if validation rule is not a boolean' do
+          expect { mock_component[title_property, { required: 'Yes it is required' }] }.to raise_error('An instance of CardFacade has a required validation with a value of \'Yes it is required\', but it should be of type: Boolean')
         end
 
         it 'raises error if a required property value is nil' do
@@ -118,7 +127,15 @@ RSpec.describe FenrirView::PropertyTypes do
           expect { mock_component[[title_property], array_validations] }.not_to raise_error
         end
 
-        xit 'raises error when validation rule is not an array'
+        it 'raises error when validation rule is not an array' do
+          expect { 
+            mock_component['The best title', { one_of_type: 'The best title' }] 
+          }.to raise_error('An instance of CardFacade has a one_of_type validation with a value of \'The best title\', but it should be of type: Array of Classes')
+
+          expect { 
+            mock_component['The best title', { one_of_type: String }] 
+          }.to raise_error('An instance of CardFacade has a one_of_type validation with a value of \'String\', but it should be of type: Array of Classes')
+        end
 
         it 'raises error if property is wrong type' do
           expect { mock_component[title_property, array_validations] }.to raise_error("An instance of CardFacade has the wrong type: 'String' for property: 'title'. The value is: 'The best title', Should be one of: Array")
@@ -137,7 +154,15 @@ RSpec.describe FenrirView::PropertyTypes do
           expect { mock_component['The second best title', title_validations] }.not_to raise_error
         end
 
-        xit 'raises error when validation rule is not an array' # TODO: Add to validator
+        it 'raises error when validation rule is not an array' do
+          expect { 
+            mock_component['The best title', { one_of: 'The best title' }] 
+          }.to raise_error('An instance of CardFacade has a one_of validation with a value of \'The best title\', but it should be of type: Array')
+
+          expect { 
+            mock_component['The best title', { one_of: String }] 
+          }.to raise_error('An instance of CardFacade has a one_of validation with a value of \'String\', but it should be of type: Array')
+        end
 
         it 'raises error if value is not one of the allowed values' do
           expect { mock_component['Terrible title', title_validations] }.to raise_error("An instance of CardFacade has the wrong value for property: 'title' (value: 'Terrible title'). Should be one of: The best title, The second best title")
@@ -151,19 +176,26 @@ RSpec.describe FenrirView::PropertyTypes do
       describe 'array_of' do
         let(:simple_validations) { { array_of: { one_of: ['The best title', 'The second best title', 'Valid title'] } } }
 
-        # TODO: How does a required array of work? Or doesn't it?
-
         it 'returns if property has proper values' do
           expect {
             mock_component[['The best title', 'The second best title'], simple_validations]
           }.not_to raise_error
         end
 
-        xit 'raises error if value is not an array' do
-          # TODO: figure out funny business
+        it 'raises error if validation rule is not a hash' do
           expect {
-            mock_component[{ title: title_property }, simple_validations]
-          }.to raise_error
+            mock_component[['The best title', 'The second best title'], { array_of: ['The best title', 'The second best title'] }]
+          }.to raise_error('An instance of CardFacade has a array_of validation with a value of \'["The best title", "The second best title"]\', but it should be of type: Hash of validations')
+        end
+
+        it 'raises error if value is not an array' do
+          expect {
+            mock_component[title_property, simple_validations]
+          }.to raise_error('An instance of CardFacade has the wrong type: \'String\' for property: \'title\'. The value is: \'The best title\', Should be one of: Array')
+
+          expect {
+            mock_component[{ data: title_property }, simple_validations]
+          }.to raise_error('An instance of CardFacade has the wrong type: \'Hash\' for property: \'title\'. The value is: \'{:data=>"The best title"}\', Should be one of: Array')
         end
 
         it 'raises error if array values do not pass validations' do
@@ -180,8 +212,7 @@ RSpec.describe FenrirView::PropertyTypes do
           }.to raise_error("An instance of CardFacade has the wrong value for property: 'title[0]' (value: '1'). Should be one of: The best title, The second best title, Valid title")
         end
 
-        xit 'does not raise if value is nil' do
-          # TODO: figure out funny business
+        it 'does not raise if value is nil' do
           expect { mock_component[nil, simple_validations] }.not_to raise_error
         end
       end
@@ -198,12 +229,18 @@ RSpec.describe FenrirView::PropertyTypes do
 
         it 'returns if property has proper values' do
           expect { mock_component[{ id: 1, title: title_property }, simple_validations] }.not_to raise_error
+
+          expect { mock_component[{ id: 2 }, simple_validations] }.not_to raise_error
         end
 
-        xit 'raises error if value is not a hash' do
-          # TODO: figure out funny business
-          expect { mock_component['The best title', simple_validations] }.to raise_error
-          expect { mock_component[['id', 1], simple_validations] }.to raise_error
+        it 'raises error if value is not a hash' do
+          expect { 
+            mock_component['The best title', simple_validations] 
+          }.to raise_error('An instance of CardFacade has the wrong type: \'String\' for property: \'title\'. The value is: \'The best title\', Should be one of: Hash')
+
+          expect { 
+            mock_component[['id', 1], simple_validations] 
+          }.to raise_error('An instance of CardFacade has the wrong type: \'Array\' for property: \'title\'. The value is: \'["id", 1]\', Should be one of: Hash')
         end
 
         it 'raises error if hash values do not pass validations' do
@@ -212,8 +249,7 @@ RSpec.describe FenrirView::PropertyTypes do
           expect { mock_component[{ title: title_property }, simple_validations] }.to raise_error("An instance of CardFacade is missing the required property: title[id]")
         end
 
-        xit 'does not raise if value is nil' do
-          # TODO: figure out funny business
+        it 'does not raise if value is nil' do
           expect { mock_component[nil, simple_validations] }.not_to raise_error
         end
       end
@@ -255,22 +291,21 @@ RSpec.describe FenrirView::PropertyTypes do
         it 'raises when you pass bad values in any part of a nested rule' do
           expect { mock_component[{ id: 1, title: title_property }, complex_validations] }.to raise_error("An instance of CardFacade is missing the required property: title[buttons]")
 
-          # TODO: figure out funny business
-          # expect { mock_component[{
-          #   id: 1,
-          #   title: title_property,
-          #   buttons: {
-          #     title: 'Edit',
-          #     link: '/edit',
-          #     style: 'primary',
-          #   },
-          # }, complex_validations] }.to raise_error
-          #
-          # expect { mock_component[{
-          #   id: 1,
-          #   title: title_property,
-          #   buttons: [['new', 'edit', 'delete']],
-          # }, complex_validations] }.to raise_error
+          expect { mock_component[{
+            id: 1,
+            title: title_property,
+            buttons: {
+              title: 'Edit',
+              link: '/edit',
+              style: 'primary',
+            },
+          }, complex_validations] }.to raise_error('An instance of CardFacade has the wrong type: \'Hash\' for property: \'title[buttons]\'. The value is: \'{:title=>"Edit", :link=>"/edit", :style=>"primary"}\', Should be one of: Array')
+          
+          expect { mock_component[{
+            id: 1,
+            title: title_property,
+            buttons: [['new', 'edit', 'delete']],
+          }, complex_validations] }.to raise_error('An instance of CardFacade has the wrong type: \'Array\' for property: \'title[buttons][0]\'. The value is: \'["new", "edit", "delete"]\', Should be one of: Hash')
 
           expect { mock_component[{
             id: 1,

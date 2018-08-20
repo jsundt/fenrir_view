@@ -28,24 +28,36 @@ module FenrirView
       property_validations.slice(*VALIDATION_KEYS).each do |validation_type, validation_rule|
         case validation_type
         when :required
-          raise required_property_missing(property, value) if value.blank?
+          raise wrong_validation_format(validation_type, validation_rule, 'Boolean') unless !!validation_rule == validation_rule
+          raise required_property_missing(property, value) if value.blank? && !!validation_rule
         when :one_of_type
+          raise wrong_validation_format(validation_type, validation_rule, 'Array of Classes') unless validation_rule.is_a?(Array)
           raise invalid_property_type(property, value, validation_rule) if value.present? && !validation_rule.include?(value.class)
         when :one_of
+          raise wrong_validation_format(validation_type, validation_rule, 'Array') unless validation_rule.is_a?(Array)
           raise invalid_property_value(property, value, validation_rule) if value.present? && !validation_rule.include?(value)
         when :array_of
-          raise invalid_property_type(property, value, validation_rule) if value.present? && !value.is_a?(Array)
+          raise wrong_validation_format(validation_type, validation_rule, 'Hash of validations') unless validation_rule.is_a?(Hash)
 
-          value.each_with_index do |v, i|
-            validate_property("#{property}[#{i}]", v, property_validations[:array_of])
+          if value.present?
+            raise invalid_property_type(property, value, ['Array']) unless value.is_a?(Array)
+
+            # Loop over each value in the array and apply the specified rules on each item
+            value.each_with_index do |v, i|
+              validate_property("#{property}[#{i}]", v, property_validations[:array_of])
+            end
           end
         when :hash_of
-          raise invalid_property_type(property, value, validation_rule) if value.present? && !value.is_a?(Hash)
+          raise wrong_validation_format(validation_type, validation_rule, 'Hash of validations') unless validation_rule.is_a?(Hash)
 
-          # Loop over the validations for the keys in this hash
-          # and check that the 'value' conforms to those rules
-          property_validations[:hash_of].each do |k, key_validations|
-            validate_property("#{property}[#{k}]", value[k], key_validations)
+          if value.present?
+            raise invalid_property_type(property, value, ['Hash']) unless value.is_a?(Hash)
+
+            # Loop over the validations for the keys in this hash
+            # and check that the 'value' conforms to those rules
+            property_validations[:hash_of].each do |k, key_validations|
+              validate_property("#{property}[#{k}]", value[k], key_validations)
+            end
           end
         end
       end
@@ -98,6 +110,10 @@ module FenrirView
     def unknown_keys
       unknown_keys = @instance_properties.keys.reject { |key| @component_properties.include?(key) }
       ArgumentError.new("#{@component_class.name} has unkown keys: #{unknown_keys.join(', ')}. Should be one of: #{@component_properties.keys.join(', ')}")
+    end
+
+    def wrong_validation_format(rule, current_value, valid_type)
+      ArgumentError.new("An instance of #{@component_class.name} has a #{rule} validation with a value of '#{current_value}', but it should be of type: #{valid_type}")
     end
 
     def deprecated_property(property)
