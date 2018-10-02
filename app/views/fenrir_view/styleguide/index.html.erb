@@ -19,11 +19,11 @@
                 <% properties = component_properties[:props] %>
 
                 <% if component_properties[:yield] %>
-                  <%= render_ui component.variant, component.name, properties.clone do %>
+                  <%= render_ui component.variant, component.component_identifier, properties.clone do %>
                     <%= component_properties[:yield].html_safe %>
                   <% end %>
                 <% else %>
-                  <%= render_ui component.variant, component.name, properties.clone %>
+                  <%= render_ui component.variant, component.component_identifier, properties.clone %>
                 <% end %>
 
               <% end %>
@@ -34,11 +34,7 @@
             <p class="o-text--product <%= component.meta_status[:bg] %>">Status: <%= component.meta_status[:code] %></p>
             <p class="o-text--body"><%= component.meta_description %></p>
 
-            <%= ui_element("button", {
-              title: "View all variants",
-              link: components_path(variant: variant, id: component.name),
-              style: "u-bg--silver"
-            }) %>
+            <%= link_to 'View all variants', components_path(variant: variant, id: component.name) %>
           </div>
         </section>
       <% end %>
