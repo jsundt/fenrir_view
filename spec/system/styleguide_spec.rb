@@ -9,6 +9,12 @@ RSpec.describe 'Styleguide', type: :system do
 
       expect(current_path).to eq('/design_system/docs/overview/index')
       expect(page).to have_text('Charlie Design System')
+      expect(page).to have_text('Card')
+      expect(page).to have_text('Header')
+      expect(page).to have_text('Paragraph')
+      expect(page).to have_text('Profile')
+      expect(page).to have_text('Yielder')
+
       click_on 'Example Usage'
 
       expect(page).to have_text('Examples of components together')
@@ -72,6 +78,21 @@ RSpec.describe 'Styleguide', type: :system do
       visit '/design_system/styleguide/components/something'
 
       # TODO: differnt hint message if component is missing compared to just missing stubs
+    end
+  end
+
+  describe 'system components' do
+    it 'does not show in styleguide sidebar' do
+      visit '/design_system'
+
+      expect(page).to_not have_text('Application frame')
+    end
+
+    it 'accessible on direct url' do
+      visit '/design_system/system_components/application_frame'
+
+      expect(page).to have_text('Application frame')
+      expect(page).to have_text('Component Properties:')
     end
   end
 end

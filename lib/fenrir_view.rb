@@ -9,11 +9,15 @@ require 'fenrir_view/docs'
 
 module FenrirView
   def self.pattern_type(variant)
-    FenrirView.configuration.system_path.join(variant)
+    if variant == 'system'
+      Pathname.new(File.expand_path('fenrir_view/components', __dir__))
+    else
+      FenrirView.configuration.system_path.join(variant)
+    end
   end
 
   def self.patterns_for(variant)
-    FenrirView.configuration.system_path.join(variant, '*')
+    FenrirView.pattern_type(variant).join('*')
   end
 
   def self.configuration

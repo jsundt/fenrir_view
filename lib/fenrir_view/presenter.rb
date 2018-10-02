@@ -54,7 +54,8 @@ module FenrirView
     class << self
       def component_for(*args)
         klass = "#{args.second.to_s.camelize}Facade".safe_constantize
-        klass ||= self
+        raise ArgumentError.new("Could not find component: #{args.first.to_s}: #{args.second.to_s}") unless !!klass
+
         klass.new(*args)
       end
 

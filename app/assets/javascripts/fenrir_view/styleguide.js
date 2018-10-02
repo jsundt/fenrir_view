@@ -5,6 +5,8 @@
 
 //= require fenrir_view/extras
 
+//= require fenrir_view/system_components
+
 //= require elements
 //= require components
 //= require modules

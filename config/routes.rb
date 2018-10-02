@@ -6,4 +6,7 @@ FenrirView::Engine.routes.draw do
   get "styleguide/:variant/:id", to: 'styleguide#show', as: 'components'
 
   get 'docs/:section(/:page)', to: 'docs#show', as: 'fenrir_docs'
+
+  # Show components used by styleguide
+  get 'system_components/:id', to: 'styleguide#show', as: 'system_components', defaults: { variant: 'system' }
 end

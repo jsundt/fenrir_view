@@ -26,5 +26,11 @@ module FenrirView
         capture(&block) if block_given?
       end
     end
+
+    def system_component(slug, properties = {}, &block)
+      render_ui('system', "fenrir_view_#{slug}", properties) do
+        capture(&block) if block_given?
+      end
+    end
   end
 end

@@ -48,11 +48,11 @@
 
           <div class="col-xs-12 col-lg-6">
             <% if component_properties[:yield] %>
-              <%= render_ui @component.variant, @component.name, properties.clone do %>
+              <%= render_ui @component.variant, @component.component_identifier, properties.clone do %>
                 <%= component_properties[:yield].html_safe %>
               <% end %>
             <% else %>
-              <%= render_ui @component.variant, @component.name, properties.clone %>
+              <%= render_ui @component.variant, @component.component_identifier, properties.clone %>
             <% end %>
           </div>
 
@@ -67,6 +67,8 @@
                 <% helper_start = "ui_component(" %>
               <% when "modules" %>
                 <% helper_start = "ui_module(" %>
+              <% when "system" %>
+                <% helper_start = "system_component(" %>
               <% else %>
                 <% helper_start = "render_ui(\"#{ @component.variant }\", " %>
               <% end %>
