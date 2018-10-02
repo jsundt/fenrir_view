@@ -1,0 +1,13 @@
+<div class="fenrir-view-application-frame">
+  <%= system_component('navbar', navbar_facade) %>
+
+  <div class="fenrir-view-application-frame__page">
+    <%= system_component('sidebar', sidebar_facade) %>
+
+    <div class="fenrir-view-application-frame__content js-page-wrapper">
+      <div class="fenrir-view-application-frame__content-card">
+        <%= properties[:yield] %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,58 +16,14 @@
 
   <!-- Load Webfonts -->
   <% unless Rails.env.test? %>
-    <script src="//use.typekit.net/ler6yzq.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
+    <link rel="stylesheet" href="https://use.typekit.net/ler6yzq.css">
   <% end %>
 </head>
 <body>
-  <div class="content-wrap js-content-wrap u-padding--y-0">
-    <div class="sidebar-wrapper">
-      <div class="section-nav js-scrollbar u-padding--b-50" id="styleguide-nav" data-turbolinks-permanent>
-
-        <h1 class="o-text--lead u-padding--y-50" style="margin-left:15px;">Charlie Design System</h1>
-
-        <% @page.docs.each do |doc| %>
-          <h2 class="sidebar-section__title"><%= doc.title %></h2>
-
-          <ul class="u-margin--b-50 reset-ul">
-            <% doc.sections.each do |section| %>
-              <li>
-                <ul class="u-margin--b-25 reset-ul">
-                  <% section.pages.each do |page| %>
-                    <li>
-                      <%= ui_element 'nav_item', title: page.title, link: fenrir_docs_path(section: page.section_path, page: page.page_path), current_page: request.original_fullpath, style: page.id == 0 ? 'o-text--product' : nil %>
-                    </li>
-                  <% end %>
-                </ul>
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
-
-        <h2 class="sidebar-section__title"><%= link_to("UI Patterns", component_index_path) %></h2>
-
-        <% @page.components.each do |section, data| %>
-          <h3 class="o-text--product" style="margin-left:15px;"><%= section.titleize %></h3>
-
-          <% unless data.empty? %>
-            <ul class="reset-ul">
-              <% data.each do |item| %>
-                <li>
-                  <%= ui_element 'nav_item', title: item.title, link: components_path(variant: section, id: item.name), current_page: request.original_fullpath %>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
-            <p class="o-text--note u-margin--b-25 u-color--coolgray" style="margin-left:15px;">Nothing to see :(</p>
-          <% end %>
-        <% end %>
-
-      </div>
-      <div class="section-wrap js-page-wrapper js-scrollbar">
-        <%= yield %>
-      </div>
-    </div>
-  </div>
+  <%= system_component('application_frame', {
+    page: @page,
+  }) do %>
+    <%= yield %>
+  <% end %>
 </body>
 </html>

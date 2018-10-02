@@ -1,0 +1,5 @@
+@mixin first-and-last-descendant-children-border-radius($br) {
+  > :last-child { border-bottom-left-radius: $br; border-bottom-right-radius: $br; }
+  > :first-child { border-top-left-radius: $br; border-top-right-radius: $br; }
+  > :only-child { border-radius: $br; }
+}

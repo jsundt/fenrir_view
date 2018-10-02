@@ -1,0 +1,67 @@
+//----------------------------------------\\
+// System component: Application Frame
+//----------------------------------------\\
+
+$nav-height: 60px;
+$switch-from-tabs-size: 'lg';
+
+.fenrir-view-application-frame {
+  //
+}
+
+// Make sure navbar doesn't overlap page content
+.fenrir-view-application-frame__page {
+  padding-top: 20px;
+  position: relative;
+
+  .fenrir-view-navbar + & {
+    padding-top: $nav-height;
+
+    @include media-breakpoint-up($switch-from-tabs-size) {
+      padding-top: 80px;
+    }
+  }
+}
+
+.fenrir-view-application-frame__content {
+  position: relative;
+  border-radius: 0;
+  right: 0;
+  z-index: 1;
+
+  @include media-breakpoint-up($switch-from-tabs-size) {
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: $br;
+    margin-bottom: $padding * 2;
+  }
+
+  .fenrir-view-sidebar + & {
+    @include media-breakpoint-up($switch-from-tabs-size) {
+      margin-left: 200px;
+    }
+  }
+
+  .is-scrolled &::before {
+    content: '';
+    position: fixed;
+    height: 5px;
+    width: 100%;
+    background-image: linear-gradient(rgba(color('charcoal'), 0.1), rgba(color('charcoal'), 0.00001));
+    z-index: 5;
+  }
+}
+
+.fenrir-view-application-frame__content-card {
+  @include bg-color('white');
+  position: relative;
+  border-radius: 0;
+  margin-bottom: $padding;
+  box-shadow: 0 5px 20px 0 $shadow;
+
+  @include media-breakpoint-up($switch-from-tabs-size) {
+    @include first-and-last-descendant-children-border-radius($br);
+    border-radius: $br;
+    margin-bottom: $padding / 4;
+  }
+}

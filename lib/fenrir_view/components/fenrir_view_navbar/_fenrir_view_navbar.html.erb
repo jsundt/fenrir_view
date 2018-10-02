@@ -1,0 +1,35 @@
+<nav class="<%= item_classes %>" role="navigation" aria-label="<%= aria_label %>">
+  <% if logo %>
+    <%= link_to logo[:link], class: "fenrir-view-navbar-logo #{logo[:style]}" do %>
+      <% if logo[:image] %>
+        <%= image_tag(logo[:image], alt: logo[:name], class: 'fenrir-view-navbar-logo__image') %>
+      <% else %>
+        <p class="fenrir-view-navbar-logo__name"><%= logo[:name] %></p>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div class="fenrir-view-navbar__main-links-wrapper">
+    <% if sidebar? %>
+      <%= system_component("button", {
+        title: 'Menu',
+        trigger: 'js-fenrir-view-navbar__sidebar-toggle',
+        style: 'u-bg--silver fenrir-view-navbar__sidebar-toggle',
+      }) %>
+    <% end %>
+  </div>
+
+  <% if properties[:yield] %>
+    <div class="fenrir-view-navbar__content-wrapper">
+      <%= properties[:yield] %>
+    </div>
+  <% end %>
+
+  <% if additional_actions? %>
+    <div class="fenrir-view-navbar__actions-wrapper">
+      <% additional_actions.each do |action| %>
+        <%= system_component("button", action) %>
+      <% end %>
+    </div>
+  <% end %>
+</nav>

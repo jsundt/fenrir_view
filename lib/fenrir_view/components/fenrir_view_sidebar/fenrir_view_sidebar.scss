@@ -1,0 +1,76 @@
+//----------------------------------------\\
+// components: sidebar
+//----------------------------------------\\
+
+$switch-from-tabs-size: 'lg';
+
+@mixin is-hidden {
+  pointer-events: none;
+  z-index: 0;
+  transform: translate3d(-100vw, 0, 0);
+}
+
+@mixin is-showing {
+  pointer-events: all;
+  position: fixed;
+  z-index: 8;
+  transform: translate3d(0, 0, 0);
+}
+
+.fenrir-view-sidebar {
+  @include bg-color('white-115');
+  @include is-hidden;
+  position: fixed;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 75px 15px;
+  flex-direction: column;
+
+  @include media-breakpoint-up($switch-from-tabs-size) {
+    @include is-showing;
+    display: flex;
+    top: 80px;
+    bottom: 20px;
+    width: 200px;
+    height: auto;
+    min-height: auto;
+    padding: 0 15px;
+    z-index: 1;
+  }
+
+  &.is-showing { @include is-showing; }
+
+  + .page-wrapper {
+    @include media-breakpoint-up($switch-from-tabs-size) {
+      margin-left: 200px;
+    }
+  }
+}
+
+  .fenrir-view-sidebar__category-name {
+    @include o-text--product;
+    line-height: 1.2;
+    font-weight: 700;
+    color: color('charcoal');
+  }
+
+  .fenrir-view-sidebar__item {
+    @include o-text--product;
+    position: relative;
+    display: block;
+    line-height: 1.2;
+    padding: 3px 0;
+    color: color('charcoal', 85);
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: color('secondary');
+    }
+  }
