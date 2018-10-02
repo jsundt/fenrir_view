@@ -8,7 +8,12 @@ module FenrirView
     end
 
     def title
-      @name.humanize
+      name.humanize
+    end
+
+    def component_identifier
+      return "fenrir_view_#{name}" if variant == 'system'
+      name
     end
 
     def default_properties_as_json
@@ -42,7 +47,7 @@ module FenrirView
     end
 
     def stubs_file
-      FenrirView.pattern_type(variant).join(name, "#{name}.yml")
+      FenrirView.pattern_type(variant).join(component_identifier, "#{component_identifier}.yml")
     end
 
     def stubs?
@@ -109,7 +114,7 @@ module FenrirView
     private
 
     def component_facade
-      @component_facade ||= FenrirView::Presenter.component_for(variant, name, {}, validate: false)
+      @component_facade ||= FenrirView::Presenter.component_for(variant, component_identifier, {}, validate: false)
     end
 
     def meta_status_code
