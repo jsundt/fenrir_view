@@ -1,0 +1,17 @@
+<nav class="<%= item_classes %>">
+  <% category_facades.each do |category| %>
+    <% if category.items.any? %>
+      <section class="<%= category.style %>">
+        <% if category.name? %>
+          <p class="fenrir-view-sidebar__category-name">
+            <%= category.name %>
+          </p>
+        <% end %>
+
+        <% category.items.each do |item| %>
+          <%= link_to item.title, item.link, class: 'fenrir-view-sidebar__item' %>
+        <% end %>
+      </section>
+    <% end %>
+  <% end %>
+</nav>

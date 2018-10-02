@@ -24,6 +24,17 @@ module FenrirView
       components
     end
 
+    def system_components
+      items = []
+
+      sorted_components_for('system').map do |dir|
+        item_name = File.basename(dir).delete_prefix('fenrir_view_')
+        items.push(FenrirView::Component.new('system', item_name))
+      end
+
+      items
+    end
+
     private
 
     def sorted_components_for(pattern_variant)

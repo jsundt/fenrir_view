@@ -1,0 +1,130 @@
+//----------------------------------------\\
+// Element: Button
+//----------------------------------------\\
+
+.fenrir-view-button {
+  @include o-text--label;
+  @include w-btn;
+  padding: 5px 15px;
+  min-height: 45px;
+  opacity: 1;
+  background-color: color('primary');
+  border-color: color('primary', 115);
+  color: color('white');
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: color('primary', 115);
+    border-color: color('primary', 130);
+    color: color('white');
+  }
+
+  .when-collapsing { display: none; }
+  .not-collapsing  { display: inline-flex; align-items: center; }
+
+  &.is-collapsing {
+    .when-collapsing { display: inline-flex; align-items: center; }
+    .not-collapsing  { display: none; }
+  }
+
+  &--in-group {
+    border-radius: 0;
+    margin-left: 0;
+    margin-right: 0;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+
+    &.is-active {
+      color: color('primary');
+    }
+  }
+}
+
+
+//----------------------------------------\\
+// Element: Button layout variants
+//----------------------------------------\\
+
+.fenrir-view-button--lg {
+  @include o-text--lead;
+  text-transform: none;
+  font-weight: 400;
+  min-height: 60px;
+  padding: 5px 25px;
+}
+
+.fenrir-view-button--as-link {
+  @include o-text--product;
+  text-transform: none;
+  font-weight: 400;
+  font-size: inherit;
+  line-height: inherit;
+  background-color: transparent;
+  color: color('primary');
+  border: 0;
+  padding: 0;
+  min-height: 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: transparent;
+    border-color: transparent;
+    color: color('primary');
+    text-decoration: underline;
+  }
+}
+
+// Disabled buttons
+.fenrir-view-button--disabled {
+  opacity: 0.25;
+  pointer-events: none;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+// Button loaders
+.fenrir-view-button__loader {
+  @include custom-svg-icon($height: 30px, $width: 30px);
+  margin: 0 auto;
+  display: block;
+  transform: scale(0.5);
+
+  animation: rotate 0.7s infinite;
+
+  transition: opacity 0.5s,
+              transform 0.5s;
+
+  path {
+    stroke: color('white');
+  }
+}
+
+.fenrir-view-button--block {
+  width: 100%;
+  justify-content: center;
+}
+
+.fenrir-view-button--icon {
+  min-width: 45px;
+  padding: 5px 6px;
+}
+
+.fenrir-view-button--sm {
+  height: 30px;
+}
+
+.fenrir-view-button__tooltip {
+  @include o-tooltip;
+
+  .fenrir-view-button--tooltip:hover & {
+    @include o-tooltip--hover;
+  }
+}

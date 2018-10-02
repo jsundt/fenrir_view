@@ -1,0 +1,34 @@
+:meta:
+  status: "in use"
+  description: "A navigation link or action trigger. Setting the property `trigger` changes the expected behaviour by creating a `button` HTML tag instead of a `link` tag"
+
+:stubs:
+- :name: ""
+  :props:
+    :title: "Get Started!"
+    :link: "/"
+
+- :name: "Restyled button"
+  :props:
+    :title: "Cancel"
+    :link: "/product"
+    :style: "u-bg--silver u-bg--to-success"
+
+- :name: "Button that triggers some JavaScript"
+  :props:
+    :title: "Trigger JS"
+    :style: "u-bg--warning"
+    :trigger: "js-enable-super-powers"
+
+- :name: "Button that looks like a link"
+  :props:
+    :title: "I'm a link"
+    :link: "#"
+    :style: 'e-button--as-link'
+
+- :name: "Button loading state"
+  :props:
+    :title: "Loading Button"
+    :link: "#"
+    :style: "is-loading"
+    :loader: true
