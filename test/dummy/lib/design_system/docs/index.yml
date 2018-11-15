@@ -5,5 +5,5 @@ system_info:
     index: 'Test cases'
     missing: 'No file'
     examples: 'Example usage'
-    broken: 'Broken propties'
+    broken: 'Broken properties'
 

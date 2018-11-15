@@ -21,10 +21,6 @@ RSpec.describe 'Styleguide', type: :system do
 
       expect(page).to have_text('Missing Page')
     end
-
-    it 'raises error if a component on the page has broken properties' do
-      expect { get '/design_system/docs/spec/broken' }.to raise_error('An instance of CardFacade is missing the required property: title')
-    end
   end
 
   describe 'components' do
@@ -49,15 +45,6 @@ RSpec.describe 'Styleguide', type: :system do
 
       expect(page).to have_text('Component Properties:')
       expect(page).to have_text('name. Required. As String')
-      expect(page).to have_text('validations: {
-        one_of: [
-          "default",
-          "danger",
-          "warning",
-          "success",
-          "primary"
-        ]
-      }')
       expect(page).to have_text('badges: []')
       expect(page).to have_text('E.g. Charlie account badges. Is passed to icon helper.')
       expect(page).to have_text('<%= ui_component("profile", {properties as below}) %>')
