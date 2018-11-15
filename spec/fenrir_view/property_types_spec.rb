@@ -112,8 +112,14 @@ RSpec.describe FenrirView::PropertyTypes do
           expect { mock_component[title_property, { required: 'Yes it is required' }] }.to raise_error('An instance of CardFacade has a required validation with a value of \'Yes it is required\', but it should be of type: Boolean')
         end
 
-        it 'raises error if a required property value is nil' do
+        it 'raises error if a required property\'s value is nil' do
           expect { mock_component[nil, title_validations] }.to raise_error('An instance of CardFacade is missing the required property: title')
+        end
+
+        it 'does not raise if a required property\'s value is false' do
+          expect { mock_component[false, title_validations] }.not_to raise_error
+          expect { mock_component[false, { required: false }] }.not_to raise_error
+          expect { mock_component[false, {}] }.not_to raise_error
         end
       end
 
