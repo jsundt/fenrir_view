@@ -12,8 +12,6 @@ RSpec.describe FenrirView::Presenter do
       expect(mock_presenter_class.properties).to eq({yield: nil})
     end
 
-    xit '#render method?'
-
     it '#partial returns the correct path' do
       expect(mock_presenter_class.partial).to eq('base/base')
     end
@@ -44,8 +42,6 @@ RSpec.describe FenrirView::Presenter do
       expect(dummy_card_facade.title).to eq('everything')
       expect(dummy_card_facade.has_description?).to eq(false)
     end
-
-    xit '#render method?'
 
     it '#partial returns the correct path' do
       expect(dummy_card_facade.partial).to eq('card/card')
