@@ -3,6 +3,9 @@
 Changes worth mentioning.
 
 ---
+## 0.21.4 – 2018-08-17
+- [Improvement] Required boolean's can now have a value of false :upside_down_face:
+
 ## 0.21.3 – 2018-08-17
 - [Improvement] Fix pending property types tests
 
