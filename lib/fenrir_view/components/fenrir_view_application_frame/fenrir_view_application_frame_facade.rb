@@ -7,7 +7,7 @@ class FenrirViewApplicationFrameFacade < FenrirView::Presenter
     {
       logo: {
         name: I18n.t('fenrir_view.styleguide_title'),
-        link: '/design_system',
+        link: fenrir_view_routes.root_path,
         image: I18n.t('fenrir_view.styleguide_logo').presence,
       },
       sidebar: !!sidebar_facade,
@@ -28,57 +28,49 @@ class FenrirViewApplicationFrameFacade < FenrirView::Presenter
   end
 
   def doc_links
-    doc_links = page.docs.map do |doc|
-      items = []
-
-      doc.sections.each do |section|
-        section.pages.each do |page|
-          items.push({
-            title: page.title,
-            link: "/design_system/docs/#{page.section_path}/#{page.page_path}"
-          })
-        end
-      end
-
+    page.docs.map do |section|
       {
-        name: doc.title,
+        name: section.title,
         style: 'u-padding--b-50',
-        items: items,
+        items: section.pages.map do |page|
+          {
+            title: page.title,
+            link: fenrir_view_routes.fenrir_docs_path(section: section.folder, page: page.path),
+          }
+        end,
       }
     end
-
-    doc_links
   end
 
   def component_links
-    component_links = page.components.map do |section, data|
-      items = data.map do |item|
-        {
-          title: item.title,
-          link: "/design_system/styleguide/#{section}/#{item.name}"
-        }
-      end
-
+    page.components.map do |section, data|
       {
         name: section.titleize,
         style: 'u-padding--b-50',
-        items: items,
+        items:  data.map do |component|
+          {
+            title: component.title,
+            link: fenrir_view_routes.components_path(variant: section, id: component.name),
+          }
+        end
       }
     end
-
-    component_links
   end
 
   def system_component_links
     [{
-      name: 'System components',
+      name: 'Internal system',
       style: 'u-padding--b-50',
-      items: page.system_components.map do |item|
+      items: page.system_components.map do |component|
         {
-          title: item.title,
-          link: "/design_system/system_components/#{item.name}"
+          title: component.title,
+          link: fenrir_view_routes.system_components_path(id: component.name),
         }
-      end,
+      end
     }]
+  end
+
+  def fenrir_view_routes
+    FenrirView::Engine.routes.url_helpers
   end
 end

@@ -5,7 +5,7 @@ require 'fenrir_view/configuration'
 require 'fenrir_view/property_types'
 require 'fenrir_view/presenter'
 require 'fenrir_view/component'
-require 'fenrir_view/docs'
+require 'fenrir_view/documentation'
 
 module FenrirView
   def self.pattern_type(variant)

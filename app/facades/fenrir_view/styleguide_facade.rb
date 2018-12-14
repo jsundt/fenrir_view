@@ -1,13 +1,9 @@
+# frozen_string_literal: true
+
 module FenrirView
   class StyleguideFacade
-    def initialize()
-      @docs = doc_pages
-    end
-
     def docs
-      @docs.map do |key, value|
-        FenrirView::Docs.new(key, value)
-      end
+      FenrirView::Documentation.new.sections
     end
 
     def components
@@ -39,14 +35,6 @@ module FenrirView
 
     def sorted_components_for(pattern_variant)
       Dir.glob(FenrirView.patterns_for(pattern_variant)).sort_by!{ |pattern| File.basename(pattern) }
-    end
-
-    def doc_pages
-      @docs = YAML.load_file(docs_index_file)
-    end
-
-    def docs_index_file
-      FenrirView.configuration.docs_path.join("index.yml")
     end
   end
 end
