@@ -1,9 +1,22 @@
-system_info:
-  overview:
-    index: 'Welcome'
-  spec:
-    index: 'Test cases'
-    missing: 'No file'
-    examples: 'Example usage'
-    broken: 'Broken properties'
+documentation:
+- title: 'Overview'
+  slug: 'overview'
+  pages:
+  - title: 'Welcome'
+    slug: 'index'
 
+- title: 'Test cases'
+  slug: 'spec'
+  pages:
+  - title: 'No file'
+    slug: 'file_does_not_exist'
+  - title: 'Example usage'
+    slug: 'examples'
+  - title: 'Broken properties'
+    slug: 'broken'
+
+- title: 'System information'
+  slug: 'other'
+  pages:
+  - title: 'Other useful information'
+    slug: 'information'
