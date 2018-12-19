@@ -9,7 +9,9 @@ module FenrirView
     # The parameters used to render the show action is validated
     # against your own list of specified documentation pages in docs/index.yml
     def show
-      @partial = "/#{ @section.to_s }/#{ @doc.to_s }"
+      render template: "#{params[:section]}/#{params[:page]}"
+    rescue ActionView::MissingTemplate
+      render template: 'fenrir_view/docs/missing'
     end
 
     private
