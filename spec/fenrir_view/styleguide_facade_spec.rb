@@ -8,29 +8,29 @@ RSpec.describe FenrirView::StyleguideFacade do
   let(:components) { styleguide_facade.components }
 
   it '#docs generate correct list of pages' do
-    expected_doc_title = 'System info'
+    expected_doc_title = 'Overview'
 
-    expect(first_doc).to be_a_kind_of(FenrirView::Docs)
+    expect(first_doc).to be_a_kind_of(FenrirView::Documentation::Section)
     expect(first_doc.title).to eq(expected_doc_title)
 
-    second_section = first_doc.sections.second
-    expected_section_title = 'Spec'
-    expected_section_path = 'spec'
+    second_section = styleguide_facade.docs.second
+    expected_section_title = 'Test cases'
+    expected_section_slug = 'spec'
 
-    expect(second_section).to be_a_kind_of(FenrirView::DocSection)
+    expect(second_section).to be_a_kind_of(FenrirView::Documentation::Section)
     expect(second_section.title).to eq(expected_section_title)
-    expect(second_section.path).to eq(expected_section_path)
+    expect(second_section.folder).to eq(expected_section_slug)
+    expect(second_section.pages.length).to eq(3)
 
-    expect(second_section.pages.first).to be_a_kind_of(OpenStruct)
-    expect(second_section.pages.first.title).to eq('Test cases')
-    expect(second_section.pages.first.section_path).to eq('spec')
-    expect(second_section.pages.first.page_path).to eq('index')
+    expect(second_section.pages.second).to be_a_kind_of(FenrirView::Documentation::Page)
+    expect(second_section.pages.second.title).to eq('Example usage')
+    expect(second_section.pages.second.path).to eq('examples')
   end
 
   it '#components generate correct list of components' do
     expect(components.count).to eq(4)
 
-    expect(components['elements'].first).to be_a_kind_of(FenrirView::Component)
+    expect(components['elements']).to be_empty
     expect(components['components'].first).to be_a_kind_of(FenrirView::Component)
     expect(components['modules']).to be_empty
     expect(components['views']).to be_empty

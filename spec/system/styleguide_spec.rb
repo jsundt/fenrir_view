@@ -7,32 +7,40 @@ RSpec.describe 'Styleguide', type: :system do
     it 'can visit pages' do
       visit '/design_system'
 
-      expect(current_path).to eq('/design_system/docs/overview/index')
-      expect(page).to have_text('Charlie Design System')
+      expect(current_path).to eq('/design_system/overview/index')
+      expect(page).to have_text('Charlie Design')
+      expect(page).to have_text('Select one of the components from the side to view its examples and documentation')
+
+      # Links to documentation pages
+      expect(page).to have_text('Welcome')
+      expect(page).to have_text('Example usage')
+      expect(page).to have_text('Broken properties')
+      expect(page).to have_text('Other useful information')
+
+      # Links to component pages
       expect(page).to have_text('Card')
       expect(page).to have_text('Header')
       expect(page).to have_text('Paragraph')
       expect(page).to have_text('Profile')
       expect(page).to have_text('Yielder')
 
-      click_on 'Example Usage'
+      click_on 'Example usage'
 
       expect(page).to have_text('Examples of components together')
       expect(page).to have_selector('div.card', count: 3)
       expect(page).to have_text('Blocks of content yielded for days and days and days.')
     end
 
-    it 'can visit page missing content' do
-      visit '/design_system/docs/spec/missing'
+    xit 'can visit page missing content' do
+      visit '/design_system/spec/missing'
 
       expect(page).to have_text('Missing Page')
     end
   end
 
   describe 'components' do
-    xit 'overview page' do
-      visit '/design_system/styleguide'
-      # TODO: Fix broken page
+    it 'overview page' do
+      visit '/design_system/components'
     end
 
     it 'show specific component' do
@@ -59,7 +67,7 @@ RSpec.describe 'Styleguide', type: :system do
     end
 
     it 'shows a hint message if the component stub file is empty' do
-      visit '/design_system/styleguide/components/breadcrumbs'
+      visit '/design_system/components/components/breadcrumbs'
 
       expect(page).to have_text('Hint:To see your component make sure you\'ve created stubs:')
       expect(page).to have_text('components/breadcrumbs/breadcrumbs.yml')
@@ -67,7 +75,7 @@ RSpec.describe 'Styleguide', type: :system do
     end
 
     it 'shows a hint message if the component stub file is not found' do
-      visit '/design_system/styleguide/components/paragraph'
+      visit '/design_system/components/components/paragraph'
 
       expect(page).to have_text('Hint:To see your component make sure you\'ve created stubs:')
       expect(page).to have_text('components/paragraph/paragraph.yml')
@@ -75,7 +83,7 @@ RSpec.describe 'Styleguide', type: :system do
     end
 
     xit 'shows a hint message if the component is not found' do
-      visit '/design_system/styleguide/components/something'
+      visit '/design_system/components/components/something'
 
       # TODO: differnt hint message if component is missing compared to just missing stubs
     end
@@ -92,7 +100,6 @@ RSpec.describe 'Styleguide', type: :system do
       visit '/design_system/system_components/application_frame'
 
       expect(page).to have_text('Application frame')
-      expect(page).to have_text('Component Properties:')
     end
   end
 end
