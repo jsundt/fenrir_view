@@ -17,7 +17,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.before(:each, type: :system) do
-    driven_by :selenium_chrome_headless
+    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

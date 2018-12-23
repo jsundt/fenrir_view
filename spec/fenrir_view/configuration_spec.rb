@@ -5,8 +5,6 @@ require 'rails_helper'
 RSpec.describe FenrirView::Configuration do
   let(:initilized_configuration) { FenrirView.configuration }
 
-  describe '#styleguide_path' # TODO: Remove this, not in use
-
   describe '#system_variants' do
     let(:default_system_variants) { ['elements', 'components', 'modules', 'views'] }
     let(:custom_system_variants) { ['components', 'views'] }
@@ -69,7 +67,7 @@ RSpec.describe FenrirView::Configuration do
       expect(initilized_configuration.property_validation).to eq(default_property_validation)
     end
 
-    it 'You can change docs path' do
+    it 'You can change property validation' do
       FenrirView.configure { |c| c.property_validation = custom_property_validation }
       expect(FenrirView.configuration.property_validation).to eq(custom_property_validation)
 
