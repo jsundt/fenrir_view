@@ -102,4 +102,27 @@ RSpec.describe 'Styleguide', type: :system do
       expect(page).to have_text('Application frame')
     end
   end
+
+  describe 'styleguide filter' do
+    it 'can filter the sidebar' do
+      visit '/design_system'
+
+      expect(page).to have_text('Other useful information')
+      expect(page).to_not have_text('Nothing found.')
+
+      fill_in('stupid-filter-search', with: 'example')
+      expect(page).to have_text('Example usage')
+      expect(page).to_not have_text('Other useful information')
+
+      fill_in('stupid-filter-search', with: 'garbage')
+      expect(page).to have_text('Nothing found.')
+      expect(page).to_not have_text('Example usage')
+
+      fill_in('stupid-filter-search', with: 'u-color')
+      expect(page).to_not have_text('Other useful information')
+      click_on 'Example usage'
+
+      expect(page).to have_text('Examples of components together')
+    end
+  end
 end

@@ -1,4 +1,10 @@
 <nav class="<%= item_classes %>">
+  <div class="w-card u-bg--warning u-padding--25 js-fenrir-view-sidebar__filter-error" style="display: none;">
+    <p class="o-text--product">
+      Nothing found. Tell J what you're looking for :shrug:
+    </p>
+  </div>
+
   <% category_facades.each do |category| %>
     <% if category.items.any? %>
       <section class="<%= category.style %>">
@@ -8,12 +14,14 @@
           </p>
         <% end %>
 
-        <% category.items.each do |item| %>
-          <% classes = ['fenrir-view-sidebar__item'] %>
-          <% classes.push('is-current-page') if current_page?(item.link) %>
+        <div class="js-fenrir-view-sidebar__category-pages">
+          <% category.items.each do |item| %>
+            <% classes = ['fenrir-view-sidebar__item js-fenrir-view-sidebar__item'] %>
+            <% classes.push('is-current-page') if current_page?(item.link) %>
 
-          <%= link_to item.title, item.link, class: classes %>
-        <% end %>
+            <%= link_to item.title, item.link, class: classes, data: { 'fenrir-view-filter-types': item.filter_types } %>
+          <% end %>
+        </div>
       </section>
     <% end %>
   <% end %>

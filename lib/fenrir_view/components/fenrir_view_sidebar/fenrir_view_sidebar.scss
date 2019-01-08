@@ -53,6 +53,21 @@ $switch-from-tabs-size: 'lg';
   }
 }
 
+  .fenrir-view-sidebar__category {
+    margin-top: $padding / 4;
+    margin-bottom: $padding / 4;
+
+    &.is-filtered {
+      opacity: 0.5;
+      margin-top: 0;
+      margin-bottom: 0;
+
+      &:first-child {
+        margin-top: $padding / 4;
+      }
+    }
+  }
+
   .fenrir-view-sidebar__category-name {
     @include o-text--product;
     line-height: 1.2;

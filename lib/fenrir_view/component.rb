@@ -111,6 +111,10 @@ module FenrirView
       styleguide_stubs.is_a?(Hash) && styleguide_stubs.key?(:stubs)
     end
 
+    def filter_types
+      [title, variant].join(' ')
+    end
+
     private
 
     def component_facade

@@ -12,6 +12,7 @@ documentation:
     slug: 'file_does_not_exist'
   - title: 'Example usage'
     slug: 'examples'
+    filter_types: 'u-color u-bg layouts'
   - title: 'Broken properties'
     slug: 'broken'
 
