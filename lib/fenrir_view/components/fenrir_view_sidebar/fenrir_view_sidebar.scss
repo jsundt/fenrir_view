@@ -58,19 +58,40 @@ $switch-from-tabs-size: 'lg';
     line-height: 1.2;
     font-weight: 700;
     color: color('charcoal');
+    margin-bottom: 2px;
   }
 
   .fenrir-view-sidebar__item {
-    @include o-text--product;
+    @include o-text--lead;
     position: relative;
     display: block;
     line-height: 1.2;
-    padding: 3px 0;
+    padding: 4px;
+    margin: 0 -4px;
     color: color('charcoal', 85);
+    border-radius: 4px;
 
     &:hover,
     &:focus,
     &:active {
-      color: color('secondary');
+      color: color('white');
+      background-color: color('secondary');
+      text-decoration: none;
+    }
+
+    &.is-current-page {
+      background-color: color('silver');
+      color: color('charcoal');
+
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+        cursor: default;
+      }
+    }
+
+    @include media-breakpoint-up($switch-from-tabs-size) {
+      font-size: 18px;
     }
   }

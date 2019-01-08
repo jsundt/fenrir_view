@@ -9,7 +9,10 @@
         <% end %>
 
         <% category.items.each do |item| %>
-          <%= link_to item.title, item.link, class: 'fenrir-view-sidebar__item' %>
+          <% classes = ['fenrir-view-sidebar__item'] %>
+          <% classes.push('is-current-page') if current_page?(item.link) %>
+
+          <%= link_to item.title, item.link, class: classes %>
         <% end %>
       </section>
     <% end %>
