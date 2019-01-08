@@ -31,11 +31,11 @@ class FenrirViewApplicationFrameFacade < FenrirView::Presenter
     page.docs.map do |section|
       {
         name: section.title,
-        style: 'u-padding--b-50',
         items: section.pages.map do |page|
           {
             title: page.title,
             link: fenrir_view_routes.fenrir_docs_path(section: section.folder, page: page.path),
+            filter_types: page.filter_types,
           }
         end,
       }
@@ -46,11 +46,11 @@ class FenrirViewApplicationFrameFacade < FenrirView::Presenter
     page.components.map do |section, data|
       {
         name: section.titleize,
-        style: 'u-padding--b-50',
-        items:  data.map do |component|
+        items: data.map do |component|
           {
             title: component.title,
             link: fenrir_view_routes.components_path(variant: section, id: component.name),
+            filter_types: component.filter_types,
           }
         end
       }
@@ -60,11 +60,12 @@ class FenrirViewApplicationFrameFacade < FenrirView::Presenter
   def system_component_links
     [{
       name: 'Internal system',
-      style: 'u-padding--b-50',
+      style: 'u-opacity--50',
       items: page.system_components.map do |component|
         {
           title: component.title,
           link: fenrir_view_routes.system_components_path(id: component.name),
+          filter_types: component.filter_types,
         }
       end
     }]

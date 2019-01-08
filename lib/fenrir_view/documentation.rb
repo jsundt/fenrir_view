@@ -55,6 +55,10 @@ module FenrirView
       def path
         @page[:slug]
       end
+
+      def filter_types
+        [title, @page[:filter_types]].join(' ')
+      end
     end
 
     private

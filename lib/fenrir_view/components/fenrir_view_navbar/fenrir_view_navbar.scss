@@ -118,6 +118,20 @@ $switch-from-tabs-size: 'lg';
     }
   }
 
+    .fenrir-view-navbar-filter-sidebar {
+      @include w-input;
+      display: block;
+      height: 45px;
+      padding: 8px;
+      margin-top: 8px;
+      margin-left: 8px;
+      margin-right: 8px;
+
+      @include media-breakpoint-up($switch-from-tabs-size) {
+        margin-left: 0;
+      }
+    }
+
   .fenrir-view-navbar__content-wrapper {
     flex-grow: 1;
     display: flex;

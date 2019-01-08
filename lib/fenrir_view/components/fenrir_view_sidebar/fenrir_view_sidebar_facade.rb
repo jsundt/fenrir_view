@@ -42,7 +42,11 @@ class FenrirViewSidebarFacade < FenrirView::Presenter
     end
 
     def style
-      @category[:style]
+      [
+        'fenrir-view-sidebar__category',
+        'js-fenrir-view-sidebar__category',
+        @category[:style],
+      ].join(' ')
     end
 
     def name?
@@ -60,6 +64,10 @@ class FenrirViewSidebarFacade < FenrirView::Presenter
 
       def link
         @item[:link]
+      end
+
+      def filter_types
+        @item[:filter_types]
       end
     end
   end
