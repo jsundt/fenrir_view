@@ -40,11 +40,11 @@ $switch-from-tabs-size: 'lg';
 
   .fenrir-view-navbar-logo {
     display: flex;
-    align-items: left;
+    align-items: flex-start;
     position: relative;
     color: inherit;
     width: auto;
-    height: height('nav');
+    height: $nav-height;
     padding: 5px;
     border-top: 0;
     border-bottom: 0;
