@@ -6,9 +6,7 @@
 
 //= require fenrir_view/system_components
 
-//= require elements
 //= require components
-//= require modules
 
 function showPropertyValidations(e) {
   e.nextElementSibling.classList.toggle('is-hidden');

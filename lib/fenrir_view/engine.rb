@@ -12,12 +12,6 @@ module FenrirView
       end
     end
 
-    initializer 'fenrir_view.system_variants' do |app|
-      FenrirView.configure do |c|
-        c.system_variants ||= ['elements', 'components', 'modules', 'views']
-      end
-    end
-
     initializer 'fenrir_view.docs_path' do |app|
       FenrirView.configure do |c|
         c.docs_path ||= FenrirView.configuration.system_path.join('docs')
@@ -31,10 +25,8 @@ module FenrirView
     end
 
     initializer 'fenrir_view.load_classes', before: :set_autoload_paths do |app|
-      FenrirView.configuration.system_variants.each do |variant|
-        system_paths = "#{FenrirView.patterns_for(variant)}"
-        app.config.eager_load_paths += Dir[system_paths]
-      end
+      system_paths = FenrirView.patterns_for('components').to_s
+      app.config.eager_load_paths += Dir[system_paths]
 
       docs_path = "#{FenrirView.configuration.docs_path}/{*}"
       app.config.eager_load_paths += Dir[docs_path]
@@ -44,10 +36,7 @@ module FenrirView
     end
 
     initializer 'fenrir_view.assets' do |app|
-      FenrirView.configuration.system_variants.each do |variant|
-        Rails.application.config.assets.paths << FenrirView.pattern_type(variant).to_s
-      end
-
+      Rails.application.config.assets.paths << FenrirView.pattern_type('components').to_s
       Rails.application.config.assets.paths << FenrirView.pattern_type('system').to_s
 
       Rails.application.config.assets.precompile += %w[ fenrir_view/styleguide.css
@@ -56,11 +45,8 @@ module FenrirView
 
     initializer 'fenrir_view.append_view_paths' do |app|
       ActiveSupport.on_load :action_controller do
-        FenrirView.configuration.system_variants.each do |variant|
-          append_view_path FenrirView.pattern_type(variant).to_s
-        end
+        append_view_path FenrirView.pattern_type('components').to_s
         append_view_path FenrirView.pattern_type('system').to_s
-
         append_view_path FenrirView.configuration.docs_path
       end
     end

@@ -5,23 +5,6 @@ require 'rails_helper'
 RSpec.describe FenrirView::Configuration do
   let(:initilized_configuration) { FenrirView.configuration }
 
-  describe '#system_variants' do
-    let(:default_system_variants) { ['elements', 'components', 'modules', 'views'] }
-    let(:custom_system_variants) { ['components', 'views'] }
-
-    it 'Set default system variants' do
-      expect(initilized_configuration.system_variants).to eq(default_system_variants)
-    end
-
-    it 'You can change system variants' do
-      FenrirView.configure { |c| c.system_variants = custom_system_variants }
-      expect(FenrirView.configuration.system_variants).to eq(custom_system_variants)
-
-      FenrirView.configure { |c| c.system_variants = default_system_variants }
-      expect(FenrirView.configuration.system_variants).to eq(default_system_variants)
-    end
-  end
-
   describe '#system_path' do
     let(:default_system_path) { Rails.root.join('lib', 'design_system') }
     let(:custom_system_path) { Rails.root.join('app', 'ds') }

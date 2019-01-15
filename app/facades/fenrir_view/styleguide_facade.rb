@@ -7,14 +7,10 @@ module FenrirView
     end
 
     def components
-      components = {}
+      components = []
 
-      FenrirView.configuration.system_variants.each do |variant|
-        components[variant] = []
-
-        sorted_components_for(variant).map do |dir|
-          components[variant] << FenrirView::Component.new( variant, File.basename(dir) )
-        end
+      sorted_components_for('components').map do |dir|
+        components.push(FenrirView::Component.new('components', File.basename(dir)))
       end
 
       components
@@ -34,7 +30,7 @@ module FenrirView
     private
 
     def sorted_components_for(pattern_variant)
-      Dir.glob(FenrirView.patterns_for(pattern_variant)).sort_by!{ |pattern| File.basename(pattern) }
+      Dir.glob(FenrirView.patterns_for(pattern_variant)).sort_by! { |pattern| File.basename(pattern) }
     end
   end
 end
