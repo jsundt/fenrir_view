@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FenrirView
   class Presenter
     class_attribute :_properties, instance_accessor: false

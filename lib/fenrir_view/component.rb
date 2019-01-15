@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FenrirView
   class Component
     attr_reader :variant, :name
@@ -13,6 +15,7 @@ module FenrirView
 
     def component_identifier
       return "fenrir_view_#{name}" if variant == 'system'
+
       name
     end
 
