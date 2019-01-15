@@ -3,7 +3,6 @@
 module FenrirView
   class Configuration
     attr_accessor :styleguide_path
-    attr_accessor :system_variants
     attr_accessor :property_validation
     attr_reader :system_path
     attr_reader :docs_path

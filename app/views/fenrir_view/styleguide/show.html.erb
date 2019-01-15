@@ -60,17 +60,10 @@
             <div class="w-card u-bg--silver">
               <h1 class="o-text--title"><%= @component.stubs_title(index) %></h1>
 
-              <% case @component.variant%>
-              <% when "elements"%>
-                <% helper_start = "ui_element(" %>
-              <% when "components" %>
-                <% helper_start = "ui_component(" %>
-              <% when "modules" %>
-                <% helper_start = "ui_module(" %>
-              <% when "system" %>
+              <% if @component.variant == "system" %>
                 <% helper_start = "system_component(" %>
               <% else %>
-                <% helper_start = "render_ui(\"#{ @component.variant }\", " %>
+                <% helper_start = "ui_component(" %>
               <% end %>
 
               <% if component_properties[:yield] %>
@@ -80,7 +73,7 @@
               <% end %>
 
               <pre><code class="language-ruby">
-                &lt;%= <%= helper_start %>"<%= @component.name %>", {properties as below})<%= helper_end %>
+                &lt;%= <%= helper_start %>'<%= @component.name %>', {properties as below})<%= helper_end %>
                 <% if component_properties[:yield] %>
                   Your html content here
                 &lt;% end %&gt;
@@ -95,35 +88,6 @@
         </div>
       <% end %>
     <% end %>
-  <% elsif @component.variant == "views" %>
-    <div class="row">
-      <div class="col-xs-12">
-        <p><%= @component.meta_description %></p>
-        <p class="o-text--caption">Status: <%= @component.meta_status %></p>
-
-        <% if @component.meta_used_by? %>
-          <p class="o-text--note">Used by: <%= @component.meta_used_by %></p>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="row u-margin--y-100 u-bg--white">
-      <div class="col-xs-12">
-        <%= render_ui @component.variant, @component.name %>
-      </div>
-    </div>
-
-    <div class="row u-margin--y-100 u-bg--white">
-      <div class="col-xs-12">
-        <div class="mv-component__description">
-          <h1 class="o-text--title"><%= @component.title %> html source</h1>
-
-          <div class="mv-component__description__properties">
-            <pre><code class="language-html"><xmp><%= render_ui(@component.variant, @component.name) %></xmp></code></pre>
-          </div>
-        </div>
-      </div>
-    </div>
   <% else %>
     <div class="mv-hint">
       <h2><span>Hint:</span>You have Stubs but they don't follow the correct format</h2>
@@ -153,5 +117,4 @@
     </ul>
   </div>
 <% end %>
-
 </div>

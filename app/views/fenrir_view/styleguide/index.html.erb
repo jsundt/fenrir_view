@@ -9,35 +9,31 @@
 </div>
 
 <div class="container">
-  <% @page.components.each do |variant, components| %>
-    <% unless variant == 'views' %>
-      <% components.each do |component| %>
-        <section class="row u-bg-zebra--silver-50 u-padding--y-50">
-          <div class="col-xs-12 col-md-6">
-            <% if component.component_stubs? %>
-              <% component.component_stubs.take(1).each do |component_properties| %>
-                <% properties = component_properties[:props] %>
+  <% @page.components.each do |component| %>
+    <section class="row u-bg-zebra--silver-50 u-padding--y-50">
+      <div class="col-xs-12 col-md-6">
+        <% if component.component_stubs? %>
+          <% component.component_stubs.take(1).each do |component_properties| %>
+            <% properties = component_properties[:props] %>
 
-                <% if component_properties[:yield] %>
-                  <%= render_ui component.variant, component.component_identifier, properties.clone do %>
-                    <%= component_properties[:yield].html_safe %>
-                  <% end %>
-                <% else %>
-                  <%= render_ui component.variant, component.component_identifier, properties.clone %>
-                <% end %>
-
+            <% if component_properties[:yield] %>
+              <%= render_ui 'components', component.component_identifier, properties.clone do %>
+                <%= component_properties[:yield].html_safe %>
               <% end %>
+            <% else %>
+              <%= render_ui 'components', component.component_identifier, properties.clone %>
             <% end %>
-          </div>
-          <div class="col-xs-12 col-md-6">
-            <h1 class="o-text--title"><%= component.title %></h1>
-            <p class="o-text--product <%= component.meta_status[:bg] %>">Status: <%= component.meta_status[:code] %></p>
-            <p class="o-text--body"><%= component.meta_description %></p>
 
-            <%= link_to 'View all variants', components_path(variant: variant, id: component.name) %>
-          </div>
-        </section>
-      <% end %>
-    <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <h1 class="o-text--title"><%= component.title %></h1>
+        <p class="o-text--product <%= component.meta_status[:bg] %>">Status: <%= component.meta_status[:code] %></p>
+        <p class="o-text--body"><%= component.meta_description %></p>
+
+        <%= link_to 'View all variants', components_path(id: component.name) %>
+      </div>
+    </section>
   <% end %>
 </div>

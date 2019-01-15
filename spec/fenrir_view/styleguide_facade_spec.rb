@@ -28,14 +28,10 @@ RSpec.describe FenrirView::StyleguideFacade do
   end
 
   it '#components generate correct list of components' do
-    expect(components.count).to eq(4)
+    expect(components.count).to eq(6)
+    expect(components.first).to be_a_kind_of(FenrirView::Component)
 
-    expect(components['elements']).to be_empty
-    expect(components['components'].first).to be_a_kind_of(FenrirView::Component)
-    expect(components['modules']).to be_empty
-    expect(components['views']).to be_empty
-
-    card_component = components['components'].second
+    card_component = components.second
     expected_component = FenrirView::Component.new('component', 'card')
 
     expect(card_component.title).to eq(expected_component.title)

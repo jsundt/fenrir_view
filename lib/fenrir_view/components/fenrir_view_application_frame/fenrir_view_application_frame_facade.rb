@@ -37,24 +37,22 @@ class FenrirViewApplicationFrameFacade < FenrirView::Presenter
             link: fenrir_view_routes.fenrir_docs_path(section: section.folder, page: page.path),
             filter_types: page.filter_types,
           }
-        end,
+        end
       }
     end
   end
 
   def component_links
-    page.components.map do |section, data|
-      {
-        name: section.titleize,
-        items: data.map do |component|
-          {
-            title: component.title,
-            link: fenrir_view_routes.components_path(variant: section, id: component.name),
-            filter_types: component.filter_types,
-          }
-        end
-      }
-    end
+    [{
+      name: 'Components',
+      items: page.components.map do |component|
+        {
+          title: component.title,
+          link: fenrir_view_routes.components_path(id: component.name),
+          filter_types: component.filter_types,
+        }
+      end
+    }]
   end
 
   def system_component_links
