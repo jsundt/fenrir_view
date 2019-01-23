@@ -1,4 +1,8 @@
-# desc "Explaining what the task does"
-# task :fenrir_view do
-#   # Task goes here
-# end
+# frozen_string_literal: true
+
+namespace :design_system do
+  desc 'Generate a new design system metrics yaml file'
+  task generate_metrics: :environment do
+    FenrirView::Metrics.new.run
+  end
+end

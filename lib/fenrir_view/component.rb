@@ -77,6 +77,10 @@ module FenrirView
       stubs_extra_info[:description]
     end
 
+    def meta_deprecated
+      stubs_extra_info[:deprecated]
+    end
+
     def meta_status
       case meta_status_code
       when 'work in progress'
