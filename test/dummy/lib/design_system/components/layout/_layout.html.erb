@@ -1,0 +1,15 @@
+<div class="c-layout container-fluid">
+  <h2><%= @_component.title %></h2>
+
+  <% if layout.present? %>
+    <div class="row">
+      <div class="layout-1 col-xs-12 col-md-6">
+        <%= @_component.layout.column1 %>
+      </div>
+
+      <div class="layout-2 col-xs-12 col-md-6">
+        <%= @_component.layout.column2 %>
+      </div>
+    </div>
+  <% end %>
+</div>

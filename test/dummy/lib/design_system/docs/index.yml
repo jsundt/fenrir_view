@@ -15,6 +15,8 @@ documentation:
     filter_types: 'u-color u-bg layouts'
   - title: 'Broken properties'
     slug: 'broken'
+  - title: 'Component yields'
+    slug: 'component_yields'
 
 - title: 'System information'
   slug: 'other'

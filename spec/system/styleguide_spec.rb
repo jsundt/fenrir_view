@@ -29,6 +29,18 @@ RSpec.describe 'Styleguide', type: :system do
       expect(page).to have_text('Examples of components together')
       expect(page).to have_selector('div.card', count: 3)
       expect(page).to have_text('Blocks of content yielded for days and days and days.')
+
+      click_on 'Component yields'
+      expect(page).to have_text('First layout component column1')
+      expect(page).to have_text('First layout component column2')
+      expect(page).to have_text('Second layout component column2')
+      expect(page).to have_text('Second layout component column2')
+      expect(page).to have_text('Nested layout component')
+      expect(page).to have_text('Profile')
+      expect(page).to have_text('Sam')
+
+      expect(page).to_not have_text('WILL NOT RENDER')
+      expect(page).to_not have_text('Second layout component column1')
     end
 
     xit 'can visit page missing content' do
