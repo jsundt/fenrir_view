@@ -6,12 +6,13 @@
 - :name: ""
   :props:
     :title: "Get Started!"
-    :link: "/"
+    :link: "#"
 
 - :name: "Restyled button"
   :props:
     :title: "Cancel"
-    :link: "/product"
+    :link: "#"
+    :size: 'big'
     :style: "u-bg--silver u-bg--to-success"
 
 - :name: "Button that triggers some JavaScript"
@@ -24,11 +25,18 @@
   :props:
     :title: "I'm a link"
     :link: "#"
+    :target: "_blank"
     :style: 'e-button--as-link'
 
-- :name: "Button loading state"
+- :name: "Submit button"
   :props:
-    :title: "Loading Button"
-    :link: "#"
-    :style: "is-loading"
-    :loader: true
+    :title: "Create new"
+    :tabindex: 2
+    :submit: true
+
+- :name: "Disabled ajax delete button"
+  :props:
+    :title: "Delete"
+    :remote: true
+    :link_method: 'destroy'
+    :disabled: true

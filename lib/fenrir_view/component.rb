@@ -19,10 +19,6 @@ module FenrirView
       name
     end
 
-    def default_properties_as_json
-      JSON.pretty_generate(component_facade.properties).gsub(/\"(\S+)?\":/, '\1:')
-    end
-
     def default_properties_and_validations
       component_facade.component_property_rule_descriptions
     end
@@ -96,14 +92,6 @@ module FenrirView
           code: meta_status_code,
         }
       end
-    end
-
-    def meta_used_by?
-      stubs_extra_info[:used_by].present?
-    end
-
-    def meta_used_by
-      stubs_extra_info[:used_by].join(', ')
     end
 
     def stubs_correct_format?
