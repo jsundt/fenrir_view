@@ -47,12 +47,17 @@
         <div class="row u-padding--y-100 u-bg-zebra--silver-50">
 
           <div class="col-xs-12 col-lg-6">
-            <% if component_properties[:yield] %>
-              <%= render_ui @component.variant, @component.component_identifier, properties.clone do %>
-                <%= component_properties[:yield].html_safe %>
+            <% case @component.variant %>
+            <% when 'components' %>
+              <%= ui_component(@component.name, properties.clone) do %>
+                <%= component_properties[:yield].html_safe if component_properties[:yield] %>
+              <% end %>
+            <% when 'system' %>
+              <%= system_component(@component.name, properties.clone) do %>
+                <%= component_properties[:yield].html_safe if component_properties[:yield] %>
               <% end %>
             <% else %>
-              <%= render_ui @component.variant, @component.component_identifier, properties.clone %>
+              <% throw "unknown component variant #{@component.variant}" %>
             <% end %>
           </div>
 
