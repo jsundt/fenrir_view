@@ -17,11 +17,11 @@
             <% properties = component_properties[:props] %>
 
             <% if component_properties[:yield] %>
-              <%= render_ui 'components', component.component_identifier, properties.clone do %>
+              <%= ui_component component.component_identifier, properties.clone do %>
                 <%= component_properties[:yield].html_safe %>
               <% end %>
             <% else %>
-              <%= render_ui 'components', component.component_identifier, properties.clone %>
+              <%= ui_component component.component_identifier, properties.clone %>
             <% end %>
 
           <% end %>
