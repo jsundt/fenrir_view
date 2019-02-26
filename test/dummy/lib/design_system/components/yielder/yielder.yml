@@ -1,0 +1,7 @@
+:meta:
+  status: "in use"
+
+:stubs:
+- :name: "Regular yielder"
+  :props:
+    :yield: "Test yield"

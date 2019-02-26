@@ -13,34 +13,53 @@ RSpec.describe 'Styleguide', type: :system do
 
       # Links to documentation pages
       expect(page).to have_text('Welcome')
-      expect(page).to have_text('Example usage')
-      expect(page).to have_text('Broken properties')
-      expect(page).to have_text('Other useful information')
+
+      within('[data-spec-section="sidebar-test-cases"]') do
+        expect(page).to have_text('No file')
+        expect(page).to have_text('Example usage')
+        expect(page).to have_text('Broken properties')
+        expect(page).to have_text('Component yields')
+      end
+
+      within('[data-spec-section="sidebar-system-information"]') do
+        expect(page).to have_text('Other useful information')
+      end
 
       # Links to component pages
-      expect(page).to have_text('Card')
-      expect(page).to have_text('Header')
-      expect(page).to have_text('Paragraph')
-      expect(page).to have_text('Profile')
-      expect(page).to have_text('Yielder')
+      within('[data-spec-section="sidebar-components"]') do
+        expect(page).to have_text('Breadcrumbs')
+        expect(page).to have_text('Card')
+        expect(page).to have_text('Header')
+        expect(page).to have_text('Layout')
+        expect(page).to have_text('Paragraph')
+        expect(page).to have_text('Profile')
+        expect(page).to have_text('Yielder')
+      end
 
       click_on 'Example usage'
-
-      expect(page).to have_text('Examples of components together')
-      expect(page).to have_selector('div.card', count: 3)
-      expect(page).to have_text('Blocks of content yielded for days and days and days.')
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Examples of components together')
+        expect(page).to have_selector('div.card', count: 3)
+        expect(page).to have_text('Blocks of content yielded for days and days and days.')
+      end
 
       click_on 'Component yields'
-      expect(page).to have_text('First layout component column1')
-      expect(page).to have_text('First layout component column2')
-      expect(page).to have_text('Second layout component column2')
-      expect(page).to have_text('Second layout component column2')
-      expect(page).to have_text('Nested layout component')
-      expect(page).to have_text('Profile')
-      expect(page).to have_text('Sam')
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('First layout component column1', count: 1)
+        expect(page).to have_text('First layout component column2', count: 1)
+        expect(page).to_not have_text('First layout component block content', count: 1)
 
-      expect(page).to_not have_text('WILL NOT RENDER')
-      expect(page).to_not have_text('Second layout component column1')
+        expect(page).to have_text('Second layout component column2', count: 1)
+
+        expect(page).to_not have_text('Layout component no block variable block content', count: 1)
+
+        expect(page).to have_text('Nested layout component', count: 1)
+        expect(page).to have_text('Profile', count: 1)
+        expect(page).to have_text('Sam', count: 1)
+
+        expect(page).to_not have_text('WILL NOT RENDER')
+        expect(page).to_not have_text('Second layout component column1')
+      end
     end
 
     xit 'can visit page missing content' do
@@ -53,45 +72,74 @@ RSpec.describe 'Styleguide', type: :system do
   describe 'components' do
     it 'overview page' do
       visit '/design_system/components'
+      expect(page).to have_text('Pattern Library')
     end
 
-    it 'show specific component' do
+    it 'show specific components' do
       visit '/design_system'
       click_on 'Card'
 
-      expect(page).to have_text('Aspen, Snowmass')
-      expect(page).to have_text('title: "Snowmass"')
-      expect(page).to have_text('link: "http://google.com"')
-      expect(page).to have_selector('div.card', count: 3)
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Aspen, Snowmass')
+        expect(page).to have_text('title: "Snowmass"')
+        expect(page).to have_text('link: "http://google.com"')
+        expect(page).to have_selector('div.card', count: 3)
+      end
+
+      click_on 'Header'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('20 Mountains you didn\'t know they even existed')
+        expect(page).to have_text('Header 1')
+      end
+
+      click_on 'Layout'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Without layout sections')
+        expect(page).to have_text('With layout sections')
+        expect(page).to have_text('With layout sections and classic yield')
+        expect(page).to have_text('With only one section used')
+        expect(page).to have_text('}) do |layout| %>')
+        expect(page).to have_text('<% layout.column1 do %>')
+      end
+
+      click_on 'Yielder'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Regular yielder')
+        expect(page).to have_text('Test yield', count: 2)
+      end
     end
 
     it 'shows default properties and validations for specific component' do
       visit '/design_system'
       click_on 'Profile'
 
-      expect(page).to have_text('Component Properties:')
-      expect(page).to have_text('name. Required. As String')
-      expect(page).to have_text('badges: []')
-      expect(page).to have_text('E.g. Charlie account badges. Is passed to icon helper.')
-      expect(page).to have_text("<%= ui_component('profile', {properties as below}) %>")
-
-      # TODO: Default properties table only shows up if the :meta key is part of yml
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Component Properties:')
+        expect(page).to have_text('name. Required. As String')
+        expect(page).to have_text('badges: []')
+        expect(page).to have_text('E.g. Charlie account badges. Is passed to icon helper.')
+        expect(page).to have_text("<%= ui_component('profile', {properties as below}) %>")
+      end
     end
 
     it 'shows a hint message if the component stub file is empty' do
       visit '/design_system/components/breadcrumbs'
 
-      expect(page).to have_text('Hint:To see your component make sure you\'ve created stubs:')
-      expect(page).to have_text('components/breadcrumbs/breadcrumbs.yml')
-      expect(page).to have_text('information about the component breadcrumbs')
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Hint:To see your component make sure you\'ve created stubs:')
+        expect(page).to have_text('components/breadcrumbs/breadcrumbs.yml')
+        expect(page).to have_text('information about the component breadcrumbs')
+      end
     end
 
     it 'shows a hint message if the component stub file is not found' do
       visit '/design_system/components/paragraph'
 
-      expect(page).to have_text('Hint:To see your component make sure you\'ve created stubs:')
-      expect(page).to have_text('components/paragraph/paragraph.yml')
-      expect(page).to have_text('information about the component paragraph')
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Hint:To see your component make sure you\'ve created stubs:')
+        expect(page).to have_text('components/paragraph/paragraph.yml')
+        expect(page).to have_text('information about the component paragraph')
+      end
     end
 
     xit 'shows a hint message if the component is not found' do
@@ -102,16 +150,42 @@ RSpec.describe 'Styleguide', type: :system do
   end
 
   describe 'system components' do
-    it 'does not show in styleguide sidebar' do
+    it 'visible in sidebar' do
       visit '/design_system'
 
-      expect(page).to_not have_text('Application frame')
+      expect(page).to have_text('Application frame')
+      expect(page).to have_text('Button')
+      expect(page).to have_text('Navbar')
+      expect(page).to have_text('Sidebar')
+
+      click_on 'Button'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('A navigation link or action trigger')
+        expect(page).to have_text('Restyled button')
+        expect(page).to have_text('Get Started!')
+        expect(page).to have_text('GET STARTED!')
+      end
+
+      click_on 'Navbar'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Navbar')
+        expect(page).to have_text('STATUS: WORK IN PROGRESS')
+      end
+
+      click_on 'Sidebar'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Sidebar')
+        expect(page).to have_text('STATUS: WORK IN PROGRESS')
+      end
     end
 
     it 'accessible on direct url' do
       visit '/design_system/system_components/application_frame'
 
-      expect(page).to have_text('Application frame')
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Application frame')
+        expect(page).to have_text('ou have Stubs but they don\'t follow the correct format')
+      end
     end
   end
 

@@ -1,4 +1,4 @@
-<nav class="<%= item_classes %>">
+<nav class="<%= item_classes %>" data-spec-section="sidebar">
   <div class="w-card u-bg--warning u-padding--25 js-fenrir-view-sidebar__filter-error" style="display: none;">
     <p class="o-text--product">
       Nothing found. Tell J what you're looking for :shrug:
@@ -7,7 +7,7 @@
 
   <% category_facades.each do |category| %>
     <% if category.items.any? %>
-      <section class="<%= category.style %>">
+      <section class="<%= category.style %>" data-spec-section="sidebar-<%= category.name.parameterize %>">
         <% if category.name? %>
           <p class="fenrir-view-sidebar__category-name">
             <%= category.name %>

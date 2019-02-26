@@ -1,0 +1,29 @@
+:meta:
+  :status: "in review"
+  :description: ""
+
+:stubs:
+  - :name: "Without layout sections"
+    :props:
+      :title: "20 Mountains you didn't know they even existed"
+
+  - :name: "With layout sections"
+    :yields:
+      :column1: "This is column 1"
+      :column2: "This is column 2"
+    :props:
+      :title: "20 Mountains you didn't know they even existed"
+
+  - :name: "With layout sections and classic yield"
+    :yields:
+      :column1: "HTML for column 1"
+      :column2: "HTML for column 2"
+    :props:
+      :yield: "HTML outside specific column sections"
+      :title: "20 Mountains you didn't know they even existed"
+
+  - :name: "With only one section used"
+    :yields:
+      :column2: "Column 2 HTML"
+    :props:
+      :title: "20 Mountains you didn't know they even existed"

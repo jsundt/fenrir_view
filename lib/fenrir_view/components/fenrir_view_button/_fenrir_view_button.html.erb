@@ -1,24 +1,3 @@
 <%= content_tag(element_symbol, html_options) do %>
-  <% if loader? %>
-    <span class="not-loading">
-      <%= svg_icon(icon, class: icon_styles, inline: icon_inline) if icon? %>
-      <%= title %>
-      <% if tooltip? %>
-        <div class="o-tooltip"><%= tooltip %></div>
-      <% end %>
-    </span>
-    <div class="when-loading">
-      <%= svg_icon('anim__loader', file: 'iconanim.svg', class: 'e-button__loader') %>
-    </div>
-  <% elsif expandable? %>
-    <span class="not-collapsing"><%= svg_icon("app__arrow", class: "o-icon o-icon--xs u-margin--r-5 o-icon--270") %>Show less</span>
-    <span class="when-collapsing"><%= svg_icon("app__arrow", class: "o-icon o-icon--xs u-margin--r-5 o-icon--90") %>Show more</span>
-  <% else %>
-    <%= svg_icon(icon, class: icon_styles, inline: icon_inline) if icon? %>
-    <%= title %>
-    <% if tooltip? %>
-      <div class="fenrir-view-button__tooltip"><%= tooltip %></div>
-    <% end %>
-  <% end %>
+  <%= title %>
 <% end %>
-

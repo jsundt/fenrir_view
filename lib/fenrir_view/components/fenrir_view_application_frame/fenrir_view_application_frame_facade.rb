@@ -22,7 +22,7 @@ class FenrirViewApplicationFrameFacade < FenrirView::Presenter
 
   def sidebar_link_categories
     links = doc_links + component_links
-    links += system_component_links if Rails.env.development?
+    links += system_component_links if !Rails.env.production?
 
     links
   end
