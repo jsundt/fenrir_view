@@ -1,0 +1,57 @@
+<div class="u-bg--charcoal u-padding--y-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>Examples of components that yield content</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= ui_component('layout', title: 'First layout component') do |layout| %>
+  First layout component block content WILL NOT RENDER
+
+  <% layout.column1 do %>
+    <h3>First layout component column1</h3>
+  <% end %>
+
+  <% layout.column2 do %>
+    <h3>First layout component column2</h3>
+  <% end %>
+
+  <% layout.column2 do %>
+    <h3>WILL NOT RENDER column 2</h3>
+  <% end %>
+<% end %>
+
+<%= ui_component('layout', title: 'Second layout component') do |layout| %>
+  <% layout.column2 do %>
+    <h3>Second layout component column2</h3>
+  <% end %>
+<% end %>
+
+<%= ui_component('layout', title: 'Layout component without block') %>
+
+<%= ui_component('layout', title: 'Layout component no block variable') do %>
+  Layout component no block variable block content WILL NOT RENDER
+<% end %>
+
+<%= ui_component('layout', title: 'Layout component containing components') do |layout| %>
+  <% layout.column1 do %>
+    <%= ui_component('layout', title: 'Nested layout component') do |layout| %>
+      <% layout.column1 do %>
+        <h4>Inception</h4>
+      <% end %>
+
+      <% layout.column2 do %>
+        <h4>Profile</h4>
+
+        <%= ui_component('profile', name: 'Sam') %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= ui_component('yielder') do %>
+  Yielder component renders
+<% end %>
