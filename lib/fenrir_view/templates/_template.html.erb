@@ -1,11 +1,14 @@
-<div class="<%%= item_classes %>">
-  <%%= title %>
+<div class="<%%= @_component.item_classes %>">
+  <%%= @_component.title %>
 
-  <%% if tags? %>
-    <%% design_system_tags.each do |tag_hash| %>
-      <%%= ui_component("tag", tag_hash) %>
-    <%% end %>
-  <%% end %>
+  <%%# if @_component.tags? %>
+    <%%# @_component.design_system_tags.each do |tag_hash| %>
+      <%%#= ui_component("tag", tag_hash) %>
+    <%%# end %>
+  <%%# end %>
 
-  <%%= properties[:yield] %>
+  <%%#= @_component.properties[:yield] %>
+
+  <%%#= @_component.layout.column_1 %>
+  <%%#= @_component.layout.column_2 %>
 </div>
