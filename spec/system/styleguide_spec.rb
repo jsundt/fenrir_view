@@ -118,7 +118,7 @@ RSpec.describe 'Styleguide', type: :system do
         expect(page).to have_text('name. Required. As String')
         expect(page).to have_text('badges: []')
         expect(page).to have_text('E.g. Charlie account badges. Is passed to icon helper.')
-        expect(page).to have_text("<%= ui_component('profile', {properties as below}) %>")
+        expect(page).to have_text("<%= ui_component('profile', {\n  name: \"Johnny\"")
       end
     end
 
