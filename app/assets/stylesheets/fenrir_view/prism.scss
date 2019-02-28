@@ -51,6 +51,10 @@ pre[class*="language-"] {
 	white-space: normal;
 }
 
+.token {
+	color: color('charcoal', 130);
+}
+
 .token.comment,
 .token.prolog,
 .token.doctype,
@@ -111,13 +115,13 @@ pre[class*="language-"] {
 }
 
 .token.keyword {
-	color: #66d9ef;
-	color: color('primary');
+	// color: #66d9ef;
+	color: color('charcoal', 70);
 }
 
 .token.regex,
 .token.important {
-	color: #fd971f;
+	// color: #fd971f;
 	color: color('danger', 150);
 }
 
