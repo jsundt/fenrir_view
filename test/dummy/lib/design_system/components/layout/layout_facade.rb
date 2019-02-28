@@ -10,7 +10,7 @@ class LayoutFacade < FenrirView::Presenter
     @layout = LayoutSectionCollector.new(context: context)
   end
 
-  VALID_LAYOUT_SECTIONS = %i[column1 column2]
+  VALID_LAYOUT_SECTIONS = %i[column1 column2].freeze
 
   class LayoutSectionCollector
     def initialize(context:)

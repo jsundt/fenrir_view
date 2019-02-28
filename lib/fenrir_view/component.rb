@@ -45,6 +45,14 @@ module FenrirView
       component_stubs.any?
     end
 
+    def component_layout_sections?
+      component_facade.class.const_defined?('VALID_LAYOUT_SECTIONS')
+    end
+
+    def component_layout_sections
+      component_facade.class.const_get('VALID_LAYOUT_SECTIONS')
+    end
+
     def stubs_file
       FenrirView.pattern_type(variant).join(component_identifier, "#{component_identifier}.yml")
     end
