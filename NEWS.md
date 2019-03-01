@@ -3,6 +3,9 @@
 Changes worth mentioning.
 
 ---
+## 0.24.0 - 2019-03-01
+- [Feature] Components can accept and render multiple blocks of HTML
+
 ## 0.23.0 - 2019-01-16
 - [Improvement] Remove atomic pattern levels
 
