@@ -80,6 +80,10 @@ RSpec.describe 'Styleguide', type: :system do
       click_on 'Card'
 
       within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Healthy instances: 11')
+        expect(page).to have_text('Property hashes: 0')
+        expect(page).to have_text('Deprecated instances: 2')
+
         expect(page).to have_text('Aspen, Snowmass')
         expect(page).to have_text('title: "Snowmass"')
         expect(page).to have_text('link: "http://google.com"')
@@ -94,6 +98,11 @@ RSpec.describe 'Styleguide', type: :system do
 
       click_on 'Layout'
       within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Healthy instances: 6')
+
+        expect(page).to have_text('Layout component options')
+        expect(page).to have_text('<% layout.column1 do %> <html> <% end %>')
+
         expect(page).to have_text('Without layout sections')
         expect(page).to have_text('With layout sections')
         expect(page).to have_text('With layout sections and classic yield')
@@ -114,6 +123,10 @@ RSpec.describe 'Styleguide', type: :system do
       click_on 'Profile'
 
       within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Low usage!')
+        expect(page).to have_text('Health: 100%')
+        expect(page).to have_text('Deprecated instances: 0')
+
         expect(page).to have_text('Component Properties:')
         expect(page).to have_text('name. Required. As String')
         expect(page).to have_text('badges: []')
@@ -126,6 +139,9 @@ RSpec.describe 'Styleguide', type: :system do
       visit '/design_system/components/breadcrumbs'
 
       within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Low usage!')
+        expect(page).to have_text('Health: 0%')
+
         expect(page).to have_text('Hint:To see your component make sure you\'ve created stubs:')
         expect(page).to have_text('components/breadcrumbs/breadcrumbs.yml')
         expect(page).to have_text('information about the component breadcrumbs')
@@ -169,13 +185,13 @@ RSpec.describe 'Styleguide', type: :system do
       click_on 'Navbar'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Navbar')
-        expect(page).to have_text('STATUS: WORK IN PROGRESS')
+        expect(page).to have_text('This is component is only available in the styleguide.')
       end
 
       click_on 'Sidebar'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Sidebar')
-        expect(page).to have_text('STATUS: WORK IN PROGRESS')
+        expect(page).to have_text('This is component is only available in the styleguide.')
       end
     end
 
@@ -184,7 +200,7 @@ RSpec.describe 'Styleguide', type: :system do
 
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Application frame')
-        expect(page).to have_text('ou have Stubs but they don\'t follow the correct format')
+        expect(page).to have_text('You have Stubs but they don\'t follow the correct format')
       end
     end
   end

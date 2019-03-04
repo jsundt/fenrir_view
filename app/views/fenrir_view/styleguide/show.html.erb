@@ -1,11 +1,10 @@
-<div class="<%= @component.meta_status[:bg] %> u-padding--y-50">
+<div class="<%= @component.header_style %> u-padding--y-50">
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12">
         <h1 class="o-text--headline u-text--bold"><%= @component.title %></h1>
-        <p class="o-text--caption">Status: <%= @component.meta_status[:code] %></p>
-
-        <p><%= @component.meta_description %></p>
+        <p class="o-text--product u-margin--b-25"><%= @component.meta_status %></p>
+        <p class="o-text--product"><%= @component.meta_description %></p>
       </div>
     </div>
   </div>
