@@ -1,0 +1,72 @@
+---
+:design_system:
+  :metrics:
+    :components:
+      :breadcrumbs:
+        :component_count: 0
+        :property_hash_count: 0
+        :deprecated_instance_count: 0
+        :composition_usage: 0
+      :card:
+        :component_count: 11
+        :property_hash_count: 0
+        :deprecated_instance_count: 2
+        :composition_usage: 4
+      :header:
+        :component_count: 0
+        :property_hash_count: 0
+        :deprecated_instance_count: 0
+        :composition_usage: 0
+      :layout:
+        :component_count: 6
+        :property_hash_count: 0
+        :deprecated_instance_count: 0
+        :composition_usage: 6
+      :paragraph:
+        :component_count: 0
+        :property_hash_count: 0
+        :deprecated_instance_count: 0
+        :composition_usage: 0
+      :profile:
+        :component_count: 1
+        :property_hash_count: 0
+        :deprecated_instance_count: 0
+        :composition_usage: 1
+      :yielder:
+        :component_count: 2
+        :property_hash_count: 0
+        :deprecated_instance_count: 0
+        :composition_usage: 2
+    :extras:
+      :layout_rules: 9
+      :content_cards: 0
+      :misc_cards: 0
+      :misc: 0
+      :modals: 0
+      :charlie_talks: 0
+      :best_in_place: 0
+      :uploaders: 0
+    :file_types:
+      :erb:
+        :files: 2
+        :lines: 49
+      :facades:
+        :files: 0
+        :lines: 0
+      :scss:
+        :files: 2
+        :lines: 32
+        :classes: 1
+      :js:
+        :files: 1
+        :lines: 14
+        :functions: 0
+    :totals:
+      :components: 20
+      :property_hashes: 0
+      :deprecated: 2
+      :additional_deprecated: 9
+      :ignored_deprecation: 0
+      :composition: 13
+      :all_instances: 22
+      :saturation: 90.91

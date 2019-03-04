@@ -3,37 +3,42 @@
     <div class="row">
       <div class="col-xs-12">
         <h1 class="o-text--headline">Pattern Library</h1>
+        <% @page.top_line_metrics.each do |metric| %>
+          <p class="o-text--product"><%= metric %></p>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container">
-  <% @page.components.each do |component| %>
-    <section class="row u-bg-zebra--silver-50 u-padding--y-50">
-      <div class="col-xs-12 col-md-6">
-        <% if component.component_stubs? %>
-          <% component.component_stubs.take(1).each do |component_properties| %>
-            <% properties = component_properties[:props] %>
+<% @page.components.each do |component| %>
+  <div class="u-bg-zebra--silver-50 u-padding--y-50">
+    <div class="container">
+      <div class="row ">
+        <div class="col-xs-12 col-md-6">
+          <% if component.component_stubs? %>
+            <% component.component_stubs.take(1).each do |component_properties| %>
+              <% properties = component_properties[:props] %>
 
-            <% if component_properties[:yield] %>
-              <%= ui_component component.component_identifier, properties.clone do %>
-                <%= component_properties[:yield].html_safe %>
+              <% if component_properties[:yield] %>
+                <%= ui_component component.component_identifier, properties.clone do %>
+                  <%= component_properties[:yield].html_safe %>
+                <% end %>
+              <% else %>
+                <%= ui_component component.component_identifier, properties.clone %>
               <% end %>
-            <% else %>
-              <%= ui_component component.component_identifier, properties.clone %>
+
             <% end %>
-
           <% end %>
-        <% end %>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <h1 class="o-text--title"><%= component.title %></h1>
-        <p class="o-text--product <%= component.meta_status[:bg] %>">Status: <%= component.meta_status[:code] %></p>
-        <p class="o-text--body"><%= component.meta_description %></p>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <h1 class="o-text--title"><%= component.title %></h1>
+          <p class="o-text--product <%= component.header_style %>">Status: <%= component.meta_status %></p>
+          <p class="o-text--body"><%= component.meta_description %></p>
 
-        <%= link_to 'View all variants', components_path(id: component.name) %>
+          <%= link_to 'View all variants', components_path(id: component.name) %>
+        </div>
       </div>
-    </section>
-  <% end %>
-</div>
+    </div>
+  </div>
+<% end %>

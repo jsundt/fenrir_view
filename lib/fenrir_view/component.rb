@@ -81,28 +81,39 @@ module FenrirView
       stubs_extra_info[:deprecated]
     end
 
-    def meta_status
-      case meta_status_code
-      when 'work in progress'
-        {
-          bg: "u-bg--warning",
-          code: meta_status_code,
-        }
-      when 'in review'
-        {
-          bg: "u-bg--primary",
-          code: meta_status_code,
-        }
-      when 'in use'
-        {
-          bg: "u-bg--silver",
-          code: meta_status_code,
-        }
+    def header_style
+      if variant == 'system'
+        'u-bg--secondary'
+      elsif health.metrics_available?
+        if health.usage_healthy? && !health.low_usage?
+          'u-bg--silver u-color--charcoal'
+        elsif health.usage_shakey?
+          'u-bg--warning'
+        else
+          'u-bg--danger'
+        end
       else
-        {
-          bg: "u-bg--danger",
-          code: meta_status_code,
-        }
+        'u-bg--danger'
+      end
+    end
+
+    def meta_status
+      if variant == 'system'
+        'This is component is only available in the styleguide.'
+      elsif health.metrics_available?
+        [
+          ('Low usage!' if health.low_usage?),
+          "Health: #{health.score}%",
+          '(',
+          [
+            "Healthy instances: #{health.component_usage_count}",
+            "Property hashes: #{health.property_hashes_count}",
+            "Deprecated instances: #{health.component_deprecated_count}",
+          ].join(' | '),
+          ')',
+        ].compact.join(' ')
+      else
+        'Metrics for this component is unavailable 😞'
       end
     end
 
@@ -118,26 +129,14 @@ module FenrirView
       [title, variant].join(' ')
     end
 
+    def health
+      @health ||= FenrirView::Component::Health.new(variant: variant, component: name)
+    end
+
     private
 
     def component_facade
       @component_facade ||= FenrirView::Presenter.component_for(variant, component_identifier, {}, validate: false)
-    end
-
-    def meta_status_code
-      code = stubs_extra_info[:status]&.downcase
-
-      if status_codes.include?(code)
-        code
-      elsif code.present?
-        "Unknown status: #{ code }"
-      else
-        'missing'
-      end
-    end
-
-    def status_codes
-      ['deprecated', 'work in progress', 'in review', 'in use']
     end
   end
 end

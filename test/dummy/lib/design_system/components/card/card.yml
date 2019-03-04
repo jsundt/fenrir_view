@@ -1,5 +1,6 @@
 :meta:
   status: "in use"
+  :deprecated: "(<button|link_to)"
 
 :stubs:
 - :props:
