@@ -3,6 +3,10 @@
 Changes worth mentioning.
 
 ---
+## 0.25.0 - 2019-03-06
+- [Feature] Generate usage metrics for your app by running `rails design_system:generate_metrics`
+- [Feature] Show usage of components in styleguide
+
 ## 0.24.0 - 2019-03-01
 - [Feature] Components can accept and render multiple blocks of HTML
 
