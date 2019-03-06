@@ -207,7 +207,7 @@ module FenrirView
     end
 
     def calculate_saturation
-      return 0 if @metrics[:totals][:all_instances].negative?
+      return 0 if @metrics[:totals][:components].zero? || @metrics[:totals][:all_instances].zero?
 
       ((@metrics[:totals][:components].to_f / @metrics[:totals][:all_instances]) * 100).round(2)
     end
@@ -296,17 +296,9 @@ module FenrirView
 
     def get_deprecated_grep_as_string(component_name)
       facade = FenrirView::Component.new('components', component_name)
-      facade.stubs_extra_info[:deprecated]
+      facade.meta_deprecated
     rescue Psych::SyntaxError
       throw "Unable to parse deprecated string in yaml for #{component_name}"
-    end
-
-    def load_component_stubs(component)
-      stubs_file = FenrirView.pattern_type('components').join(component.to_s, "#{component}.yml")
-
-      YAML.load_file(stubs_file)
-    rescue Errno::ENOENT
-      Rails.logger.info("Didn't find #{component}.yml")
     end
 
     def generate_metrics_file(metrics)

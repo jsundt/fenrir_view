@@ -16,6 +16,12 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.before(:suite) do
+    puts '--- Generating a new metrics file ---'
+    FenrirView::Metrics.new.run
+    puts '--- Generated yml for dummy app ---'
+  end
+
   config.before(:each, type: :system) do
     driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   end
