@@ -3,6 +3,9 @@
 Changes worth mentioning.
 
 ---
+## 0.25.1 - 2019-03-08
+- [Improvement] Only show component usuage metrics in developement and test enviroments
+
 ## 0.25.0 - 2019-03-06
 - [Feature] Generate usage metrics for your app by running `rails design_system:generate_metrics`
 - [Feature] Show usage of components in styleguide
