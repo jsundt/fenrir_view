@@ -28,7 +28,8 @@ module FenrirView
     end
 
     def top_line_metrics
-      return [] if metrics.nil?
+      return [] if !metrics.present? || Rails.env.production?
+
       [
         "System saturation: #{metrics.dig(:totals, :saturation)}%",
         "Total component instances: #{metrics.dig(:totals, :components)}",
@@ -44,6 +45,8 @@ module FenrirView
 
     def metrics
       @metrics ||= YAML.load_file(Rails.root.join('lib', 'design_system', 'metrics.yml')).dig(:design_system, :metrics) || {}
+    rescue Errno::ENOENT
+      {}
     end
   end
 end

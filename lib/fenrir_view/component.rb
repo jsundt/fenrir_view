@@ -104,17 +104,23 @@ module FenrirView
         [
           ('Low usage!' if health.low_usage?),
           "Health: #{health.score}%",
-          '(',
-          [
-            "Healthy instances: #{health.component_usage_count}",
-            "Property hashes: #{health.property_hashes_count}",
-            "Deprecated instances: #{health.component_deprecated_count}",
-          ].join(' | '),
-          ')',
+          component_usage,
         ].compact.join(' ')
       else
         'Metrics for this component is unavailable 😞'
       end
+    end
+
+    def component_usage
+      return nil if Rails.env.production?
+
+      [
+        '(',
+        "Healthy instances: #{health.component_usage_count}",
+        "Property hashes: #{health.property_hashes_count}",
+        "Deprecated instances: #{health.component_deprecated_count}",
+        ')',
+      ].join(' ')
     end
 
     def stubs_correct_format?
