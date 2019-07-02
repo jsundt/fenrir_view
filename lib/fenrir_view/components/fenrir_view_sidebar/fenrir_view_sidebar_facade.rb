@@ -69,6 +69,10 @@ class FenrirViewSidebarFacade < FenrirView::Presenter
       def filter_types
         @item[:filter_types]
       end
+
+      def locked?
+        @item[:locked]
+      end
     end
   end
 end

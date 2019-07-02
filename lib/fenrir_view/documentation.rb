@@ -14,6 +14,20 @@ module FenrirView
       end
     end
 
+    def unlocked_sections
+      @unlocked_sections ||= documentation_pages_as_hash.map do |section|
+        unlocked_section_pages = []
+
+        section.fetch(:pages).each do |page|
+          unless page.fetch(:locked, true)
+            unlocked_section_pages.push("#{section[:slug]}/#{page[:slug]}")
+          end
+        end
+
+        unlocked_section_pages
+      end.flatten
+    end
+
     # Invalidate routes that does not match the described pages
     def matches?(request)
       section = request.path_parameters[:section]
@@ -58,6 +72,10 @@ module FenrirView
 
       def filter_types
         [title, @page[:filter_types]].join(' ')
+      end
+
+      def locked
+        @page.fetch(:locked, true)
       end
     end
 
