@@ -4,22 +4,30 @@ documentation:
   pages:
   - title: 'Welcome'
     slug: 'index'
+    locked: false
 
 - title: 'Test cases'
   slug: 'spec'
   pages:
   - title: 'No file'
     slug: 'file_does_not_exist'
+    locked: false
   - title: 'Example usage'
     slug: 'examples'
     filter_types: 'u-color u-bg layouts'
+    locked: false
   - title: 'Broken properties'
     slug: 'broken'
+    locked: false
   - title: 'Component yields'
     slug: 'component_yields'
+    locked: false
+  - title: 'Locked page'
+    slug: 'locked_page'
 
 - title: 'System information'
   slug: 'other'
   pages:
   - title: 'Other useful information'
     slug: 'information'
+    locked: false

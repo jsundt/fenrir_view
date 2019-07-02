@@ -79,7 +79,8 @@ $switch-from-tabs-size: 'lg';
   .fenrir-view-sidebar__item {
     @include o-text--lead;
     position: relative;
-    display: block;
+    display: flex;
+    justify-content: space-between;
     line-height: 1.2;
     padding: 4px;
     margin: 0 -4px;
@@ -92,6 +93,14 @@ $switch-from-tabs-size: 'lg';
       color: color('white');
       background-color: color('secondary');
       text-decoration: none;
+
+      .o-icon {
+        color: color('white');
+      }
+    }
+
+    .o-icon {
+      color: color('gray');
     }
 
     &.is-current-page {
@@ -103,6 +112,10 @@ $switch-from-tabs-size: 'lg';
       &:active {
         text-decoration: none;
         cursor: default;
+
+        .o-icon {
+          color: color('gray');
+        }
       }
     }
 

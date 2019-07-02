@@ -38,7 +38,7 @@
         :deprecated_instance_count: 0
         :composition_usage: 2
     :extras:
-      :layout_rules: 9
+      :layout_rules: 10
       :content_cards: 0
       :misc_cards: 0
       :misc: 0
@@ -65,7 +65,7 @@
       :components: 20
       :property_hashes: 0
       :deprecated: 2
-      :additional_deprecated: 9
+      :additional_deprecated: 10
       :ignored_deprecation: 0
       :composition: 13
       :all_instances: 22

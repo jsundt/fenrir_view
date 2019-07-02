@@ -22,7 +22,7 @@ class FenrirViewApplicationFrameFacade < FenrirView::Presenter
 
   def sidebar_link_categories
     links = doc_links + component_links
-    links += system_component_links if !Rails.env.production?
+    links += system_component_links unless Rails.env.production?
 
     links
   end
@@ -36,6 +36,7 @@ class FenrirViewApplicationFrameFacade < FenrirView::Presenter
             title: page.title,
             link: fenrir_view_routes.fenrir_docs_path(section: section.folder, page: page.path),
             filter_types: page.filter_types,
+            locked: page.locked,
           }
         end
       }

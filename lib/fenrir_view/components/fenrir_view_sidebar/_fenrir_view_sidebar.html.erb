@@ -18,8 +18,17 @@
           <% category.items.each do |item| %>
             <% classes = ['fenrir-view-sidebar__item js-fenrir-view-sidebar__item'] %>
             <% classes.push('is-current-page') if current_page?(item.link) %>
+            <% classes.push('is-locked') if item.locked? %>
 
-            <%= link_to item.title, item.link, class: classes, data: { 'fenrir-view-filter-types': item.filter_types } %>
+            <%= link_to item.link, class: classes, data: { 'fenrir-view-filter-types': item.filter_types } do %>
+              <%= item.title %>
+
+              <% if item.locked? %>
+                <svg class="o-icon o-icon--inline" viewBox="0 0 50 50" aria-label="Page is protected" role="img">
+                  <path d="M38.6 22.3c-1-.4-2-.8-3-1.1v-5c0-6.9-4.3-11.3-10.9-11.3S13.9 9.3 13.9 16.2v5.1c-.9.3-1.7.6-2.5 1-.5.2-.8.6-.8 1.1v15.8c0 .5.3 1 .8 1.1 4.3 1.9 8.9 2.8 13.6 2.8s9.3-.9 13.6-2.8c.5-.2.8-.6.8-1.1V23.5c0-.5-.3-1-.8-1.2zm-20.7-2v-4c0-6.6 4.8-7.3 6.9-7.3s6.9.7 6.9 7.3v4c-2.2-.4-4.4-.7-6.6-.7-2.5-.1-4.9.2-7.2.7z"></path>
+                </svg>
+              <% end %>
+            <% end %>
           <% end %>
         </div>
       </section>

@@ -20,7 +20,7 @@ RSpec.describe FenrirView::StyleguideFacade do
     expect(second_section).to be_a_kind_of(FenrirView::Documentation::Section)
     expect(second_section.title).to eq(expected_section_title)
     expect(second_section.folder).to eq(expected_section_slug)
-    expect(second_section.pages.length).to eq(4)
+    expect(second_section.pages.length).to eq(5)
 
     expect(second_section.pages.second).to be_a_kind_of(FenrirView::Documentation::Page)
     expect(second_section.pages.second.title).to eq('Example usage')

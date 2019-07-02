@@ -19,6 +19,7 @@ RSpec.describe 'Styleguide', type: :system do
         expect(page).to have_text('Example usage')
         expect(page).to have_text('Broken properties')
         expect(page).to have_text('Component yields')
+        expect(page).to have_text('Locked page')
       end
 
       within('[data-spec-section="sidebar-system-information"]') do
@@ -60,6 +61,25 @@ RSpec.describe 'Styleguide', type: :system do
         expect(page).to_not have_text('WILL NOT RENDER')
         expect(page).to_not have_text('Second layout component column1')
       end
+    end
+
+    it 'can only visit locked pages if you have permission' do
+      visit '/design_system/spec/locked_page'
+
+      expect(page).to_not have_text('Secret text')
+      expect(page).to have_text('This page is restricted to Charlie employees')
+
+      click_on 'Example usage'
+      expect(page).to_not have_text('This content is only for employee\'s')
+
+      allow_any_instance_of(DesignSystemPolicy).to receive(:employee?).and_return(true)
+
+      visit '/design_system/spec/locked_page'
+
+      expect(page).to have_text('Secret text')
+
+      click_on 'Example usage'
+      expect(page).to have_text('This content is only for employee\'s')
     end
 
     xit 'can visit page missing content' do

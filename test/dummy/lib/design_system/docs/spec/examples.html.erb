@@ -32,4 +32,12 @@
       <% end %>
     </div>
   </div>
+
+  <% if @design_system_policy.employee? %>
+    <div class="row">
+      <div class="col-xs-12">
+        This content is only for employee's
+      </div>
+    </div>
+  <% end %>
 </div>
