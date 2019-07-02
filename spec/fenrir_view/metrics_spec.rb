@@ -196,7 +196,7 @@ RSpec.describe FenrirView::Metrics do
     it 'calculates totals' do
       expect(metric_totals.dig(:components)).to eq(0)
       expect(metric_totals.dig(:property_hashes)).to eq(3)
-      expect(metric_totals.dig(:saturation)).to eq(0)
+      expect(metric_totals.dig(:saturation)).to eq(100)
     end
   end
 

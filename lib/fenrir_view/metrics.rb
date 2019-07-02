@@ -108,8 +108,8 @@ module FenrirView
       component_names.each do |component_name|
         components[component_name] = {
           name: component_name,
-          components: /ui_component\(('|")#{component_name}/,
-          property_hashes: /(DesignSystem|FenrirView).properties\(('|")#{component_name}/,
+          components: /ui_component\(('|")#{component_name}('|")(\, ({|@content\.)?(?!design_system_#{component_name})|\))/,
+          property_hashes: /(DesignSystem.properties\(('|")#{component_name}|def design_system_#{component_name})/,
           deprecated: get_deprecated_grep_as_string(component_name),
         }
       end
@@ -165,6 +165,9 @@ module FenrirView
           @metrics[:components][name][:component_count] += count_item(file, components[name][:components])
           @metrics[:components][name][:composition_usage] += count_item(file, components[name][:components])
 
+          @metrics[:components][name][:property_hash_count] += count_item(file, components[name][:property_hashes])
+          @metrics[:components][name][:composition_usage] += count_item(file, components[name][:property_hashes])
+
           if components[name][:deprecated].present?
             @metrics[:components][name][:deprecated_instance_count] += count_item(file, /#{components[name][:deprecated]}/)
             @metrics[:components][name][:composition_usage] += count_item(file, /#{components[name][:deprecated]}/)
@@ -200,6 +203,7 @@ module FenrirView
 
     def calculate_instance_count
       count = @metrics[:totals][:components]
+      count += @metrics[:totals][:property_hashes]
       count += @metrics[:totals][:deprecated]
       count += @metrics[:totals][:additional_deprecated]
       count -= @metrics[:totals][:ignored_deprecation]
@@ -207,9 +211,11 @@ module FenrirView
     end
 
     def calculate_saturation
-      return 0 if @metrics[:totals][:components].zero? || @metrics[:totals][:all_instances].zero?
+      count = @metrics[:totals][:components] + @metrics[:totals][:property_hashes]
 
-      ((@metrics[:totals][:components].to_f / @metrics[:totals][:all_instances]) * 100).round(2)
+      return 0 if count.zero? || @metrics[:totals][:all_instances].zero?
+
+      ((count.to_f / @metrics[:totals][:all_instances]) * 100).round(2)
     end
 
     def count_css_classes
@@ -255,7 +261,7 @@ module FenrirView
     def misc_deprecated
       {
         layout_rules: /css_columns|col-xs-/,
-        content_cards: /(content_card)/,
+        content_cards: /content_card/,
         misc_cards: /(charlie_empty_content_block|(j |= )note_card|notification_card|registered_company_card|special_day_card|card_stats|time_off_card)/,
         misc: /(slice_beta_feedback|info_slice\(|c_slice_cta|cell_header_options|onboarding_steps|nav_onboarding__item|charlie_clock|charlie_hint|content_hint|content_loader|content_member_type)/,
         modals: /\$.charlie.modal|content_modal/,
@@ -277,7 +283,8 @@ module FenrirView
 
     def system_files
       erb = Dir.glob(app_root.join('lib', 'design_system', '**', '*.erb'))
-      erb.select { |f| File.file?(f) }
+      erb += Dir.glob(app_root.join('lib', 'design_system', '**', '*_facade.rb'))
+      erb.flatten.select { |f| File.file?(f) }
     end
 
     def scss_files
