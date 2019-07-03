@@ -1,0 +1,35 @@
+meta:
+  status: "in review"
+  description: ""
+
+stubs:
+- name: "With layout sections"
+  description: "This component take an array of items and renders them into columns."
+  examples:
+    - name: "Collection of 4 items"
+      properties:
+        title: "20 Mountains you didn't know they even existed"
+      yields:
+        - key: 'add_item'
+          content: "This is column 1"
+        - key: 'add_item'
+          content: "This is column 2"
+        - key: 'add_item'
+          content: "This is column 3"
+        - key: 'add_item'
+          content: "This is column 4"
+
+    - name: "Collection of people"
+      properties:
+        title: "3 People"
+      yields:
+        - key: 'add_item'
+          content: "Jerry"
+        - key: 'add_item'
+          content: "Larry"
+        - key: 'add_item'
+          content: "Marry"
+
+- name: "Without layout sections"
+  props:
+    title: "20 Mountains you didn't know they even existed"

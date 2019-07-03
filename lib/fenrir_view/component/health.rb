@@ -10,6 +10,18 @@ module FenrirView
         @component = component
       end
 
+      def to_sentence
+        if metrics_available?
+          [
+            ('Low usage!' if low_usage?),
+            "Health: #{score}%",
+            component_usage,
+          ].compact.join(' ')
+        else
+          'Metrics for this component is unavailable 😞'
+        end
+      end
+
       def score
         return 0 if total_usage.zero?
 
@@ -49,6 +61,18 @@ module FenrirView
       end
 
       private
+
+      def component_usage
+        return nil if Rails.env.production?
+
+        usage = [
+          "Healthy instances: #{component_usage_count}",
+          "Property hashes: #{property_hashes_count}",
+          "Deprecated instances: #{component_deprecated_count}",
+        ].join(', ')
+
+        "(#{usage})"
+      end
 
       def component_metrics
         metrics_file.dig(:design_system, :metrics, :components, component.to_sym)

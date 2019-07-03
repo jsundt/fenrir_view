@@ -1,0 +1,98 @@
+<div class="fenrir-view-component-example js-fenrir-view-component-example" id="<%= @_component.identifier %>">
+  <h3 class="o-text--title u-text--bold"><%= @_component.title %></h3>
+  <p class="o-text--product u-margin--b-50"><%= @_component.description %></p>
+
+  <div class="fenrir-view-component-example__examples-wrapper">
+    <% @_component.devices.each do |device| %>
+      <div class="fenrir-view-component-example__example-wrapper">
+        <iframe class="fenrir-view-component-example__example" width="<%= device.width %>" height="<%= device.height %>" name="<%= device.name %>" srcdoc='
+          <script type="text/javascript">
+            window.onload = function() {
+              if (parent) {
+                var oHead = document.getElementsByTagName("head")[0];
+                var arrStyleSheets = parent.document.getElementsByTagName("link");
+                var arrJavaScript = parent.document.getElementsByTagName("script");
+
+                for (var i = 0; i < arrStyleSheets.length; i++) {
+                  oHead.appendChild(arrStyleSheets[i].cloneNode(true));
+                }
+
+                for (var i = 0; i < arrJavaScript.length; i++) {
+                  var script = document.createElement("script");
+                  script.type = "text/javascript";
+
+                  if (arrJavaScript[i].src) {
+                    script.src = arrJavaScript[i].src;
+                    oHead.appendChild(script);
+                  }
+                }
+
+                document.body.classList.add("fenrir-view-component-example__content-body")
+              }
+            }
+          </script>
+          <div class="fenrir-view-component-example__content-wrap">
+            <% @_component.examples.each do |example| %>
+              <%= public_send(example.helper_start, example.component, example.properties) do |layout| %>
+                <% example.yields.each do |content| %>
+                  <% if content.key? && content.args.any? %>
+                    <% layout.public_send(content.key, content.args) do %>
+                      <%= content.content %>
+                    <% end %>
+                  <% elsif content.key? %>
+                    <% layout.public_send(content.key) do %>
+                      <%= content.content %>
+                    <% end %>
+                  <% else %>
+                    <%= content.content %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </code></pre>
+      </div>
+        '>
+        </iframe>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="fenrir-view-component-example__source js-fenrir-view-component-example__source">
+    <%= system_component('button', {
+      title: 'View source',
+      trigger: 'js-fenrir-view-component-example__source-toggle',
+      style: 'u-bg--silver u-color--charcoal',
+      data_options: {
+        data: {
+          'spec': @_component.identifier,
+        },
+      },
+    }) %>
+
+    <div class="fenrir-view-component-example__source-examples">
+      <% @_component.examples.each do |example| %>
+        <div class="fenrir-view-component-example__source-example">
+          <p class="o-text--product u-text--bold"><%= example.name %></p>
+
+<pre><code class="language-erb">
+<%= example.helper %>
+<% if example.yields.any? %>
+  <% example.yields.each do |obj| %>
+  <% if obj.key? %>
+  &lt;% layout.<%= obj.key %><%= "(#{obj.args})" if obj.args.any? %> do %&gt;
+    <%= obj.content %>
+  &lt;% end %&gt;
+  <% else %>
+  <%= obj.content %>
+  <% end %>
+  <% end %>
+&lt;% end %&gt;
+<% end %>
+</code></pre>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

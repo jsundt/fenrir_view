@@ -53,10 +53,12 @@ module FenrirView
       end
     end
 
+    class MissingFacadeError < ArgumentError; end
+
     class << self
       def component_for(*args)
         klass = "#{args.second.to_s.camelize}Facade".safe_constantize
-        raise ArgumentError.new("Could not find component: #{args.first.to_s}: #{args.second.to_s}") unless !!klass
+        raise ::FenrirView::Presenter::MissingFacadeError.new("Could not find component: #{args.first.to_s}: #{args.second.to_s}") unless !!klass
 
         klass.new(*args)
       end

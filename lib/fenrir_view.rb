@@ -6,6 +6,7 @@ require 'fenrir_view/property_types'
 require 'fenrir_view/presenter'
 require 'fenrir_view/component'
 require 'fenrir_view/component/health'
+require 'fenrir_view/component/examples'
 require 'fenrir_view/documentation'
 require 'fenrir_view/metrics'
 

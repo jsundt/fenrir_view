@@ -30,9 +30,9 @@ RSpec.describe 'Styleguide', type: :system do
       within('[data-spec-section="sidebar-components"]') do
         expect(page).to have_text('Breadcrumbs')
         expect(page).to have_text('Card')
+        expect(page).to have_text('Collection')
         expect(page).to have_text('Header')
         expect(page).to have_text('Layout')
-        expect(page).to have_text('Paragraph')
         expect(page).to have_text('Profile')
         expect(page).to have_text('Yielder')
       end
@@ -82,8 +82,8 @@ RSpec.describe 'Styleguide', type: :system do
       expect(page).to have_text('This content is only for employee\'s')
     end
 
-    xit 'can visit page missing content' do
-      visit '/design_system/spec/missing'
+    it 'can visit page missing content' do
+      visit '/design_system/spec/file_does_not_exist'
 
       expect(page).to have_text('Missing Page')
     end
@@ -92,41 +92,78 @@ RSpec.describe 'Styleguide', type: :system do
   describe 'components' do
     it 'overview page' do
       visit '/design_system/components'
-      expect(page).to have_text('Pattern Library')
+      expect(page).to have_text('Component Library')
     end
 
     it 'show specific components' do
       visit '/design_system'
-      click_on 'Card'
 
+      click_on 'Card'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Healthy instances: 11')
         expect(page).to have_text('Property hashes: 0')
         expect(page).to have_text('Deprecated instances: 2')
 
-        expect(page).to have_text('Aspen, Snowmass')
+        page.within_frame('card_1_0') do
+          expect(page).to have_text('Aspen, Snowmass')
+        end
+
+        expect(page).to_not have_text('title: "Snowmass"')
+
+        find('button[data-spec="card_1"]').click
+
         expect(page).to have_text('title: "Snowmass"')
         expect(page).to have_text('link: "http://google.com"')
-        expect(page).to have_selector('div.card', count: 3)
+        expect(page).to have_selector('iframe', count: 3)
+      end
+
+      click_on 'Collection'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Low usage!')
+
+        page.within_frame('with_layout_sections_0') do
+          expect(page).to have_text('This is column 1')
+          expect(page).to have_text('This is column 2')
+          expect(page).to have_text('This is column 3')
+          expect(page).to have_text('This is column 4')
+        end
       end
 
       click_on 'Header'
       within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('header 1')
+
+        find('button[data-spec="header_1"]').click
+
         expect(page).to have_text('20 Mountains you didn\'t know they even existed')
-        expect(page).to have_text('Header 1')
       end
 
       click_on 'Layout'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Healthy instances: 6')
 
-        expect(page).to have_text('Layout component options')
-        expect(page).to have_text('<% layout.column1 do %> <html> <% end %>')
+        expect(page).to have_text('With layout sections')
+
+        page.within_frame('with_layout_sections_0') do
+          expect(page).to have_text('20 Mountains you didn\'t know they even existed')
+          expect(page).to have_text('This is column 1')
+          expect(page).to have_text('This is column 2')
+        end
 
         expect(page).to have_text('Without layout sections')
-        expect(page).to have_text('With layout sections')
+
         expect(page).to have_text('With layout sections and classic yield')
+
+        page.within_frame('with_layout_sections_and_classic_yield_0') do
+          expect(page).to have_text('HTML outside specific column sections')
+        end
+
+        find('button[data-spec="with_layout_sections_and_classic_yield"]').click
+
+        expect(page).to have_text('HTML outside specific column sections')
+
         expect(page).to have_text('With only one section used')
+
         expect(page).to have_text('}) do |layout| %>')
         expect(page).to have_text('<% layout.column1 do %>')
       end
@@ -134,7 +171,14 @@ RSpec.describe 'Styleguide', type: :system do
       click_on 'Yielder'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Regular yielder')
-        expect(page).to have_text('Test yield', count: 2)
+
+        find('button[data-spec="regular_yielder"]').click
+
+        expect(page).to have_text('Test yield')
+
+        page.within_frame('regular_yielder_0') do
+          expect(page).to have_text('Test yield')
+        end
       end
     end
 
@@ -151,6 +195,9 @@ RSpec.describe 'Styleguide', type: :system do
         expect(page).to have_text('name. Required. As String')
         expect(page).to have_text('badges: []')
         expect(page).to have_text('E.g. Charlie account badges. Is passed to icon helper.')
+
+        find('button[data-spec="regular_profile"]').click
+
         expect(page).to have_text("<%= ui_component('profile', {\n  name: \"Johnny\"")
       end
     end
@@ -162,26 +209,17 @@ RSpec.describe 'Styleguide', type: :system do
         expect(page).to have_text('Low usage!')
         expect(page).to have_text('Health: 0%')
 
-        expect(page).to have_text('Hint:To see your component make sure you\'ve created stubs:')
+        expect(page).to have_text('Hint: To see your component make sure you\'ve created stubs:')
         expect(page).to have_text('components/breadcrumbs/breadcrumbs.yml')
-        expect(page).to have_text('information about the component breadcrumbs')
+        expect(page).to have_text('To see your component make sure you\'ve created stubs')
       end
     end
 
-    it 'shows a hint message if the component stub file is not found' do
-      visit '/design_system/components/paragraph'
-
-      within('[data-spec-section="content-card"]') do
-        expect(page).to have_text('Hint:To see your component make sure you\'ve created stubs:')
-        expect(page).to have_text('components/paragraph/paragraph.yml')
-        expect(page).to have_text('information about the component paragraph')
-      end
-    end
-
-    xit 'shows a hint message if the component is not found' do
+    it 'shows a hint message if the component is not found' do
       visit '/design_system/components/something'
 
-      # TODO: differnt hint message if component is missing compared to just missing stubs
+      expect(page).to have_text('something is not a component')
+      expect(page).to have_text('rails g fenrir_view:new_pattern something')
     end
   end
 
@@ -191,15 +229,36 @@ RSpec.describe 'Styleguide', type: :system do
 
       expect(page).to have_text('Application frame')
       expect(page).to have_text('Button')
+      expect(page).to have_text('Component example')
       expect(page).to have_text('Navbar')
       expect(page).to have_text('Sidebar')
+
+      click_on 'Application frame'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Application frame')
+        expect(page).to have_text('This is component is only available in the styleguide.')
+      end
 
       click_on 'Button'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('A navigation link or action trigger')
         expect(page).to have_text('Restyled button')
+
+        find('button[data-spec="test"]').click
+
         expect(page).to have_text('Get Started!')
-        expect(page).to have_text('GET STARTED!')
+
+        page.within_frame('test_0') do
+          expect(page).to have_text('GET STARTED!')
+        end
+
+        expect(page).to have_selector('iframe', count: 12)
+      end
+
+      click_on 'Component example'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Component example')
+        expect(page).to have_text('This is component is only available in the styleguide.')
       end
 
       click_on 'Navbar'
@@ -220,7 +279,7 @@ RSpec.describe 'Styleguide', type: :system do
 
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Application frame')
-        expect(page).to have_text('You have Stubs but they don\'t follow the correct format')
+        expect(page).to have_text('To see your component make sure you\'ve created stubs')
       end
     end
   end

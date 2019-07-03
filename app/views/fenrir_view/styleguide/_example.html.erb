@@ -1,11 +1,33 @@
-<pre>
-:meta: 'information about the component <%= component_name %>' # Optional
-:stubs: # As many as you need
-  -
-    :id: 1
-    :title: "Some title"
-    :subtitle: "Some subtitle"
-  -
-    :id: 2
-    :title: "Another subtitle"
-</pre>
+<pre><code class="language-yaml">
+meta:
+  description: ''
+
+stubs:
+- name: "Regular profile cards"
+  description: "Used to reference people"
+  examples:
+    - name: "Style 1"
+      properties:
+        name: "Sam"
+        role: 'CEO'
+        avatar: '...'
+
+    - name: "Style 2"
+      properties:
+        name: "Alex"
+        role: 'Junior designer'
+        avatar: '...'
+
+
+- name: "With layout sections"
+  description: "This component take an array of items and renders them into columns."
+  examples:
+    - name: "Collection of 2 items"
+      properties:
+        title: "20 Mountains you didn't know they even existed"
+      yields:
+        - key: 'add_item'
+          content: "This is content for column 1"
+        - key: 'add_item'
+          content: "This is content for column 2"
+</code></pre>
