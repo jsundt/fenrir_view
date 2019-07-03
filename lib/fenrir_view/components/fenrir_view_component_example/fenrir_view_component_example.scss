@@ -1,0 +1,76 @@
+//----------------------------------------\\
+// Component example
+//----------------------------------------\\
+
+.fenrir-view-component-example {
+  margin: 32px auto;
+}
+
+.fenrir-view-component-example__examples-wrapper {
+  display: flex;
+  overflow-x: auto;
+  padding: 16px 16px 0;
+  background-color: color('silver', 25);
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border: 1px solid color('gray', 25);
+  border-bottom: none;
+}
+
+.fenrir-view-component-example__example-wrapper {
+  flex-shrink: 0;
+  position: relative;
+  margin-right: 32px;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 100;
+    width: 10px;
+    height: 10px;
+    top: 10px;
+    margin-left: 50%;
+    left: -5px;
+    background-color: color('gray', 115);
+    border: 1px solid color('gray', 130);
+    border-radius: 50%;
+  }
+}
+
+.fenrir-view-component-example__example {
+  resize: both;
+  position: relative;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border: 4px solid color('gray');
+  border-top-width: 30px;
+  border-bottom: none;
+  margin-bottom: -7px;
+}
+
+.fenrir-view-component-example__content-body {
+  padding: 8px;
+}
+
+.fenrir-view-component-example__source {
+  background-color: color('silver');
+  border: 1px solid color('gray', 50);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  width: 100%;
+  padding: 8px 16px;
+}
+
+.fenrir-view-component-example__source-examples {
+  display: none;
+
+  .fenrir-view-component-example__source.is-open & {
+    display: block;
+  }
+}
+
+.fenrir-view-component-example__source-example {
+  margin-bottom: 8px;
+  margin-top: 16px;
+}

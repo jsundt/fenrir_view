@@ -1,9 +1,13 @@
-:meta:
+meta:
   status: "in use"
-  :deprecated: "(<button|link_to)"
+  deprecated: "(<button|link_to)"
+  devices:
+  - "800x350"
 
-:stubs:
-- :props:
+stubs:
+- devices:
+  - "800x600"
+  :props:
     :title: "Snowmass"
     :location: "Aspen"
     :description: "Aspen Snowmass is a winter resort complex located in Pitkin County in western Colorado in the United States. Owned and operated by the Aspen Skiing Company it comprises four skiing/snowboarding areas on four adjacent mountains in the vicinity of the towns of Aspen and Snowmass Village."

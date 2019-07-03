@@ -3,7 +3,7 @@
   description: "A navigation link or action trigger. Setting the property `trigger` changes the expected behaviour by creating a `button` HTML tag instead of a `link` tag"
 
 :stubs:
-- :name: ""
+- :name: "Test"
   :props:
     :title: "Get Started!"
     :link: "#"

@@ -12,6 +12,11 @@
         :property_hash_count: 0
         :deprecated_instance_count: 2
         :composition_usage: 4
+      :collection:
+        :component_count: 0
+        :property_hash_count: 0
+        :deprecated_instance_count: 0
+        :composition_usage: 0
       :header:
         :component_count: 0
         :property_hash_count: 0
@@ -22,11 +27,6 @@
         :property_hash_count: 0
         :deprecated_instance_count: 0
         :composition_usage: 6
-      :paragraph:
-        :component_count: 0
-        :property_hash_count: 0
-        :deprecated_instance_count: 0
-        :composition_usage: 0
       :profile:
         :component_count: 1
         :property_hash_count: 0
