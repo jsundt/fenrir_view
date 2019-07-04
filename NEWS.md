@@ -3,6 +3,11 @@
 Changes worth mentioning.
 
 ---
+## 0.26.0 - 2019-07-04
+- [Feature] Use a policy object to hide certain pages or information from the general public
+- [Improvement] Show components in iframes to properly preview components that use position fixed
+- [Improvement] Render component previews at different sizes to more easily test device scaling
+
 ## 0.25.1 - 2019-03-08
 - [Improvement] Only show component usuage metrics in developement and test enviroments
 
