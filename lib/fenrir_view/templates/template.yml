@@ -1,16 +1,33 @@
-:meta:
+# Component: <%= component_name %>.
+# This file specifies the basic examples of this component in the styleguide.
+
+meta:
   status: "work in progress" # 'deprecated', 'work in progress', 'in review', 'in use'
   description: ""
+  # deprecated: '' # Regex to find deprecated html.erb content in the codebase for this component
+  # devices: # Each example should render within iframes of these sizes (unless the example specifies it's own devices)
+  # # - "<WIDTH>x<HEIGHT>"
+  # - "320x400"
+  # - "800x400"
 
-:stubs:
-- :name: "Example of pattern"
-  :props:
-    :title: "Pattern name"
-
-- :name: "Example of pattern with tags"
-  :props:
-    :title: "Tagged pattern"
-    :design_system_tags:
-    - :title: "Super tag"
-      :icon: "app__success"
-      :style: "u-bg--success"
+stubs:
+- name: "Example section for <%= component_name %>"
+  description: "Optional description of this set of examples"
+  # devices: # Specifed as an array of strings
+  # - "320x250"
+  # - "800x250"
+  examples:
+  - name: "Basic example"
+    # yields:
+    # - content: "(Required) HTML content for this yield block"
+    #   key: "add_item" # Name of layout method OR blank to pass to regular yield block
+    #   args: { item_id: "tag_id" } # Optional hash of key+values that are passed to the above layout method
+    properties:
+    - title: "Example pattern"
+  - name: "More indepth example"
+    properties:
+    title: "Tagged pattern"
+    design_system_tags:
+    - title: "Super tag"
+      icon: "app__success"
+      style: "u-bg--success"

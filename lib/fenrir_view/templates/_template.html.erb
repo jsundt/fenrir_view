@@ -4,6 +4,10 @@
   <%%# if @_component.tags? %>
     <%%# @_component.design_system_tags.each do |tag_hash| %>
       <%%#= ui_component("tag", tag_hash) %>
+
+      <% if @_component.layout_item?(item_id: tag_hash.fetch(:id)) %>
+        <%= @_component.layout.render_item(item_id: tag_hash.fetch(:id)) %>
+      <% end %>
     <%%# end %>
   <%%# end %>
 

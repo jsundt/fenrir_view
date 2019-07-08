@@ -1,5 +1,6 @@
-class <%= pattern_name.camelize %>Facade < FenrirView::Presenter
-  ### Required properties
+# frozen_string_literal: true
+
+class <%= component_name.camelize %>Facade < FenrirView::Presenter
   property :title, default: 'The best title', required: true, one_of_type: [String]
 
   # property :description, one_of: ['The best description', 'The second best description'], note: 'Change these rules'
@@ -9,14 +10,9 @@ class <%= pattern_name.camelize %>Facade < FenrirView::Presenter
   #   tags: { array_of: { one_of_type: [Hash] } }
   # }
 
-  ### Optional properties
   property :style
 
-  ### Properties passed on to other patterns
-  # property :design_system_tags, default: []   # Element: Tag
-
-  ### Block content is available in partial as: properties[:yield]
-  ### Or by adding the Layout Collector at the bottom of this file
+  # property :design_system_tags, default: []   # Component: Tag
 
   def item_classes
     item_classes = ["<%= css_class_name %>", "<%= js_class_name %>"]
@@ -34,6 +30,7 @@ class <%= pattern_name.camelize %>Facade < FenrirView::Presenter
   # end
 
   ## Layout section Handling
+  ## Block content is available in partial as: properties[:yield]
   ## Pass multiple blocks of html to this component by uncommenting the below
   # attr_reader :layout
 
@@ -45,8 +42,15 @@ class <%= pattern_name.camelize %>Facade < FenrirView::Presenter
 
   ## Layout sections should be the same as the method names defined in
   ## LayoutSectionCollector. This is used by the style guide documentation.
-  # VALID_LAYOUT_SECTIONS = %i[column1 column2]
+  # VALID_LAYOUT_SECTIONS = %i[column1 column2 add_item]
 
+  # def layout_item?(item_id:)
+  #   !!layout && layout.item?(item_id: item_id)
+  # end
+
+  # def layout_items?
+  #   !!layout && layout.items?
+  # end
 
   ## The LayoutSectionCollector is used by the yield statement in
   ## ui_component to allow the component access to anything passed
@@ -59,6 +63,7 @@ class <%= pattern_name.camelize %>Facade < FenrirView::Presenter
   # class LayoutSectionCollector
   #   def initialize(context:)
   #     @context = context
+  #     @items = {}
   #   end
 
   #   def column1(&block)
@@ -67,6 +72,22 @@ class <%= pattern_name.camelize %>Facade < FenrirView::Presenter
 
   #   def column2(&block)
   #     @column2 ||= block_given? ? @context.capture(&block) : nil
+  #   end
+
+  #   def items?
+  #     @items.any?
+  #   end
+
+  #   def item?(item_id:)
+  #     @items[item_id].present?
+  #   end
+
+  #   def render_item(item_id:)
+  #     @items[item_id]
+  #   end
+
+  #   def add_item(item_id:, &block)
+  #     @items[item_id] = @context.capture(&block) if block_given?
   #   end
   # end
 end
