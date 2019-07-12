@@ -3,6 +3,9 @@
 Changes worth mentioning.
 
 ---
+## 0.26.1 - 2019-07-08
+- [Improvement] Updated new component generator and template files
+
 ## 0.26.0 - 2019-07-04
 - [Feature] Use a policy object to hide certain pages or information from the general public
 - [Improvement] Show components in iframes to properly preview components that use position fixed
