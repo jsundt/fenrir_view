@@ -1,17 +1,17 @@
 <div class="c-layout container-fluid">
-  <h2><%= @_component.title %></h2>
+  <h2><%= @component.title %></h2>
 
-  <% if layout.present? %>
+  <% if @component.layout.present? %>
     <div class="row">
       <div class="layout-1 col-xs-12 col-md-6">
-        <%= @_component.layout.column1 %>
+        <%= @component.layout.column1 %>
       </div>
 
       <div class="layout-2 col-xs-12 col-md-6">
-        <%= @_component.layout.column2 %>
+        <%= @component.layout.column2 %>
       </div>
     </div>
   <% end %>
 
-  <%= properties[:yield] %>
+  <%= @component.properties[:yield] %>
 </div>

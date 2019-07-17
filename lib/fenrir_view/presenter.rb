@@ -87,17 +87,11 @@ module FenrirView
     end
 
     module ViewContext
-      attr_reader :_component
-      delegate :properties, to: :_component
+      attr_reader :component
+      delegate :properties, to: :component
 
       def inject_component_context(component)
-        @_component = component
-        protected_methods = FenrirView::Presenter.public_methods(false)
-        methods = component.public_methods(false) - protected_methods
-        methods.each do |meth|
-          next if self.class.method_defined?(meth)
-          self.class.delegate meth, to: :_component
-        end
+        @component = component
       end
     end
   end

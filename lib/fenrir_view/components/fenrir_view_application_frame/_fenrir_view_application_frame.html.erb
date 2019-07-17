@@ -1,12 +1,12 @@
 <div class="fenrir-view-application-frame">
-  <%= system_component('navbar', navbar_facade) %>
+  <%= system_component('navbar', @component.navbar_facade) %>
 
   <div class="fenrir-view-application-frame__page">
-    <%= system_component('sidebar', sidebar_facade) %>
+    <%= system_component('sidebar', @component.sidebar_facade) %>
 
     <div class="fenrir-view-application-frame__content js-page-wrapper">
       <div class="fenrir-view-application-frame__content-card" data-spec-section="content-card">
-        <%= properties[:yield] %>
+        <%= @component.properties[:yield] %>
       </div>
     </div>
   </div>

@@ -1,18 +1,18 @@
-<div class="<%%= @_component.item_classes %>">
-  <%%= @_component.title %>
+<div class="<%%= @component.item_classes %>">
+  <%%= @component.title %>
 
-  <%%# if @_component.tags? %>
-    <%%# @_component.design_system_tags.each do |tag_hash| %>
+  <%%# if @component.tags? %>
+    <%%# @component.design_system_tags.each do |tag_hash| %>
       <%%#= ui_component("tag", tag_hash) %>
 
-      <% if @_component.layout_item?(item_id: tag_hash.fetch(:id)) %>
-        <%= @_component.layout.render_item(item_id: tag_hash.fetch(:id)) %>
+      <% if @component.layout_item?(item_id: tag_hash.fetch(:id)) %>
+        <%= @component.layout.render_item(item_id: tag_hash.fetch(:id)) %>
       <% end %>
     <%%# end %>
   <%%# end %>
 
-  <%%#= @_component.properties[:yield] %>
+  <%%#= @component.properties[:yield] %>
 
-  <%%#= @_component.layout.column_1 %>
-  <%%#= @_component.layout.column_2 %>
+  <%%#= @component.layout.column_1 %>
+  <%%#= @component.layout.column_2 %>
 </div>

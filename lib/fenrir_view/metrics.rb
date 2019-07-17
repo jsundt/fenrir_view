@@ -108,7 +108,7 @@ module FenrirView
       component_names.each do |component_name|
         components[component_name] = {
           name: component_name,
-          components: /ui_component\(('|")#{component_name}('|")(\, ({|@content\.)?(?!design_system_#{component_name})|\))/,
+          components: /ui_component\(('|")#{component_name}('|")(\, ({|@(content|component)\.)?(?!design_system_#{component_name})|\))/,
           property_hashes: /(DesignSystem.properties\(('|")#{component_name}|def design_system_#{component_name})/,
           deprecated: get_deprecated_grep_as_string(component_name),
         }
