@@ -3,6 +3,11 @@
 Changes worth mentioning.
 
 ---
+## 0.27.0 - 2019-07-08
+- [Breaking Change] Component presenter no longer injects methods into the view, these should be accessed from @component instead.
+- [Improvement] Component health stats are visible based on policy object rather than environment
+- [Fix] Metrics test is fixed, after breaking from what I assume is a change in Ruby
+
 ## 0.26.1 - 2019-07-08
 - [Improvement] Updated new component generator and template files
 
