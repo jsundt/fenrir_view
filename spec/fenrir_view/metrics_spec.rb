@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe FenrirView::Metrics do
   subject { described_class.new }
-  let(:path_to_metrics_file) { 'tmp/metrics.yml' }
+  let(:path_to_metrics_file) { File.join('tmp', 'metrics.yml') }
 
   before do
     File.delete(path_to_metrics_file) if File.exist?(path_to_metrics_file)
@@ -12,6 +12,8 @@ RSpec.describe FenrirView::Metrics do
     allow(subject).to receive(:puts).and_return(nil)
     allow(subject).to receive(:printf).and_return(nil)
     allow(subject).to receive(:metrics_file) do
+      Dir.mkdir('tmp') unless File.exists?('tmp')
+
       File.new(path_to_metrics_file, 'w')
     end
   end
