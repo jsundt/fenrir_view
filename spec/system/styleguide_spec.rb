@@ -72,6 +72,12 @@ RSpec.describe 'Styleguide', type: :system do
       click_on 'Example usage'
       expect(page).to_not have_text('This content is only for employee\'s')
 
+      click_on 'Card'
+      expect(page).to have_text('Health: 85%')
+      expect(page).to_not have_text('Healthy instances: 11')
+      expect(page).to_not have_text('Property hashes: 0')
+      expect(page).to_not have_text('Deprecated instances: 2')
+
       allow_any_instance_of(DesignSystemPolicy).to receive(:employee?).and_return(true)
 
       visit '/design_system/spec/locked_page'
@@ -80,6 +86,12 @@ RSpec.describe 'Styleguide', type: :system do
 
       click_on 'Example usage'
       expect(page).to have_text('This content is only for employee\'s')
+
+      click_on 'Card'
+      expect(page).to have_text('Health: 85%')
+      expect(page).to have_text('Healthy instances: 11')
+      expect(page).to have_text('Property hashes: 0')
+      expect(page).to have_text('Deprecated instances: 2')
     end
 
     it 'can visit page missing content' do
@@ -100,9 +112,7 @@ RSpec.describe 'Styleguide', type: :system do
 
       click_on 'Card'
       within('[data-spec-section="content-card"]') do
-        expect(page).to have_text('Healthy instances: 11')
-        expect(page).to have_text('Property hashes: 0')
-        expect(page).to have_text('Deprecated instances: 2')
+        expect(page).to have_text('Health: 85%')
 
         page.within_frame('card_1_0') do
           expect(page).to have_text('Aspen, Snowmass')
@@ -140,8 +150,6 @@ RSpec.describe 'Styleguide', type: :system do
 
       click_on 'Layout'
       within('[data-spec-section="content-card"]') do
-        expect(page).to have_text('Healthy instances: 6')
-
         expect(page).to have_text('With layout sections')
 
         page.within_frame('with_layout_sections_0') do
@@ -189,7 +197,6 @@ RSpec.describe 'Styleguide', type: :system do
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Low usage!')
         expect(page).to have_text('Health: 100%')
-        expect(page).to have_text('Deprecated instances: 0')
 
         expect(page).to have_text('Component Properties:')
         expect(page).to have_text('name. Required. As String')

@@ -2,11 +2,12 @@
 
 module FenrirView
   class Component
-    attr_reader :variant, :name
+    attr_reader :variant, :name, :design_system_policy
 
-    def initialize(variant, name)
+    def initialize(variant, name, design_system_policy: nil)
       @variant = variant
       @name = name
+      @design_system_policy = design_system_policy
     end
 
     delegate :stubs_file,
@@ -78,7 +79,8 @@ module FenrirView
     def health
       @health ||= FenrirView::Component::Health.new(
         variant: variant,
-        component: name
+        component: name,
+        design_system_policy: design_system_policy
       )
     end
 

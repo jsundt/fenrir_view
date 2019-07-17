@@ -3,11 +3,12 @@
 module FenrirView
   class Component
     class Health
-      attr_reader :variant, :component
+      attr_reader :variant, :component, :design_system_policy
 
-      def initialize(variant:, component:)
+      def initialize(variant:, component:, design_system_policy:)
         @variant = variant
         @component = component
+        @design_system_policy = design_system_policy
       end
 
       def to_sentence
@@ -62,8 +63,12 @@ module FenrirView
 
       private
 
+      def can_access_metrics?
+        design_system_policy&.employee?
+      end
+
       def component_usage
-        return nil if Rails.env.production?
+        return nil unless can_access_metrics?
 
         usage = [
           "Healthy instances: #{component_usage_count}",
