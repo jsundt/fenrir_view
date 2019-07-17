@@ -7,7 +7,7 @@ module FenrirView
     def index; end
 
     def show
-      @component = FenrirView::Component.new(params[:variant], params[:id])
+      @component = FenrirView::Component.new(params[:variant], params[:id], design_system_policy: @design_system_policy)
 
       render 'fenrir_view/styleguide/missing' unless @component.facade_loaded?
     end
