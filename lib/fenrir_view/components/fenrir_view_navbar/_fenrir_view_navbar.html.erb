@@ -1,16 +1,16 @@
-<nav class="<%= item_classes %>" role="navigation" aria-label="<%= aria_label %>">
-  <% if logo %>
-    <%= link_to logo[:link], class: "fenrir-view-navbar-logo #{logo[:style]}" do %>
-      <% if logo[:image] %>
-        <%= image_tag(logo[:image], alt: logo[:name], class: 'fenrir-view-navbar-logo__image') %>
+<nav class="<%= @component.item_classes %>" role="navigation" aria-label="<%= @component.aria_label %>">
+  <% if @component.logo %>
+    <%= link_to @component.logo[:link], class: "fenrir-view-navbar-logo #{@component.logo[:style]}" do %>
+      <% if @component.logo[:image] %>
+        <%= image_tag(@component.logo[:image], alt: @component.logo[:name], class: 'fenrir-view-navbar-logo__image') %>
       <% else %>
-        <p class="fenrir-view-navbar-logo__name"><%= logo[:name] %></p>
+        <p class="fenrir-view-navbar-logo__name"><%= @component.logo[:name] %></p>
       <% end %>
     <% end %>
   <% end %>
 
   <div class="fenrir-view-navbar__main-links-wrapper">
-    <% if sidebar? %>
+    <% if @component.sidebar? %>
       <%= system_component("button", {
         title: 'Menu',
         trigger: 'js-fenrir-view-navbar__sidebar-toggle',
@@ -21,15 +21,15 @@
     <input type="text" value="" placeholder="Find in sidebar" id="stupid-filter-search" name="stupid-filter-search" class="fenrir-view-navbar-filter-sidebar js-fenrir-view-navbar-filter-sidebar">
   </div>
 
-  <% if properties[:yield] %>
+  <% if @component.properties[:yield] %>
     <div class="fenrir-view-navbar__content-wrapper">
-      <%= properties[:yield] %>
+      <%= @component.properties[:yield] %>
     </div>
   <% end %>
 
-  <% if additional_actions? %>
+  <% if @component.additional_actions? %>
     <div class="fenrir-view-navbar__actions-wrapper">
-      <% additional_actions.each do |action| %>
+      <% @component.additional_actions.each do |action| %>
         <%= system_component("button", action) %>
       <% end %>
     </div>

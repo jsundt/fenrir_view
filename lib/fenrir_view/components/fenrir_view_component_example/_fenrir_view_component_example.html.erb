@@ -1,9 +1,9 @@
-<div class="fenrir-view-component-example js-fenrir-view-component-example" id="<%= @_component.identifier %>">
-  <h3 class="o-text--title u-text--bold"><%= @_component.title %></h3>
-  <p class="o-text--product u-margin--b-50"><%= @_component.description %></p>
+<div class="fenrir-view-component-example js-fenrir-view-component-example" id="<%= @component.identifier %>">
+  <h3 class="o-text--title u-text--bold"><%= @component.title %></h3>
+  <p class="o-text--product u-margin--b-50"><%= @component.description %></p>
 
   <div class="fenrir-view-component-example__examples-wrapper">
-    <% @_component.devices.each do |device| %>
+    <% @component.devices.each do |device| %>
       <div class="fenrir-view-component-example__example-wrapper">
         <iframe class="fenrir-view-component-example__example" width="<%= device.width %>" height="<%= device.height %>" name="<%= device.name %>" srcdoc='
           <script type="text/javascript">
@@ -32,7 +32,7 @@
             }
           </script>
           <div class="fenrir-view-component-example__content-wrap">
-            <% @_component.examples.each do |example| %>
+            <% @component.examples.each do |example| %>
               <%= public_send(example.helper_start, example.component, example.properties) do |layout| %>
                 <% example.yields.each do |content| %>
                   <% if content.key? && content.args.any? %>
@@ -65,13 +65,13 @@
       style: 'u-bg--silver u-color--charcoal',
       data_options: {
         data: {
-          'spec': @_component.identifier,
+          'spec': @component.identifier,
         },
       },
     }) %>
 
     <div class="fenrir-view-component-example__source-examples">
-      <% @_component.examples.each do |example| %>
+      <% @component.examples.each do |example| %>
         <div class="fenrir-view-component-example__source-example">
           <p class="o-text--product u-text--bold"><%= example.name %></p>
 

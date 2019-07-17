@@ -1,21 +1,21 @@
-<div class="card <%= 'card--no-img' if properties[:image_url].nil? %>">
-  <%- if properties[:image_url] %>
+<div class="card <%= 'card--no-img' if @component.properties[:image_url].nil? %>">
+  <%- if @component.properties[:image_url] %>
     <div class="card__image">
-      <a href="<%= properties[:link] %>"><img alt="<%= properties[:title] %>" src="<%= properties[:image_url] %>">
+      <a href="<%= @component.properties[:link] %>"><img alt="<%= @component.properties[:title] %>" src="<%= @component.properties[:image_url] %>">
       </a>
     </div>
   <% end %>
   <div class="card__content">
     <h3 class="card__content__title">
-      <a href="<%= properties[:link] %>"><%= title %></a>
+      <a href="<%= @component.properties[:link] %>"><%= @component.title %></a>
     </h3>
-    <%- if has_description? %>
-      <p><%= properties[:description] %></p>
+    <%- if @component.has_description? %>
+      <p><%= @component.properties[:description] %></p>
     <%- end %>
-    <p>Location: <%= location %></p>
+    <p>Location: <%= @component.location %></p>
     <div class="card__content__data">
-      <%- if properties[:data] && properties[:data].any? %>
-        <%- properties[:data].each do |data| %>
+      <%- if @component.properties[:data] && @component.properties[:data].any? %>
+        <%- @component.properties[:data].each do |data| %>
           <dl>
             <dt><%= data[:number] %></dt>
             <dd><%= data[:title] %></dd>

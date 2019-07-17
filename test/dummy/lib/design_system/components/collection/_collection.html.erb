@@ -1,9 +1,9 @@
 <div class="c-collection">
-  <h2><%= @_component.title %></h2>
+  <h2><%= @component.title %></h2>
 
   <div class="c-collection__item-wraper">
-    <% if layout.present? && layout.items? %>
-      <% layout.render_items.each do |item| %>
+    <% if @component.layout.present? && @component.layout.items? %>
+      <% @component.layout.render_items.each do |item| %>
         <div class="c-collection__item">
           <%= item %>
         </div>
