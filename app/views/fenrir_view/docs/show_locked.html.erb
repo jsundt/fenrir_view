@@ -2,9 +2,10 @@
   <div class="container u-padding--b-200 u-padding--t-50">
     <div class="row">
       <div class="col-xs-12 u-text--center u-color--gray charlie-svg-illustration">
-        <svg class="o-icon u-size--300" viewBox="0 0 50 50" aria-label="Locked page" role="img">
-          <path d="M38.6 22.3c-1-.4-2-.8-3-1.1v-5c0-6.9-4.3-11.3-10.9-11.3S13.9 9.3 13.9 16.2v5.1c-.9.3-1.7.6-2.5 1-.5.2-.8.6-.8 1.1v15.8c0 .5.3 1 .8 1.1 4.3 1.9 8.9 2.8 13.6 2.8s9.3-.9 13.6-2.8c.5-.2.8-.6.8-1.1V23.5c0-.5-.3-1-.8-1.2zm-20.7-2v-4c0-6.6 4.8-7.3 6.9-7.3s6.9.7 6.9 7.3v4c-2.2-.4-4.4-.7-6.6-.7-2.5-.1-4.9.2-7.2.7z"></path>
-        </svg>
+        <%= system_component('icon', {
+          icon: 'lock',
+          style: 'u-size--300'
+        }) %>
 
         <h1 class="o-text--title u-text--bold">This page is restricted to Charlie employees</h1>
         <p class="o-text--product"></p>

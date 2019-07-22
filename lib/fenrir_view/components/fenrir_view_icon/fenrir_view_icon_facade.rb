@@ -3,6 +3,7 @@ class FenrirViewIconFacade < FenrirView::Presenter
 
   property :icon, required: true, one_of_type: [String]
   property :style
+  property :inline, default: false, one_of_type: [TrueClass, FalseClass]
 
   delegate :content_tag, :concat, to: :@context
 
@@ -23,10 +24,15 @@ class FenrirViewIconFacade < FenrirView::Presenter
   end
 
   def item_classes
-    item_classes = ['fenrir-view-icon', 'js-fenrir-view-icon']
-    item_classes.push(style) if style?
+    css = ['fenrir-view-icon', 'js-fenrir-view-icon']
+    css.push('fenrir-view-icon--inline') if inline?
+    css.push(style) if style?
 
-    item_classes.join(' ')
+    css.join(' ')
+  end
+
+  def inline?
+    !!properties[:inline]
   end
 
   def style?
