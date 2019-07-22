@@ -13,18 +13,19 @@ module FenrirView
     delegate :stubs_file,
              :component_stubs?,
              :component_stubs,
-             :component_stubs_2,
              :stubs_correct_format?,
              :stubs_are_a_hash_with_info?,
              :component_meta_info?,
              to: :examples
+
+    delegate :can_access_metrics?, to: :health
 
     def title
       name.humanize
     end
 
     def component_identifier
-      return "fenrir_view_#{name}" if variant == 'system'
+      return "fenrir_view_#{name}" if system_component?
 
       name
     end
@@ -42,25 +43,13 @@ module FenrirView
     end
 
     def header_style
-      if variant == 'system'
+      if system_component?
         'u-bg--secondary'
-      elsif health.metrics_available?
-        if health.usage_healthy? && !health.low_usage?
-          'u-bg--silver u-color--charcoal'
-        elsif health.usage_shakey?
-          'u-bg--warning'
-        else
-          'u-bg--danger'
-        end
+      elsif !component_stubs?
+        'u-bg--warning'
       else
-        'u-bg--danger'
+        'u-bg--white'
       end
-    end
-
-    def meta_status
-      return 'This is component is only available in the styleguide.' if variant == 'system'
-
-      health.to_sentence
     end
 
     def filter_types
@@ -80,12 +69,17 @@ module FenrirView
       @health ||= FenrirView::Component::Health.new(
         variant: variant,
         component: name,
+        examples: examples,
         design_system_policy: design_system_policy
       )
     end
 
     def facade_loaded?
       component_facade.present?
+    end
+
+    def system_component?
+      variant == 'system'
     end
 
     private

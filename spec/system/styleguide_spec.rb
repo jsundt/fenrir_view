@@ -64,6 +64,8 @@ RSpec.describe 'Styleguide', type: :system do
     end
 
     it 'can only visit locked pages if you have permission' do
+      allow_any_instance_of(DesignSystemPolicy).to receive(:employee?).and_return(false)
+
       visit '/design_system/spec/locked_page'
 
       expect(page).to_not have_text('Secret text')
@@ -73,7 +75,10 @@ RSpec.describe 'Styleguide', type: :system do
       expect(page).to_not have_text('This content is only for employee\'s')
 
       click_on 'Card'
-      expect(page).to have_text('Health: 85%')
+      expect(page).to have_text('Healthy')
+      expect(page).to_not have_text('In use')
+
+      find('.spec-component-health-status', text: 'Healthy. In use').click
       expect(page).to_not have_text('Healthy instances: 11')
       expect(page).to_not have_text('Property hashes: 0')
       expect(page).to_not have_text('Deprecated instances: 2')
@@ -88,7 +93,10 @@ RSpec.describe 'Styleguide', type: :system do
       expect(page).to have_text('This content is only for employee\'s')
 
       click_on 'Card'
-      expect(page).to have_text('Health: 85%')
+      expect(page).to have_text('Healthy')
+      expect(page).to have_text('In use')
+
+      find('.spec-component-health-status', text: 'Healthy. In use').click
       expect(page).to have_text('Healthy instances: 11')
       expect(page).to have_text('Property hashes: 0')
       expect(page).to have_text('Deprecated instances: 2')
@@ -112,7 +120,7 @@ RSpec.describe 'Styleguide', type: :system do
 
       click_on 'Card'
       within('[data-spec-section="content-card"]') do
-        expect(page).to have_text('Health: 85%')
+        expect(page).to have_text('Healthy')
 
         page.within_frame('card_1_0') do
           expect(page).to have_text('Aspen, Snowmass')
@@ -129,7 +137,7 @@ RSpec.describe 'Styleguide', type: :system do
 
       click_on 'Collection'
       within('[data-spec-section="content-card"]') do
-        expect(page).to have_text('Low usage!')
+        expect(page).to have_text('Not in use')
 
         page.within_frame('with_layout_sections_0') do
           expect(page).to have_text('This is column 1')
@@ -195,10 +203,9 @@ RSpec.describe 'Styleguide', type: :system do
       click_on 'Profile'
 
       within('[data-spec-section="content-card"]') do
-        expect(page).to have_text('Low usage!')
-        expect(page).to have_text('Health: 100%')
+        expect(page).to have_text('Healthy. Low usage')
 
-        expect(page).to have_text('Component Properties:')
+        find('.spec-component-properties', text: 'Component properties').click
         expect(page).to have_text('name. Required. As String')
         expect(page).to have_text('badges: []')
         expect(page).to have_text('E.g. Charlie account badges. Is passed to icon helper.')
@@ -213,8 +220,7 @@ RSpec.describe 'Styleguide', type: :system do
       visit '/design_system/components/breadcrumbs'
 
       within('[data-spec-section="content-card"]') do
-        expect(page).to have_text('Low usage!')
-        expect(page).to have_text('Health: 0%')
+        expect(page).to have_text('Low. Not in use')
 
         expect(page).to have_text('Hint: To see your component make sure you\'ve created stubs:')
         expect(page).to have_text('components/breadcrumbs/breadcrumbs.yml')
@@ -226,7 +232,7 @@ RSpec.describe 'Styleguide', type: :system do
       visit '/design_system/components/something'
 
       expect(page).to have_text('something is not a component')
-      expect(page).to have_text('rails g fenrir_view:new_pattern something')
+      expect(page).to have_text('rails g fenrir_view:new_component something')
     end
   end
 
@@ -234,16 +240,24 @@ RSpec.describe 'Styleguide', type: :system do
     it 'visible in sidebar' do
       visit '/design_system'
 
-      expect(page).to have_text('Application frame')
-      expect(page).to have_text('Button')
-      expect(page).to have_text('Component example')
-      expect(page).to have_text('Navbar')
-      expect(page).to have_text('Sidebar')
+      within('[data-spec-section="sidebar-internal-system"]') do
+        expect(page).to have_text('Accordion')
+        expect(page).to have_text('Application frame')
+        expect(page).to have_text('Button')
+        expect(page).to have_text('Component example')
+        expect(page).to have_text('Icon')
+        expect(page).to have_text('Navbar')
+        expect(page).to have_text('Sidebar')
+      end
+
+      click_on 'Accordion'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Accordion')
+      end
 
       click_on 'Application frame'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Application frame')
-        expect(page).to have_text('This is component is only available in the styleguide.')
       end
 
       click_on 'Button'
@@ -265,19 +279,21 @@ RSpec.describe 'Styleguide', type: :system do
       click_on 'Component example'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Component example')
-        expect(page).to have_text('This is component is only available in the styleguide.')
+      end
+
+      click_on 'Icon'
+      within('[data-spec-section="content-card"]') do
+        expect(page).to have_text('Icon')
       end
 
       click_on 'Navbar'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Navbar')
-        expect(page).to have_text('This is component is only available in the styleguide.')
       end
 
       click_on 'Sidebar'
       within('[data-spec-section="content-card"]') do
         expect(page).to have_text('Sidebar')
-        expect(page).to have_text('This is component is only available in the styleguide.')
       end
     end
 

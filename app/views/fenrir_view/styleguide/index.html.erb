@@ -16,9 +16,11 @@
     <div class="container">
       <div class="row ">
         <div class="col-xs-12">
-          <h1 class="o-text--headline u-text--bold"><%= component.title %></h1>
-          <p class="o-text--product <%= component.header_style %>">Status: <%= component.meta_status %></p>
-          <p class="o-text--body"><%= component.meta_description %></p>
+          <div class="<%= component.header_style %>">
+            <h1 class="o-text--headline u-text--bold"><%= component.title %></h1>
+            <p class="o-text--product ">Status: <%= component.health.to_sentence %></p>
+            <p class="o-text--body"><%= component.meta_description %></p>
+          </div>
 
           <%= link_to 'View all variants', components_path(id: component.name) %>
 

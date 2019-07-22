@@ -3,25 +3,112 @@
 module FenrirView
   class Component
     class Health
-      attr_reader :variant, :component, :design_system_policy
+      attr_reader :variant, :component, :design_system_policy, :examples
 
-      def initialize(variant:, component:, design_system_policy:)
+      def initialize(variant:, component:, examples:, design_system_policy:)
         @variant = variant
         @component = component
+        @examples = examples
         @design_system_policy = design_system_policy
+      end
+
+      def to_accordion
+        {
+          title: [
+            status,
+            usage_status,
+          ].compact.join('. '),
+          style: [
+            theme,
+            'spec-component-health-status',
+          ].join(' '),
+          icon: icon,
+          openable: can_access_metrics?,
+        }
       end
 
       def to_sentence
         if metrics_available?
           [
-            ('Low usage!' if low_usage?),
+            usage_status,
             "Health: #{score}%",
             component_usage,
-          ].compact.join(' ')
-        else
-          'Metrics for this component is unavailable 😞'
+          ].compact.join('. ')
         end
       end
+
+      def deprecated_grep_statement
+        text = if !component_deprecated_count.zero?
+                 "Find deprecated instances by searching for:"
+               else
+                 "Found no deprecated instances by searching for:"
+               end
+
+        [
+          text,
+          examples.component_meta_info.fetch(:deprecated, 'No regex rules defined'),
+        ].join(' ')
+      end
+
+      def icon
+        if !metrics_available?
+          'unknown_status'
+        elsif deprecated?
+          'deprecated_status'
+        elsif low_score?
+          'low_status'
+        elsif healthy_score?
+          'healthy_status'
+        elsif shakey_score?
+          'shakey_status'
+        end
+      end
+
+      def status
+        if !metrics_available?
+          'Health unavailable'
+        elsif deprecated?
+          'Deprecated component'
+        elsif low_score?
+          'Low'
+        elsif healthy_score?
+          'Healthy'
+        elsif shakey_score?
+          'Shakey'
+        end
+      end
+
+      def theme
+        if !metrics_available?
+          'u-bg--gray-05'
+        elsif deprecated? || low_score?
+          'u-bg--danger-05'
+        elsif healthy_score?
+          'u-bg--success-05'
+        elsif shakey_score?
+          'u-bg--warning-05'
+        end
+      end
+
+      def usage_status
+        return unless can_access_metrics? && metrics_available?
+
+        if component_usage_count.zero?
+          'Not in use'
+        elsif component_usage_count < 10
+          'Low usage'
+        elsif component_usage_count > 100
+          'High usage'
+        else
+          'In use'
+        end
+      end
+
+      def can_access_metrics?
+        design_system_policy&.employee?
+      end
+
+      private
 
       def score
         return 0 if total_usage.zero?
@@ -29,20 +116,20 @@ module FenrirView
         ((component_usage_count.to_f / total_usage) * 100).round(0)
       end
 
-      def metrics_available?
-        component_metrics.present?
-      end
-
-      def low_usage?
-        component_usage_count < 10
-      end
-
-      def usage_healthy?
+      def healthy_score?
         score > 80
       end
 
-      def usage_shakey?
-        score > 40
+      def shakey_score?
+        score.between?(41, 80)
+      end
+
+      def low_score?
+        score <= 40
+      end
+
+      def deprecated?
+        false
       end
 
       def total_usage
@@ -61,12 +148,6 @@ module FenrirView
         metrics_available? ? component_metrics[:deprecated_instance_count].to_i : 0
       end
 
-      private
-
-      def can_access_metrics?
-        design_system_policy&.employee?
-      end
-
       def component_usage
         return nil unless can_access_metrics?
 
@@ -77,6 +158,10 @@ module FenrirView
         ].join(', ')
 
         "(#{usage})"
+      end
+
+      def metrics_available?
+        component_metrics.present?
       end
 
       def component_metrics

@@ -2,8 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12">
-        <h1 class="o-text--headline u-text--bold"><%= @component.title %></h1>
-        <p class="o-text--product u-margin--b-25"><%= @component.meta_status %></p>
+        <h1 class="o-text--headline u-text--bold"><%= 'Styleguide component: ' if @component.system_component? %><%= @component.title %></h1>
         <p class="o-text--product"><%= @component.meta_description %></p>
       </div>
     </div>
@@ -11,34 +10,44 @@
 </div>
 
 <div class="container-fluid u-padding--b-100">
-  <% if @component.component_stubs? %>
-    <% if @component.stubs_correct_format? %>
-      <% if @component.component_meta_info? %>
-        <div class="row u-padding--y-50">
-          <div class="col-xs-12">
-            <h2 class="o-text--lead">Component Properties:</h2>
-            <% @component.default_properties_and_validations.each do |property, options| %>
-              <div class="u-bg-zebra--silver-50">
-                <div onClick="showPropertyValidations(this)" class="properties-list__item">
-                  <h3 class="o-text--product">
-                    <span class="u-text--bold"><%= property %></span><span class="u-opacity--70"><%= options[:info] %></span>
-                  </h3>
-                </div>
+  <div class="row u-padding--y-50">
+    <div class="col-xs-12">
+      <%= system_component('accordion', @component.health.to_accordion) do %>
+        <% if @component.can_access_metrics? %>
+          <p class="o-text--product u-margin--b-25"><%= @component.health.to_sentence %></p>
 
-                <div class="properties-list__details is-hidden">
-                  <p><%= options[:note] %></p>
-                  <% if options[:validations].any? %>
-                    <pre><code class="language-json">validations: <%= JSON.pretty_generate(options[:validations]).gsub(/\"(\S+)?\":/, '\1:') %></code></pre>
-                  <% else %>
-                    <p>No validations set</p>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
+          <p class="o-text--product"><%= @component.health.deprecated_grep_statement %></p>
+        <% end %>
       <% end %>
 
+      <%= system_component('accordion', {
+        title: "Component properties",
+        style: 'u-bg--white-115 u-color--charcoal spec-component-properties',
+      }) do %>
+        <% @component.default_properties_and_validations.each do |property, options| %>
+          <div class="u-bg-zebra--silver-50">
+            <div onClick="showPropertyValidations(this)" class="properties-list__item">
+              <h3 class="o-text--product">
+                <span class="u-text--bold"><%= property %></span><span class="u-opacity--70"><%= options[:info] %></span>
+              </h3>
+            </div>
+
+            <div class="properties-list__details is-hidden">
+              <p><%= options[:note] %></p>
+              <% if options[:validations].any? %>
+                <pre><code class="language-json">validations: <%= JSON.pretty_generate(options[:validations]).gsub(/\"(\S+)?\":/, '\1:') %></code></pre>
+              <% else %>
+                <p>No validations set</p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @component.component_stubs? %>
+    <% if @component.stubs_correct_format? %>
       <% @component.component_stubs.each do |properties| %>
         <%= system_component('component_example', properties) %>
       <% end %>
