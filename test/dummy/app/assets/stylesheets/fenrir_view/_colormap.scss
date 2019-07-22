@@ -1,0 +1,332 @@
+// scss-lint:disable ColorVariable
+
+
+//----------------------------------------\\
+// Basic colors
+//----------------------------------------\\
+
+// Brand colors
+$color-primary:    hsl(200, 100, 48); // HSB 200 100 96 // #00a3f5
+$color-secondary:  hsl(210, 100, 41); // HSB 210 100 82 // #0069d1
+
+// Utility
+$color-success:    hsl(167, 72, 60);  // HSB 167 65 89  // #50e2c3
+$color-warning:    hsl(40, 96, 54);   // HSB 40 90 98   // #faaf19
+$color-danger:     hsl(13, 75, 53);   // HSB 13 80 88   // #e1542d
+
+// Grayscale
+$color-white:      hsl(0, 0, 100);    // HSB 0 0 100    // #fff
+$color-offwhite:   hsl(200, 33, 96);  // HSB 200 2 97   // #F2F6F7
+$color-silver:     hsl(200, 22, 90);  // HSB 200 5 92   // #e0e7eb
+$color-coolgray:   hsl(200, 22, 75);  // HSB 200 12 80  // #b3c3cb
+$color-gray:       hsl(200, 22, 50);  // HSB 200 20 55  // #71848e
+$color-charcoal:   hsl(200, 25, 24);  // HSB 200 40 30  // #2e424d
+$color-black:      hsl(0, 0, 0);      // HSB 0 0 0      // #000
+
+
+// Opinion
+$color-agree-strongly: adjust-hue(darken($color-success, 7.5%), -2deg); // Success 115%
+$color-agree: hsl(98, 68, 64);
+$color-neutral: hsl(55, 94, 54);
+$color-disagree: hsl(45, 93, 54);
+$color-disagree-strongly: adjust-hue(darken($color-warning, 4%), -6deg);
+
+// Rainbow
+$rainbow-red:    hsl(3, 90, 64);   // #F6564F
+$rainbow-orange: hsl(25, 100, 65); // #FF974D
+$rainbow-yellow: hsl(42, 100, 56); // #FFBC1E
+$rainbow-green:  hsl(166, 70, 52); // #2DDAB1
+$rainbow-blue:   hsl(194, 77, 60); // #49C2E7
+$rainbow-violet: hsl(244, 34, 53); // #655FB1
+$rainbow-indigo: hsl(301, 36, 53); // #B15BB0
+
+//----------------------------------------\\
+// Color map used by color function
+//----------------------------------------\\
+// example: color('name', strength);
+//          color('blue', 115);
+
+
+$color-map: (
+  'primary': (
+    A05: rgba($color-primary, 0.05),
+    A50: rgba($color-primary, 0.5),
+    A70: rgba($color-primary, 0.7),
+    A85: rgba($color-primary, 0.85),
+    05:  adjust-hue(lighten($color-primary, 49%), 4deg),
+    50:  lighten($color-primary, 25%),
+    70:  lighten($color-primary, 15%),
+    85:  lighten($color-primary, 7.5%),
+    100: $color-primary,
+    115: adjust-hue(darken($color-primary, 5%), 2deg),
+    130: adjust-hue(darken($color-primary, 10%), 4deg),
+    150: adjust-hue(darken($color-primary, 15%), 6deg),
+  ),
+  'secondary': (
+    A05: rgba($color-secondary, 0.05),
+    A50: rgba($color-secondary, 0.5),
+    A70: rgba($color-secondary, 0.7),
+    A85: rgba($color-secondary, 0.85),
+    05:  adjust-hue(lighten($color-secondary, 53%), 4deg),
+    50:  lighten($color-secondary, 25%),
+    70:  lighten($color-secondary, 15%),
+    85:  lighten($color-secondary, 7.5%),
+    100: $color-secondary,
+    115: adjust-hue(darken($color-secondary, 5%), 2deg),
+    130: adjust-hue(darken($color-secondary, 10%), 4deg),
+    150: adjust-hue(darken($color-secondary, 15%), 6deg),
+  ),
+  'success': (
+    A05: rgba($color-success, 0.05),
+    A50: rgba($color-success, 0.5),
+    A70: rgba($color-success, 0.7),
+    A85: rgba($color-success, 0.85),
+    05:  adjust-hue(lighten($color-success, 38%), 4deg),
+    50:  lighten($color-success, 25%),
+    70:  lighten($color-success, 15%),
+    85:  lighten($color-success, 7.5%),
+    100: $color-success,
+    115: adjust-hue(darken($color-success, 7.5%), -2deg),
+    130: adjust-hue(darken($color-success, 15%), -4deg),
+    150: adjust-hue(darken($color-success, 25%), -6deg),
+  ),
+  'warning': (
+    A05: rgba($color-warning, 0.05),
+    A50: rgba($color-warning, 0.5),
+    A70: rgba($color-warning, 0.7),
+    A85: rgba($color-warning, 0.85),
+    05:  adjust-hue(lighten($color-warning, 40%), 4deg),
+    50:  lighten($color-warning, 25%),
+    70:  lighten($color-warning, 15%),
+    85:  lighten($color-warning, 7.5%),
+    100: $color-warning,
+    115: adjust-hue(darken($color-warning, 2%), -3deg),
+    130: adjust-hue(darken($color-warning, 4%), -6deg),
+    150: adjust-hue(darken($color-warning, 6%), -9deg),
+  ),
+  'danger': (
+    A05: rgba($color-danger, 0.05),
+    A50: rgba($color-danger, 0.5),
+    A70: rgba($color-danger, 0.7),
+    A85: rgba($color-danger, 0.85),
+    05:  adjust-hue(lighten($color-danger, 45%), 4deg),
+    50:  lighten($color-danger, 25%),
+    70:  lighten($color-danger, 15%),
+    85:  lighten($color-danger, 7.5%),
+    100: $color-danger,
+    115: adjust-hue(darken($color-danger, 3%), -3deg),
+    130: adjust-hue(darken($color-danger, 6%), -6deg),
+    150: adjust-hue(darken($color-danger, 10%), -9deg),
+  ),
+  'white': (
+    A5:  rgba($color-white, 0.05),
+    A10: rgba($color-white, 0.1),
+    A25: rgba($color-white, 0.25),
+    A50: rgba($color-white, 0.5),
+    A70: rgba($color-white, 0.7),
+    A85: rgba($color-white, 0.85),
+    5:   $color-white,
+    10:  $color-white,
+    25:  $color-white,
+    50:  $color-white,
+    70:  $color-white,
+    85:  $color-white,
+    100: $color-white,
+    115: $color-offwhite,
+    130: darken($color-white, 15%),
+    150: darken($color-white, 25%)
+  ),
+  'silver': (
+    A5:  rgba($color-silver, 0.05),
+    A10: rgba($color-silver, 0.1),
+    A25: rgba($color-silver, 0.25),
+    A50: rgba($color-silver, 0.5),
+    A70: rgba($color-silver, 0.7),
+    A85: rgba($color-silver, 0.85),
+    5:   lighten($color-silver, 16%),
+    10:  lighten($color-silver, 9%),
+    25:  lighten($color-silver, 7.5%),
+    50:  lighten($color-silver, 5%),
+    70:  lighten($color-silver, 3%),
+    85:  lighten($color-silver, 2%),
+    100: $color-silver,
+    115: darken($color-silver, 7.5%),
+    130: darken($color-silver, 15%),
+    150: darken($color-silver, 25%)
+  ),
+  'coolgray': (
+    A5:  rgba($color-coolgray, 0.05),
+    A10: rgba($color-coolgray, 0.1),
+    A25: rgba($color-coolgray, 0.25),
+    A50: rgba($color-coolgray, 0.5),
+    A70: rgba($color-coolgray, 0.7),
+    A85: rgba($color-coolgray, 0.85),
+    5:   lighten($color-coolgray, 24%),
+    10:  lighten($color-coolgray, 22.5%),
+    25:  lighten($color-coolgray, 19%),
+    50:  lighten($color-coolgray, 12.5%),
+    70:  lighten($color-coolgray, 8%),
+    85:  lighten($color-coolgray, 4%),
+    100: $color-coolgray,
+    115: darken($color-coolgray, 7.5%),
+    130: darken($color-coolgray, 15%),
+    150: darken($color-coolgray, 25%)
+  ),
+  'gray': (
+    A5:  rgba($color-gray, 0.05),
+    A10: rgba($color-gray, 0.1),
+    A25: rgba($color-gray, 0.25),
+    A50: rgba($color-gray, 0.5),
+    A70: rgba($color-gray, 0.7),
+    A85: rgba($color-gray, 0.85),
+    5:   lighten($color-gray, 47.5%),
+    10:  lighten($color-gray, 45%),
+    25:  lighten($color-gray, 38%),
+    50:  lighten($color-gray, 25%),
+    70:  lighten($color-gray, 15%),
+    85:  lighten($color-gray, 7.5%),
+    100: $color-gray,
+    115: darken($color-gray, 7.5%),
+    130: darken($color-gray, 15%),
+    150: darken($color-gray, 25%)
+  ),
+  'charcoal': (
+    A5:  saturate(rgba($color-charcoal, 0.05), 50%),
+    A10: saturate(rgba($color-charcoal, 0.1), 50%),
+    A25: saturate(rgba($color-charcoal, 0.25), 48%),
+    A50: saturate(rgba($color-charcoal, 0.5), 36%),
+    A70: saturate(rgba($color-charcoal, 0.7), 20%),
+    A85: saturate(rgba($color-charcoal, 0.85), 6%),
+    5:   lighten($color-charcoal, 72%),
+    10:  lighten($color-charcoal, 68%),
+    25:  desaturate(lighten($color-charcoal, 57%), 3%),
+    50:  desaturate(lighten($color-charcoal, 38%), 7%),
+    70:  desaturate(lighten($color-charcoal, 22%), 7%),
+    85:  desaturate(lighten($color-charcoal, 11%), 5%),
+    100: $color-charcoal,
+    115: darken($color-charcoal, 7.5%),
+    130: darken($color-charcoal, 15%),
+    150: darken($color-charcoal, 20%),
+  ),
+  'black': (
+    A5:  rgba($color-black, 0.05),
+    A10: rgba($color-black, 0.1),
+    A25: rgba($color-black, 0.25),
+    A50: rgba($color-black, 0.5),
+    A70: rgba($color-black, 0.7),
+    A85: rgba($color-black, 0.85),
+    5:   lighten($color-black, 95%),
+    10:  lighten($color-black, 90%),
+    25:  lighten($color-black, 75%),
+    50:  lighten($color-black, 50%),
+    70:  lighten($color-black, 30%),
+    85:  lighten($color-black, 15%),
+    100: $color-black,
+    115: $color-black,
+    130: $color-black,
+    150: $color-black,
+  ),
+  'agree-strongly': (
+    A05: rgba($color-agree-strongly, 0.05),
+    A50: rgba($color-agree-strongly, 0.5),
+    05:  adjust-hue(lighten($color-agree-strongly, 38%), 4deg),
+    50:  lighten($color-agree-strongly, 20%),
+    100: $color-agree-strongly,
+    130: adjust-hue(darken($color-agree-strongly, 6%), -6deg),
+  ),
+  'agree': (
+    A05: rgba($color-agree, 0.05),
+    A50: rgba($color-agree, 0.5),
+    05:  adjust-hue(lighten($color-agree, 30%), 4deg),
+    50:  lighten($color-agree, 15%),
+    100: $color-agree,
+    130: adjust-hue(darken($color-agree, 10%), -6deg),
+  ),
+  'neutral': (
+    A05: rgba($color-neutral, 0.05),
+    A50: rgba($color-neutral, 0.5),
+    05:  adjust-hue(lighten($color-neutral, 38%), 4deg),
+    50:  lighten($color-neutral, 20%),
+    100: $color-neutral,
+    130: adjust-hue(darken($color-neutral, 6%), -6deg),
+  ),
+  'disagree': (
+    A05: rgba($color-disagree, 0.05),
+    A50: rgba($color-disagree, 0.5),
+    05:  adjust-hue(lighten($color-disagree, 38%), 4deg),
+    50:  lighten($color-disagree, 20%),
+    100: $color-disagree,
+    130: adjust-hue(darken($color-disagree, 5%), -6deg),
+  ),
+  'disagree-strongly': (
+    A05: rgba($color-disagree-strongly, 0.05),
+    A50: rgba($color-disagree-strongly, 0.5),
+    05:  adjust-hue(lighten($color-disagree-strongly, 38%), 4deg),
+    50:  lighten($color-disagree-strongly, 20%),
+    100: $color-disagree-strongly,
+    130: adjust-hue(darken($color-disagree-strongly, 4%), -6deg),
+  ),
+  'rainbow-red': (
+    A05: rgba($rainbow-red, 0.05),
+    A50: rgba($rainbow-red, 0.5),
+    05:  lighten($rainbow-red, 30%),
+    50:  lighten($rainbow-red, 18%),
+    100: $rainbow-red,
+    115: darken($rainbow-red, 7.5%),
+    130: darken($rainbow-red, 15%),
+  ),
+  'rainbow-orange': (
+    A05: rgba($rainbow-orange, 0.05),
+    A50: rgba($rainbow-orange, 0.5),
+    05:  lighten($rainbow-orange, 30%),
+    50:  lighten($rainbow-orange, 18%),
+    100: $rainbow-orange,
+    115: darken($rainbow-orange, 7.5%),
+    130: darken($rainbow-orange, 15%),
+  ),
+  'rainbow-yellow': (
+    A05: rgba($rainbow-yellow, 0.05),
+    A50: rgba($rainbow-yellow, 0.5),
+    05:  lighten($rainbow-yellow, 40%),
+    50:  lighten($rainbow-yellow, 18%),
+    100: $rainbow-yellow,
+    115: darken($rainbow-yellow, 7.5%),
+    130: darken($rainbow-yellow, 15%),
+  ),
+  'rainbow-green': (
+    A05: rgba($rainbow-green, 0.05),
+    A50: rgba($rainbow-green, 0.5),
+    05:  lighten($rainbow-green, 35%),
+    50:  lighten($rainbow-green, 18%),
+    100: $rainbow-green,
+    115: darken($rainbow-green, 7.5%),
+    130: darken($rainbow-green, 15%),
+  ),
+  'rainbow-blue': (
+    A05: rgba($rainbow-blue, 0.05),
+    A50: rgba($rainbow-blue, 0.5),
+    05:  lighten($rainbow-blue, 30%),
+    50:  lighten($rainbow-blue, 18%),
+    100: $rainbow-blue,
+    115: darken($rainbow-blue, 7.5%),
+    130: darken($rainbow-blue, 15%),
+  ),
+  'rainbow-violet': (
+    A05: rgba($rainbow-violet, 0.05),
+    A50: rgba($rainbow-violet, 0.5),
+    05:  lighten($rainbow-violet, 40%),
+    50:  lighten($rainbow-violet, 18%),
+    100: $rainbow-violet,
+    115: darken($rainbow-violet, 7.5%),
+    130: darken($rainbow-violet, 15%),
+  ),
+  'rainbow-indigo': (
+    A05: rgba($rainbow-indigo, 0.05),
+    A50: rgba($rainbow-indigo, 0.5),
+    05:  lighten($rainbow-indigo, 35%),
+    50:  lighten($rainbow-indigo, 18%),
+    100: $rainbow-indigo,
+    115: darken($rainbow-indigo, 7.5%),
+    130: darken($rainbow-indigo, 15%),
+  ),
+);

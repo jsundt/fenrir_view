@@ -1,0 +1,69 @@
+// ----------------------------------------\\
+// components: accordion
+// ----------------------------------------\\
+
+.fenrir-view-accordion {
+  border-radius: $br;
+  border: 1px solid color('charcoal');
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  &__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: ($padding / 4);
+    cursor: pointer;
+
+    .fenrir-view-accordion[data-openable=false] & {
+      cursor: default;
+    }
+
+    .is-compact & { padding: ($padding / 10); }
+  }
+
+  &__bar-content-wrap {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    margin: -($padding / 4);
+
+    .is-compact & { margin: -($padding / 10); }
+  }
+
+  &__bar-content {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    margin: ($padding / 4);
+
+    .is-compact & { margin: ($padding / 10); }
+  }
+
+  &__actions-arrow {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    fill: currentColor;
+    transform-origin: center;
+    transition: transform 0.2s ease;
+    margin-left: 8px;
+
+    .fenrir-view-accordion[data-openable=false] & {
+      display: hidden;
+      opacity: 0;
+    }
+
+    .is-open > .fenrir-view-accordion__bar & {
+      transform: rotateZ(90deg);
+    }
+  }
+
+  &__content {
+    display: none;
+    padding: ($padding / 4);
+    border-top: solid 1px rgba(0, 0, 0, 0.1);
+
+    .is-compact & { padding: ($padding / 10); }
+  }
+}

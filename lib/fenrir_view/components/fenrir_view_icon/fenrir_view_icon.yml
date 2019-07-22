@@ -1,0 +1,43 @@
+meta:
+  status: "work in progress" # 'deprecated', 'work in progress', 'in review', 'in use'
+  description: ""
+  deprecated: (svg_icon)
+  devices:
+  - "320x80"
+
+stubs:
+- name: "Icons"
+  examples:
+  - name: "Example of icon"
+    properties:
+      icon: "success"
+  - name: "Example of icon 2"
+    properties:
+      icon: "edit"
+  - name: "Example of icon 3"
+    properties:
+      icon: "lock"
+
+- name: "Health status icons"
+  examples:
+  - name: "1"
+    properties:
+      icon: "healthy_status"
+  - name: "2"
+    properties:
+      icon: "shakey_status"
+  - name: "3"
+    properties:
+      icon: "low_status"
+  - name: "4"
+    properties:
+      icon: "unknown_status"
+  - name: "5"
+    properties:
+      icon: "deprecated_status"
+
+- name: "Test cases"
+  examples:
+  - name: "Fallback icon"
+    properties:
+      icon: "not_an_actual_icon_name"

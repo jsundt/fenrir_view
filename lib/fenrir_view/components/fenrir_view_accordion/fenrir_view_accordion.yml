@@ -1,0 +1,53 @@
+meta:
+  status: "work in progress" # 'deprecated', 'work in progress', 'in review', 'in use'
+  description: "An expandable section. Content can come from the yield, a remote path or both."
+  devices:
+  - "800x200"
+
+stubs:
+- name: "Component health"
+  devices:
+  - "800x500"
+  examples:
+  - name: "Healthy"
+    properties:
+      title: "Healthy"
+      style: "u-bg--success-05"
+      icon: 'healthy_status'
+    yields:
+    - content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magnam quae officia sunt soluta, hic facilis pariatur! Quo possimus et aliquam magnam? Aliquam ullam hic eligendi nemo deleniti illum ipsa!"
+  - name: "Shakey"
+    properties:
+      title: "Shakey"
+      style: "u-bg--warning-05"
+      icon: 'shakey_status'
+    yields:
+    - content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magnam quae officia sunt soluta, hic facilis pariatur! Quo possimus et aliquam magnam? Aliquam ullam hic eligendi nemo deleniti illum ipsa!"
+  - name: "Low"
+    properties:
+      title: "Low"
+      style: "u-bg--danger-05"
+      icon: 'low_status'
+    yields:
+    - content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magnam quae officia sunt soluta, hic facilis pariatur! Quo possimus et aliquam magnam? Aliquam ullam hic eligendi nemo deleniti illum ipsa!"
+  - name: "Unknown"
+    properties:
+      title: "Unknown"
+      style: "u-bg--gray-05"
+      icon: 'unknown_status'
+    yields:
+    - content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magnam quae officia sunt soluta, hic facilis pariatur! Quo possimus et aliquam magnam? Aliquam ullam hic eligendi nemo deleniti illum ipsa!"
+  - name: "Deprecated"
+    properties:
+      title: "Deprecated"
+      style: "u-bg--danger-05"
+      icon: 'deprecated_status'
+    yields:
+    - content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus magnam quae officia sunt soluta, hic facilis pariatur! Quo possimus et aliquam magnam? Aliquam ullam hic eligendi nemo deleniti illum ipsa!"
+
+- name: "Test cases"
+  examples:
+  - name: "With no block content"
+    properties:
+      title: "Empty component"
+      description: "A short optional description"

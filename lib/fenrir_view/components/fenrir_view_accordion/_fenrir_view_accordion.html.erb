@@ -1,0 +1,25 @@
+<%= content_tag(:div, @component.wrapper_attributes) do %>
+  <div class="fenrir-view-accordion__bar js-fenrir-view-accordion-bar">
+    <div class="fenrir-view-accordion__bar-content-wrap">
+      <div class="fenrir-view-accordion__bar-content">
+        <%= system_component('icon', @component.icon) %>
+
+        <div>
+          <p class="o-text--lead u-text--bold u-line-height--120"><%= @component.title %></p>
+
+          <% if @component.description? %>
+            <p class="o-text--product u-opacity--70">
+              <%= @component.description %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= system_component('icon', @component.arrow_icon) %>
+  </div>
+
+  <div class="fenrir-view-accordion__content js-fenrir-view-accordion-content">
+    <%= @component.properties[:yield] %>
+  </div>
+<% end %>

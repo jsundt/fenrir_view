@@ -3,6 +3,8 @@
 // as it's testing fenrir defaults...
 //---------------------------------------//
 
+@import 'colormap';
+
 $sidebar-bg: #fff;
 
 $br: 8px;
@@ -13,4 +15,28 @@ $enable-wrapper-classes: true;
 
 $border-colors: (
   'primary': color('primary'),
+);
+
+$background-colors: (
+  'transparent':       (transparent,             inherit,            transparent),
+  'primary':           (color('primary'),        color('white'),     color('primary', 115)),
+  'primary-05':        (color('primary', 05),    color('primary', 150),  color('primary', 50)),
+  'primary-50':        (color('primary', 50),    color('charcoal'),  color('primary', 85)),
+  'secondary':         (color('secondary'),      color('white'),     color('secondary', 115)),
+  'success-05':        (color('success', 05),    color('success', 150),  color('success', 50)),
+  'success-50':        (color('success', 50),    color('charcoal'),  color('success', 85)),
+  'success':           (color('success'),        color('charcoal'),  color('success', 130)),
+  'warning-05':        (color('warning', 05),    color('warning', 150),  color('warning', 50)),
+  'warning-50':        (color('warning', 50),    color('charcoal'),  color('warning', 85)),
+  'warning':           (color('warning'),        color('charcoal'),  color('warning', 115)),
+  'danger-05 ':        (color('danger', 05),     color('danger', 150),  color('danger', 50)),
+  'danger-50':         (color('danger', 50),     color('charcoal'),  color('danger', 85)),
+  'danger':            (color('danger'),         color('white'),     color('danger', 130)),
+  'white':             (color('white'),          color('charcoal'),  color('white', 115)),
+  'white-115':         (color('white', 115),     color('gray'),      color('silver')),
+  'silver':            (color('silver'),         color('gray'),      color('silver', 115)),
+  'coolgray':          (color('coolgray'),       color('charcoal'),  color('coolgray', 115)),
+  'gray-05':           (color('gray', 25),       color('gray'),      color('gray', 70)),
+  'gray':              (color('gray'),           color('charcoal'),  color('gray', 115)),
+  'charcoal':          (color('charcoal'),       color('white'),     color('charcoal', 115)),
 );
