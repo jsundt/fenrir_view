@@ -2,6 +2,6 @@
 
 class DesignSystemPolicy
   def employee?
-    false
+    true
   end
 end
