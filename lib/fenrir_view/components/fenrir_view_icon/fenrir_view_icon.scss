@@ -1,0 +1,14 @@
+// ----------------------------------------\\
+// icon
+// ----------------------------------------\\
+
+.fenrir-view-icon {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+
+  &.u-size--100 {
+    width: 60px;
+    height: 60px;
+  }
+}
