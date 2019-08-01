@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe FenrirView::ComponentHelper, type: :helper do
   let(:initilized_configuration) { FenrirView.configuration }
-  let(:styleguide_facade) { FenrirView::StyleguideFacade.new }
+  let(:styleguide_facade) { FenrirView::StyleguideFacade.new(design_system_policy: DesignSystemPolicy.new) }
 
   describe '#ui_component' do
     it 'renders components from your app' do

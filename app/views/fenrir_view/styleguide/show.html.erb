@@ -1,5 +1,15 @@
-<div class="<%= @component.header_style %> u-padding--y-50">
+<div class="<%= @component.header_style %> u-padding--b-50">
   <div class="container-fluid">
+    <div class="row u-padding--y-25">
+      <div class="col-xs-12">
+        <p class="o-text--product">
+          <%= link_to 'Design system', root_path, class: 'u-color--inherit' %>
+          /
+          <%= link_to 'components', component_index_path, class: 'u-color--inherit' %>
+          /
+        </p>
+      </div>
+    </div>
     <div class="row">
       <div class="col-xs-12">
         <h1 class="o-text--headline u-text--bold"><%= 'Styleguide component: ' if @component.system_component? %><%= @component.title %></h1>
@@ -10,7 +20,7 @@
 </div>
 
 <div class="container-fluid u-padding--b-100">
-  <div class="row u-padding--y-50">
+  <div class="row">
     <div class="col-xs-12">
       <%= system_component('accordion', @component.health.to_accordion) do %>
         <% if @component.can_access_metrics? %>

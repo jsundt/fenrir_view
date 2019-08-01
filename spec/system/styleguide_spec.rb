@@ -78,7 +78,7 @@ RSpec.describe 'Styleguide', type: :system do
       expect(page).to have_text('Healthy')
       expect(page).to_not have_text('In use')
 
-      find('.spec-component-health-status', text: 'Healthy. In use').click
+      find('.spec-component-health-status').click
       expect(page).to_not have_text('Healthy instances: 11')
       expect(page).to_not have_text('Property hashes: 0')
       expect(page).to_not have_text('Deprecated instances: 2')
@@ -96,7 +96,7 @@ RSpec.describe 'Styleguide', type: :system do
       expect(page).to have_text('Healthy')
       expect(page).to have_text('In use')
 
-      find('.spec-component-health-status', text: 'Healthy. In use').click
+      find('.spec-component-health-status').click
       expect(page).to have_text('Healthy instances: 11')
       expect(page).to have_text('Property hashes: 0')
       expect(page).to have_text('Deprecated instances: 2')

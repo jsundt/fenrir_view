@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe FenrirView::StyleguideFacade do
-  let(:styleguide_facade) { FenrirView::StyleguideFacade.new }
+  let(:styleguide_facade) { FenrirView::StyleguideFacade.new(design_system_policy: DesignSystemPolicy.new) }
   let(:first_doc) { styleguide_facade.docs.first }
   let(:components) { styleguide_facade.components }
 
