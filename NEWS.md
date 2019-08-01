@@ -3,6 +3,10 @@
 Changes worth mentioning.
 
 ---
+## 0.28.0 - 2019-08-01
+- [Improvement] Component properties and health now render in an accordion to avoid pushing the examples down on the page
+- [Improvement] Added system components for icons and accordions
+
 ## 0.27.0 - 2019-07-08
 - [Breaking Change] Component presenter no longer injects methods into the view, these should be accessed from @component instead.
 - [Improvement] Component health stats are visible based on policy object rather than environment
