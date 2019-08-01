@@ -2,6 +2,12 @@
 
 module FenrirView
   class StyleguideFacade
+    attr_reader :design_system_policy
+
+    def initialize(design_system_policy:)
+      @design_system_policy = design_system_policy
+    end
+
     def docs
       FenrirView::Documentation.new.sections
     end
@@ -28,7 +34,7 @@ module FenrirView
     end
 
     def top_line_metrics
-      return [] if !metrics.present? || Rails.env.production?
+      return [] if !metrics.present? || !design_system_policy&.employee?
 
       [
         "System saturation: #{metrics.dig(:totals, :saturation)}%",

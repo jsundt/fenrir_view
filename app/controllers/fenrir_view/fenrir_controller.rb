@@ -9,8 +9,8 @@ module FenrirView
     private
 
     def load_page
-      @page = FenrirView::StyleguideFacade.new
       @design_system_policy = design_system_policy
+      @page = FenrirView::StyleguideFacade.new(design_system_policy: @design_system_policy)
     end
   end
 end
