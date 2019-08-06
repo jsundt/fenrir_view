@@ -1,0 +1,29 @@
+<table class="<%= @component.item_classes %>">
+  <thead class="properties-table__header">
+    <tr class="properties-table__row">
+      <th class="properties-table__header-cell">Parameter</th>
+      <th class="properties-table__header-cell">Default</th>
+      <th class="properties-table__header-cell properties-table__cell--validations">Validations</th>
+      <th class="properties-table__header-cell properties-table__cell--description">Description</th>
+    </tr>
+  </thead>
+  <tbody class="properties-table__body">
+    <% @component.property_list.each do |parameter, options| %>
+      <tr class="properties-table__row">
+        <td class="properties-table__cell u-text--bold"><%= parameter %></td>
+        <td class="properties-table__cell"><%= @component.default_value(options) %></td>
+        <td class="properties-table__cell properties-table__cell--validations">
+          <% if @component.any_validations?(options) %>
+            <ul class="properties-table__rule-list properties-table__rule-list--root">
+              <%= render "fenrir_view_properties/partials/validation_rule",
+                rule_list: options[:validations] %>
+            </ul>
+          <% end %>
+        </td>
+        <td class="properties-table__cell properties-table__cell--description">
+          <%= options[:note] %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

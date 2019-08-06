@@ -68,15 +68,11 @@ module FenrirView
 
       @component_properties.map do |name, data|
         prop_map[name] = {
-          info: [
-            (data[:default] ? ": #{default_value_with_visible_type(data[:default])}" : ''),
-            ('⚠️ Deprecated' if data[:deprecated]),
-            ('Required' if data[:required]),
-            ("As #{data[:one_of_type].join(' or ')}" if data[:one_of_type]),
-          ].compact.join('. '),
+          default: data[:default],
           note: data[:note],
           validations: {
-            # one_of_type: data[:one_of_type]&.join(', '),
+            required: data[:required] || false,
+            one_of_type: data[:one_of_type],
             one_of: data[:one_of],
             array_of: data[:array_of],
             hash_of: data[:hash_of],

@@ -1,0 +1,52 @@
+// ----------------------------------------\\
+// components: properties
+// ----------------------------------------\\
+
+.properties-table {
+  width: 100%;
+}
+
+  .properties-table__header {
+    border-bottom: 2px solid;
+  }
+
+  .properties-table__header-cell {
+    padding: .25em .25em .5em .5em;
+    font-size: 1.33em;
+    font-weight: bold;
+  }
+
+  .properties-table__cell {
+    @include o-text--product;
+
+    padding: .5em 1em .5em .5em;
+    vertical-align: top;
+  }
+
+  .properties-table__cell--validations {
+    width: 25%;
+  }
+
+  .properties-table__rule-list {
+    padding-left: 1em;
+  }
+
+  .properties-table__rule-list--root {
+    margin: 0;
+  }
+
+  .properties-table__cell--description {
+    width: 40%;
+  }
+
+  .properties-table__body .properties-table__row {
+    &:first-child .properties-table__cell {
+      // Cells on the first row need extra top padding to visually balance the
+      // gap around the header's cells.
+      padding-top: 1em;
+    }
+
+    &:nth-of-type(even) {
+      background-color: #fff;
+    }
+  }
