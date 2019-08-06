@@ -1,0 +1,37 @@
+meta:
+  status: "work in progress" # 'deprecated', 'work in progress', 'in review', 'in use'
+  description: "Table for displaying component properties."
+  devices:
+  - "800x200"
+
+stubs:
+- name: "Component Properties"
+  devices:
+  - "1100x500"
+  examples:
+  - name: "Basic Property List"
+    properties:
+      property_list:
+        Ruby:
+          required: true
+          one_of_type:
+            - 'Bool'
+          default: true
+        JavaScript:
+          validations:
+            one_of_type:
+            - "string"
+            one_of:
+              - "default"
+              - "danger"
+              - "warning"
+              - "success"
+              - "primary"
+          note: "I can haz bleghbleghvomit my furball really tie the room together so ask to be pet then attack owners hand so if it fits, i sits or meowing non stop for food."
+        PHP:
+          required: false
+          one_of_type:
+            - 'Hash'
+            - 'Array'
+          note: "str_* or str*? Why not Zoidberg?"
+          default: ['a', 'big', 'red', 'dog']

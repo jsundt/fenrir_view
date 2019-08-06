@@ -1,0 +1,18 @@
+<% rule_list.each do |rule_name, rules| %>
+  <% if rules.kind_of?(Array) %>
+    <li><%= @component.rule_name(rule_name.to_s) %>: <%= rules.to_a.join(', ') %></li>
+  <% elsif rules.kind_of?(Hash) %>
+    <li>
+      <%= @component.rule_name(rule_name.to_s) %>
+      <ul class="properties-table__rule-list">
+        <%= render "fenrir_view_properties/partials/validation_rule", rule_list: rules %>
+      </ul>
+    </li>
+  <% elsif !!rules == rules %>
+    <% if rules %>
+      <li><%= @component.rule_name(rule_name.to_s) %></li>
+    <% end %>
+  <% else %>
+    <li><%= @component.rule_name(rule_name.to_s) %></li>
+  <% end %>
+<% end %>

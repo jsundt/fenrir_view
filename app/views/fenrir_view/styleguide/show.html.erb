@@ -34,24 +34,7 @@
         title: "Component properties",
         style: 'u-bg--white-115 u-color--charcoal spec-component-properties',
       }) do %>
-        <% @component.default_properties_and_validations.each do |property, options| %>
-          <div class="u-bg-zebra--silver-50">
-            <div onClick="showPropertyValidations(this)" class="properties-list__item">
-              <h3 class="o-text--product">
-                <span class="u-text--bold"><%= property %></span><span class="u-opacity--70"><%= options[:info] %></span>
-              </h3>
-            </div>
-
-            <div class="properties-list__details is-hidden">
-              <p><%= options[:note] %></p>
-              <% if options[:validations].any? %>
-                <pre><code class="language-json">validations: <%= JSON.pretty_generate(options[:validations]).gsub(/\"(\S+)?\":/, '\1:') %></code></pre>
-              <% else %>
-                <p>No validations set</p>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+        <%= system_component('properties', { property_list: @component.default_properties_and_validations }) %>
       <% end %>
     </div>
   </div>
