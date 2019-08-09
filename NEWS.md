@@ -3,6 +3,10 @@
 Changes worth mentioning.
 
 ---
+## 0.29.0 - 2019-08-09
+- [Improvement] Improve styling of component properties view.
+- [Improvement] Change the component properties to be a system component.
+
 ## 0.28.0 - 2019-08-01
 - [Improvement] Component properties and health now render in an accordion to avoid pushing the examples down on the page
 - [Improvement] Added system components for icons and accordions
