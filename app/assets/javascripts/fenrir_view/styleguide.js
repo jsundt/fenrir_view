@@ -1,6 +1,8 @@
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
 //= require fenrir_view/prism
+
+//= require jquery-migrate-3.1.0
 
 //= require fenrir_view/extras
 
