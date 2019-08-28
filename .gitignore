@@ -12,3 +12,5 @@ test/tmp
 .ruby-version
 
 coverage/*
+
+application.yml
