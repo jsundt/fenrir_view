@@ -3,6 +3,10 @@
 Changes worth mentioning.
 
 ---
+## 0.30.0 - 2019-08-29
+- [Improvement] Updated javascript component template
+- [Improvement] Standardised the javascript for our system components
+
 ## 0.29.0 - 2019-08-09
 - [Improvement] Improve styling of component properties view.
 - [Improvement] Change the component properties to be a system component.
