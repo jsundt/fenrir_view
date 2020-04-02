@@ -206,8 +206,8 @@ RSpec.describe 'Styleguide', type: :system do
         expect(page).to have_text('Healthy. Low usage')
 
         find('.spec-component-properties', text: 'Component properties').click
-        expect(page).to have_text('name. Required. As String')
-        expect(page).to have_text('badges: []')
+        expect(page).to have_text('name Required One Of Type: String', normalize_ws: true)
+        expect(page).to have_text('badges []')
         expect(page).to have_text('E.g. Charlie account badges. Is passed to icon helper.')
 
         find('button[data-spec="regular_profile"]').click

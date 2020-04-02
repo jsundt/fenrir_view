@@ -50,39 +50,39 @@ RSpec.describe FenrirView::Presenter do
     it '#component_property_rule_descriptions' do
       expect(dummy_card_facade.component_property_rule_descriptions).to eq({
         yield: {
-          info: '',
+          default: nil,
           note: nil,
-          validations: {},
+          validations: { required: false },
         },
         title: {
-          info: '. Required',
+          default: nil,
           note: nil,
-          validations: {},
+          validations: { required: true },
         },
         description: {
-          info: '',
+          default: nil,
           note: nil,
-          validations: {},
+          validations: { required: false },
         },
         link: {
-          info: '',
+          default: nil,
           note: nil,
-          validations: {},
+          validations: { required: false },
         },
         image_url: {
-          info: '',
+          default: nil,
           note: nil,
-          validations: {},
+          validations: { required: false },
         },
         location: {
-          info: '',
+          default: nil,
           note: nil,
-          validations: {},
+          validations: { required: false },
         },
         data: {
-          info: ': []',
+          default: [],
           note: nil,
-          validations: {},
+          validations: { required: false },
         },
       })
     end
