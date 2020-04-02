@@ -3,6 +3,10 @@
 Changes worth mentioning.
 
 ---
+## 0.30.1 - 2019-08-29
+- [Improvement] Updated bundle
+- [Fix] Fixed tests that was forgotten with a previous change
+
 ## 0.30.0 - 2019-08-29
 - [Improvement] Updated javascript component template
 - [Improvement] Standardised the javascript for our system components

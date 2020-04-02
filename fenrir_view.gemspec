@@ -19,10 +19,11 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '>= 3.2.0'
   s.add_development_dependency 'capybara'
-  s.add_development_dependency 'chromedriver-helper'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'puma'
-  s.add_development_dependency 'rspec-rails', '~> 3.7.2'
+  s.add_development_dependency 'json'
+  s.add_development_dependency 'rspec-rails', '~> 4'
+  s.add_development_dependency 'webdrivers', '~> 4.0'
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov'
 end
