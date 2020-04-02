@@ -10,7 +10,7 @@ rails = case rails_version
         when "master"
           { github: "rails/rails" }
         when "default"
-          ">= 3.2.0"
+          "~> 6.0"
         else
           "~> #{rails_version}"
         end
@@ -20,7 +20,7 @@ gem "rails", rails
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 6.0'
 
-gem 'sass-rails', '~> 5.0', '>= 5.0.6'
+gem 'sass-rails', '~> 6.0'
 gem 'fenrir', git: 'https://github.com/jsundt/fenrir', branch: "master"
 
 # Declare any dependencies that are still in development here instead of in
