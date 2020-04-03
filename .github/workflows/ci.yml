@@ -4,16 +4,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          PGHOST: localhost
-          PGUSER: postgres
-          RAILS_ENV: test
-        ports: ["5432:5432"]
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
       - uses: actions/checkout@v2
 
@@ -21,27 +11,12 @@ jobs:
         with:
           ruby-version: 2.6
 
-      - name: Install dependent libraries
-        run: sudo apt-get install libpq-dev
-
       - name: Bundle install
         run: |
           gem install bundler
           bundle install
 
-      - name: Setup Database
-        env:
-          PGHOST: localhost
-          PGUSER: postgres
-          RAILS_ENV: test
-        run: |
-          bundle exec rails db:setup
-
       - name: Run RSpec
-        env:
-          PGHOST: localhost
-          PGUSER: postgres
-          RAILS_ENV: test
         run: bundle exec rspec
 
       - name: Upload coverage results
