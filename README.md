@@ -1,3 +1,5 @@
+![CI](https://github.com/jsundt/fenrir_view/workflows/CI/badge.svg)
+
 With Fenrir View you create reusable components for your Rails frontend, while generating a living style guide.
 
 **FAQ**
