@@ -6,15 +6,9 @@ jobs:
 
     services:
       postgres:
-        image: postgres:12.2
-        env:
-          POSTGRES_PASSWORD: postgres
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        image: postgres:latest
+        ports:
+        - 5432:5432
 
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +23,7 @@ jobs:
       - name: Bundle install
         run: |
           gem install bundler
-          bundle install --jobs 4 --retry 3
+          bundle install
 
       - name: Setup Database
         run: |
@@ -38,3 +32,10 @@ jobs:
 
       - name: Run RSpec
         run: bundle exec rspec
+
+      - name: Upload coverage results
+        uses: actions/upload-artifact@master
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage
