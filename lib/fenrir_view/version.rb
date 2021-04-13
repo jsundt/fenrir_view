@@ -1,3 +1,3 @@
 module FenrirView
-  VERSION = '0.30.0'.freeze
+  VERSION = '1.0.0'.freeze
 end

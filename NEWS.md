@@ -3,6 +3,10 @@
 Changes worth mentioning.
 
 ---
+## 1.0.0 - 2021-04-13
+- [Fix] Add support Rails 6.0 Zeitwerk autoloader
+- [Breaking] Dropped support for Rails 5 and below
+
 ## 0.30.1 - 2019-08-29
 - [Improvement] Updated bundle
 - [Fix] Fixed tests that was forgotten with a previous change
