@@ -329,4 +329,44 @@ RSpec.describe 'Styleguide', type: :system do
       expect(page).to have_text('Examples of components together')
     end
   end
+
+  describe '/previews' do
+    components = [
+      {
+        name: 'card',
+        content: 'Aspen Snowmass is a winter resort complex located in Pitkin County in western Colorado'
+      },
+      {
+        name: 'collection',
+        content: '20 Mountains you didn\'t know they even existed'
+      },
+      {
+        name: 'header',
+        content: '20 Mountains you didn\'t know they even existed'
+      },
+      {
+        name: 'layout',
+        content: '20 Mountains you didn\'t know they even existed'
+      },
+      {
+        name: 'profile',
+        content: 'Johnny'
+      },
+      {
+        name: 'yielder',
+        content: 'Tell me about the Proc?'
+      }
+    ].freeze
+
+    it 'component previews' do
+      components.each do |component|
+        visit "/design_system/components/#{component[:name]}/preview"
+
+        expect(page).to have_text(component[:name].titleize)
+        within_frame(find("##{component[:name]}-0-0")) do
+          expect(page).to have_content(component[:content])
+        end
+      end
+    end
+  end
 end

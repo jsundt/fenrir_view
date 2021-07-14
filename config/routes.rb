@@ -6,6 +6,7 @@ FenrirView::Engine.routes.draw do
   # Component pages
   get 'components', to: 'styleguide#index', as: 'component_index'
   get 'components/:id', to: 'styleguide#show', as: 'components', defaults: { variant: 'components' }
+  get 'components/:id/preview', to: 'styleguide#preview', as: 'preview', defaults: { variant: 'components' }
 
   # Custom documentation pages
   get ':section(/:page)', to: 'docs#show', as: 'fenrir_docs', constraints: FenrirView::Documentation.new

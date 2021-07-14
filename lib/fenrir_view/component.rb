@@ -16,6 +16,9 @@ module FenrirView
              :stubs_correct_format?,
              :stubs_are_a_hash_with_info?,
              :component_meta_info?,
+             :stub_properties,
+             :yields,
+             :devices,
              to: :examples
 
     delegate :can_access_metrics?, to: :health

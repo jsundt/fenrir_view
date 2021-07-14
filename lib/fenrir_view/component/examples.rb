@@ -77,6 +77,50 @@ module FenrirView
         FenrirView.pattern_type(variant).join(identifier, "#{identifier}.yml")
       end
 
+      def stub_properties
+        component_examples.flat_map do |stub|
+          if (stub[:yields] || stub[:props]).present?
+            [{
+              properties: stub.fetch(:props, nil) || stub.fetch(:properties, {}),
+              yields: stub.fetch(:yields, [])
+            }]
+          elsif stub[:examples]
+            stub.fetch(:examples).map do |example|
+              {
+                properties: example.fetch(:properties, {}),
+                yields: example.fetch(:yields, [])
+              }
+            end
+          else
+            {}
+          end
+        end
+      end
+
+      def yields(array)
+        @yields ||= array.map do |content|
+          OpenStruct.new(
+            key?: content[:key].present?,
+            key: content.fetch(:key, nil)&.to_sym,
+            args: content.fetch(:args, {}),
+            content: content.fetch(:content),
+          )
+        end
+      end
+
+      def devices
+        [
+          OpenStruct.new(
+            width: '320px',
+            height: '500px'
+          ),
+          OpenStruct.new(
+            width: '1200px',
+            height: '500px'
+          )
+        ]
+      end
+
       private
 
       def component_examples
