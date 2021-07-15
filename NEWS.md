@@ -3,6 +3,10 @@
 Changes worth mentioning.
 
 ---
+## 1.1.0 - 2021-07-15
+- [Improvement] Add pry gem to Gemfile
+- [Improvement] Add component preview pages
+
 ## 1.0.0 - 2021-04-13
 - [Fix] Add support Rails 6.0 Zeitwerk autoloader
 - [Breaking] Dropped support for Rails 5 and below
