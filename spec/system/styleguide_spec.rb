@@ -363,9 +363,8 @@ RSpec.describe 'Styleguide', type: :system do
         visit "/design_system/components/#{component[:name]}/preview"
 
         expect(page).to have_text(component[:name].titleize)
-        within_frame(find("##{component[:name]}-0-0")) do
-          expect(page).to have_content(component[:content])
-        end
+
+        expect(page).to have_content(component[:content])
       end
     end
   end

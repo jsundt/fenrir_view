@@ -18,7 +18,6 @@ module FenrirView
              :component_meta_info?,
              :stub_properties,
              :yields,
-             :devices,
              to: :examples
 
     delegate :can_access_metrics?, to: :health

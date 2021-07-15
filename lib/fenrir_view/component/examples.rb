@@ -103,22 +103,9 @@ module FenrirView
             key?: content[:key].present?,
             key: content.fetch(:key, nil)&.to_sym,
             args: content.fetch(:args, {}),
-            content: content.fetch(:content),
+            content: content.fetch(:content)
           )
         end
-      end
-
-      def devices
-        [
-          OpenStruct.new(
-            width: '320px',
-            height: '500px'
-          ),
-          OpenStruct.new(
-            width: '1200px',
-            height: '500px'
-          )
-        ]
       end
 
       private

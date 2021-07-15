@@ -1,53 +1,19 @@
 <h2><%= @component.name.titleize %></h2>
 
-<% @component.stub_properties.each_with_index do |property, property_index| %>
-  <div class="fenrir-view-component-example__examples-wrapper">
-    <% @component.devices.each_with_index do |device, device_index| %>
-        <iframe id="<%= @component.name%>-<%= property_index %>-<%= device_index %>" width="<%= device.width %>" height="<%= device.height %>" name="<%= device.name %>" srcdoc='
-          <script type="text/javascript">
-            window.onload = function() {
-              if (parent) {
-                var oHead = document.getElementsByTagName("head")[0];
-                var arrStyleSheets = parent.document.getElementsByTagName("link");
-                var arrJavaScript = parent.document.getElementsByTagName("script");
-
-                for (var i = 0; i < arrStyleSheets.length; i++) {
-                  oHead.appendChild(arrStyleSheets[i].cloneNode(true));
-                }
-
-                for (var i = 0; i < arrJavaScript.length; i++) {
-                  var script = document.createElement("script");
-                  script.type = "text/javascript";
-
-                  if (arrJavaScript[i].src) {
-                    script.src = arrJavaScript[i].src;
-                    oHead.appendChild(script);
-                  }
-                }
-
-                document.body.classList.add("fenrir-view-component-example__content-body")
-              }
-            }
-          </script>
-          <div>
-              <%= ui_component( @component.name, property.fetch(:properties)) do |layout| %>
-                <% @component.yields(property.fetch(:yields)).each do |content| %>
-                  <% if content.key? && content.args.any? %>
-                    <% layout.public_send(content.key, content.args) do %>
-                      <%= content.content %>
-                    <% end %>
-                  <% elsif content.key? %>
-                    <% layout.public_send(content.key) do %>
-                      <%= content.content %>
-                    <% end %>
-                  <% else %>
-                    <%= content.content %>
-                  <% end %>
-                <% end%>
-              <% end %>
-          </div>
-        '>
-        </iframe>
-    <% end %>
-  </div>
+<% @component.stub_properties.each do |property| %>
+  <%= ui_component( @component.name, property.fetch(:properties)) do |layout| %>
+    <% @component.yields(property.fetch(:yields)).each do |content| %>
+      <% if content.key? && content.args.any? %>
+        <% layout.public_send(content.key, content.args) do %>
+          <%= content.content %>
+        <% end %>
+      <% elsif content.key? %>
+        <% layout.public_send(content.key) do %>
+          <%= content.content %>
+        <% end %>
+      <% else %>
+        <%= content.content %>
+      <% end %>
+    <% end%>
+  <% end %>
 <% end %>
