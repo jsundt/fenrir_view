@@ -1,0 +1,19 @@
+<h2><%= @component.name.titleize %></h2>
+
+<% @component.stub_properties.each do |property| %>
+  <%= ui_component( @component.name, property.fetch(:properties)) do |layout| %>
+    <% @component.yields(property.fetch(:yields)).each do |content| %>
+      <% if content.key? && content.args.any? %>
+        <% layout.public_send(content.key, content.args) do %>
+          <%= content.content %>
+        <% end %>
+      <% elsif content.key? %>
+        <% layout.public_send(content.key) do %>
+          <%= content.content %>
+        <% end %>
+      <% else %>
+        <%= content.content %>
+      <% end %>
+    <% end%>
+  <% end %>
+<% end %>
