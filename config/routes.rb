@@ -3,6 +3,9 @@
 FenrirView::Engine.routes.draw do
   root to: 'docs#index'
 
+  # Accessibility
+  get 'front-end/accessibility', to: 'accessibility#index', as: 'accessibility_index'
+
   # Component pages
   get 'components', to: 'styleguide#index', as: 'component_index'
   get 'components/:id', to: 'styleguide#show', as: 'components', defaults: { variant: 'components' }
