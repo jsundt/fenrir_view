@@ -1,0 +1,8 @@
+<footer class="fenrir-view-accessibility-issue__details">
+  <dl>
+    <% @component.details.items.each do |item| %>
+      <dt style="font-family:monospace"><%= item.node.selector %></dt>
+      <dd><%= item.node.explanation %></dd>
+    <% end %>
+  </dl>
+</footer>

@@ -6,4 +6,11 @@
     <%= " (#{@component.score_as_percentage}% pass, #{@component.failure_as_percentage}% failure)" if @component.show_score? %>
   </h5>
   <p><%= @component.description %></p>
+
+  <% unless @component.debug_data.nil? %>
+    <p>These issues are classified as
+      <strong><%= @component.debug_data.impact %></strong>.</p>
+  <% end %>
+
+  <%= render @component.details_partial if @component.any_details? %>
 </article>

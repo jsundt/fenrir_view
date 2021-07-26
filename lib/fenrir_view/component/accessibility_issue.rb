@@ -5,8 +5,10 @@ module FenrirView
     class AccessibilityIssue
       attr_reader :issue
 
-      delegate :id, :score, :scoreDisplayMode, :title, to: :issue
+      delegate :details, :id, :score, :scoreDisplayMode, :title, to: :issue
+      delegate :debugData, to: :details
 
+      alias debug_data debugData
       alias score_display_mode scoreDisplayMode
 
       EXCLUDED_IDS = %w[
