@@ -1,0 +1,9 @@
+<article class="fenrir-view-accessibility-issue">
+  <h5 data-audit-id="<%= @component.id %>"
+      data-display-mode="<%= @component.score_display_mode %>"
+      data-score="<%= @component.score %>">
+    <%= @component.title %>
+    <%= " (#{@component.score_as_percentage}% pass, #{@component.failure_as_percentage}% failure)" if @component.show_score? %>
+  </h5>
+  <p><%= @component.description %></p>
+</article>
