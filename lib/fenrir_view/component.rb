@@ -4,6 +4,8 @@ module FenrirView
   class Component
     attr_reader :variant, :name, :design_system_policy
 
+    delegate :accessibility_report, to: :accessibility
+
     def initialize(variant, name, design_system_policy: nil)
       @variant = variant
       @name = name
@@ -72,6 +74,13 @@ module FenrirView
         variant: variant,
         component: name,
         examples: examples,
+        design_system_policy: design_system_policy
+      )
+    end
+
+    def accessibility
+      @accessibility ||= FenrirView::Component::Accessibility.new(
+        component: name,
         design_system_policy: design_system_policy
       )
     end

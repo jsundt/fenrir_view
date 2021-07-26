@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 
-require 'fenrir_view/version'
-require 'fenrir_view/configuration'
-require 'fenrir_view/property_types'
-require 'fenrir_view/presenter'
 require 'fenrir_view/component'
-require 'fenrir_view/component/health'
+require 'fenrir_view/component/accessibility_issue'
+require 'fenrir_view/component/accessibility_overview'
+require 'fenrir_view/component/accessibility'
 require 'fenrir_view/component/examples'
+require 'fenrir_view/component/health'
+require 'fenrir_view/configuration'
 require 'fenrir_view/documentation'
 require 'fenrir_view/metrics'
+require 'fenrir_view/presenter'
+require 'fenrir_view/property_types'
+require 'fenrir_view/version'
 
 module FenrirView
   def self.pattern_type(variant)

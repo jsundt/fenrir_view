@@ -30,6 +30,29 @@
         <% end %>
       <% end %>
 
+      <%= system_component('accordion', @component.accessibility.to_accordion) do %>
+        <% if @component.accessibility.show_accessibility? %>
+          <% if @component.accessibility.accessibility_available? %>
+            <p>The accessibility report was last generated on
+              <%= @component.accessibility.report_date.strftime('%A, %B %e, %Y at %H:%M') %>.</p>
+
+            <dl>
+              <% @component.accessibility.audit.each do |audit| %>
+                <dt data-audit-id="<%= audit.id %>">
+                  <%= audit.title %>
+                  <%= " (#{audit.score_as_percentage}% pass, #{audit.failure_as_percentage}% failure)" if audit.show_score? %>
+                </dt>
+                <dd>
+                  <p><%= audit.description %></p>
+                </dd>
+              <% end %>
+            </dl>
+          <% else %>
+            <p class="u-margin--b-0">No accessibility report is available for this component.</p>
+          <% end %>
+        <% end %>
+      <% end %>
+
       <%= system_component('accordion', {
         title: "Component properties",
         style: 'u-bg--white-115 u-color--charcoal spec-component-properties',
