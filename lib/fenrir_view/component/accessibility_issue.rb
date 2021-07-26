@@ -48,12 +48,24 @@ module FenrirView
       end
 
       def description
-        # The audit issues's description often has read more links marked up
+        # The audit issue's description often has read more links marked up
         # with Markdown. We'll use a bit of RegEx to turn them into HTML.
-        issue.description.gsub(%r{
+        CGI.escapeHTML(issue.description).gsub(%r{
           \[( [^\]]+)\]
           \(([^)]+)\)
         }x, '<a href="\2" target="_blank" rel="noopener noreferrer">\1</a>').html_safe
+      end
+
+      def screenshot?(detail)
+        !@screenshot.nil? && !detail.node.boundingRect.nil?
+      end
+
+      def cropped_screenshot(detail)
+        return unless screenshot?(detail)
+
+        @screenshot.cropped(
+          **detail.node.boundingRect.to_h.slice(:width, :height, :top, :left)
+        )
       end
     end
   end
