@@ -57,5 +57,11 @@ RSpec.describe FenrirView::Component::Accessibility do
         expect(subject.audit).to be_nil
       end
     end
+
+    describe '#audit_for_display' do
+      it 'returns nil' do
+        expect(subject.audit_for_display).to be_nil
+      end
+    end
   end
 end

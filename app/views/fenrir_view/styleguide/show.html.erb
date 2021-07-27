@@ -36,7 +36,7 @@
             <p>The accessibility report was last generated on
               <%= @component.accessibility.report_date.strftime('%A, %B %e, %Y at %H:%M') %>.</p>
 
-            <% @component.accessibility.audit.each do |audit| %>
+            <% @component.accessibility.audit_for_display.each do |audit| %>
               <%= system_component('accessibility_issue', { issue: audit }) %>
             <% end %>
           <% else %>

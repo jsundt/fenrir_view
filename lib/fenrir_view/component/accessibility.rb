@@ -49,7 +49,13 @@ module FenrirView
 
         @audit ||= accessibility_report.audits.to_h.map do |_, issue|
           FenrirView::Component::AccessibilityIssue.new(issue: issue)
-        end.select(&:display?)
+        end
+      end
+
+      def audit_for_display
+        return if audit.nil? || audit.length.zero?
+
+        @audit_for_display ||= audit.select(&:display?)
       end
 
       private
