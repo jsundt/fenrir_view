@@ -4,8 +4,9 @@ class FenrirViewAccessibilityIssueFacade < FenrirView::Presenter
   property :issue
 
   delegate :debug_data, :description, :details, :failure_as_percentage, :id,
-           :score, :score_as_percentage, :score_display_mode, :show_score?,
-           :title, to: :issue
+           :score, :score_as_percentage, :score_display_mode,
+           :cropped_screenshot, :screenshot_extension, :screenshot?,
+           :show_score?, :title, to: :issue
 
   def any_details?
     issue.respond_to?(:details)
@@ -26,5 +27,12 @@ class FenrirViewAccessibilityIssueFacade < FenrirView::Presenter
               end
 
     "fenrir_view_accessibility_issue/partials/#{partial}"
+  end
+
+  def explanation_container_styles(detail)
+    styles = ['col-xs-12']
+    styles << 'col-md-9' if screenshot?(detail)
+
+    styles.join(' ')
   end
 end

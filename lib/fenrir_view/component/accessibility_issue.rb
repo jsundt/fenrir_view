@@ -3,10 +3,11 @@
 module FenrirView
   class Component
     class AccessibilityIssue
-      attr_reader :issue
+      attr_reader :issue, :screenshot
 
       delegate :details, :id, :score, :scoreDisplayMode, :title, to: :issue
       delegate :debugData, to: :details
+      delegate :extension, to: :screenshot, prefix: true
 
       alias debug_data debugData
       alias score_display_mode scoreDisplayMode
@@ -20,8 +21,9 @@ module FenrirView
       ].freeze
       EXCLUDED_DISPLAY_MODES = %w[informative manual notApplicable].freeze
 
-      def initialize(issue:)
+      def initialize(issue:, screenshot: nil)
         @issue = issue
+        @screenshot = screenshot
       end
 
       def display?
