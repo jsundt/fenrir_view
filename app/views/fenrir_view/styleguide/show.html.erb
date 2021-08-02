@@ -31,17 +31,15 @@
       <% end %>
 
       <%= system_component('accordion', @component.accessibility.to_accordion) do %>
-        <% if @component.accessibility.show_accessibility? %>
-          <% if @component.accessibility.accessibility_available? %>
-            <p>The accessibility report was last generated on
-              <%= @component.accessibility.report_date.strftime('%A, %B %e, %Y at %H:%M') %>.</p>
+        <% if @component.accessibility.accessibility_available? %>
+          <p>The accessibility report was last generated on
+            <%= @component.accessibility.report_date.strftime('%A, %B %e, %Y at %H:%M') %>.</p>
 
-            <% @component.accessibility.audit_for_display.each do |audit| %>
-              <%= system_component('accessibility_issue', { issue: audit }) %>
-            <% end %>
-          <% else %>
-            <p class="u-margin--b-0">No accessibility report is available for this component.</p>
+          <% @component.accessibility.audit_for_display.each do |audit| %>
+            <%= system_component('accessibility_issue', { issue: audit }) %>
           <% end %>
+        <% else %>
+          <p class="u-margin--b-0">No accessibility report is available for this component.</p>
         <% end %>
       <% end %>
 

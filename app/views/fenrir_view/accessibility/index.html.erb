@@ -1,8 +1,17 @@
 <div class="u-padding--b-50">
   <div class="container-fluid">
     <div class="row u-padding--y-25">
-      <div class="col-xs-12">
-        <h2 class="u-margin--b-50">Components, from least to most accessible</h2>
+      <div class="col-xs-12 col-md-6">
+        <h2  class="u-margin--b-50">Page Reports</h2>
+        <ul>
+          <% @content.page_reports.each do |page| %>
+            <li><%= link_to(page.humanize, accessibility_page_path(page)) %></li>
+          <% end %>
+        </ul>
+     </div>
+
+     <div class="col-xs-12 col-md-6">
+        <h2 class="u-margin--b-50">Component Scores</h2>
         <ol>
           <% @content.sorted_scores.each do |component| %>
             <li><strong><%= component.component.humanize %></strong>: <%= component.overview_score.round(1) %>%</li>

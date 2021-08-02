@@ -5,6 +5,7 @@ FenrirView::Engine.routes.draw do
 
   # Accessibility
   get 'front-end/accessibility', to: 'accessibility#index', as: 'accessibility_index'
+  get 'front-end/accessibility/:page', to: 'accessibility#page', as: 'accessibility_page'
 
   # Component pages
   get 'components', to: 'styleguide#index', as: 'component_index'
