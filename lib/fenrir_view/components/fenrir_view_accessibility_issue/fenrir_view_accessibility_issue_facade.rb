@@ -6,7 +6,14 @@ class FenrirViewAccessibilityIssueFacade < FenrirView::Presenter
   delegate :debug_data, :description, :details, :failure_as_percentage, :id,
            :score, :score_as_percentage, :score_display_mode,
            :cropped_screenshot, :screenshot_extension, :screenshot?,
-           :show_score?, :title, to: :issue
+           :show_score?, to: :issue
+
+  def title
+    [
+      issue.title,
+      ("#{@component.score_as_percentage}% pass, #{@component.failure_as_percentage}% failure)" if show_score?)
+    ].compact.join(' ')
+  end
 
   def any_details?
     issue.respond_to?(:details)

@@ -3,7 +3,6 @@
       data-display-mode="<%= @component.score_display_mode %>"
       data-score="<%= @component.score %>">
     <%= @component.title %>
-    <%= " (#{@component.score_as_percentage}% pass, #{@component.failure_as_percentage}% failure)" if @component.show_score? %>
   </h5>
   <p><%= @component.description %></p>
 
