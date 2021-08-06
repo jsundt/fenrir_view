@@ -1,0 +1,8 @@
+<footer class="fenrir-view-accessibility-issue__details">
+  <dl>
+    <% @component.details.items.each do |item| %>
+      <dt><%= item.sourceLocation.url %></dt>
+      <dd><%= item.description %></dd>
+    <% end %>
+  </dl>
+</footer>

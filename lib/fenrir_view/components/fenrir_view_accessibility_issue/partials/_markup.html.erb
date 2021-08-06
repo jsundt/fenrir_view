@@ -1,0 +1,20 @@
+<footer class="fenrir-view-accessibility-issue__details">
+  <dl>
+    <% @component.details.items.each do |item| %>
+      <dt style="font-family:monospace"><%= item.node.selector %></dt>
+      <dd class="row">
+        <div class="<%= @component.explanation_container_styles(item) %>">
+          <p><%= item.node.explanation %></p>
+        </div>
+
+        <% if @component.screenshot?(item) %>
+          <div class="col-xs-12 col-md-3">
+            <img
+              src="<%= @component.cropped_screenshot(item) %>"
+              class="fenrir-view-accessibility-issue__screenshot"/>
+          </div>
+        <% end %>
+      </dd>
+    <% end %>
+  </dl>
+</footer>

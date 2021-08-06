@@ -71,7 +71,16 @@ RSpec.describe FenrirView::Component::AccessibilityIssue do
 
   describe '#description' do
     it 'converts Markdown links to HTML links' do
-      expect(subject.description).to eq('This is wrong. <a href="https://example.org" target="_blank" rel="noopener noreferrer">Read more</a>.')
+      expect(subject.description).to(
+        eq('This is wrong. <a href="https://example.org" target="_blank" rel="noopener noreferrer">Read more</a>.')
+      )
+    end
+
+    it 'encodes HTML characters that are not a Markdown link' do
+      issue_hash[:description] = '<b>This is wrong</b>. [Read more](https://example.org).'
+      expect(subject.description).to(
+        eq('&lt;b&gt;This is wrong&lt;/b&gt;. <a href="https://example.org" target="_blank" rel="noopener noreferrer">Read more</a>.')
+      )
     end
   end
 end

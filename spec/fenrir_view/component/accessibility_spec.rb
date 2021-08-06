@@ -13,7 +13,7 @@ RSpec.describe FenrirView::Component::Accessibility do
     let(:report) do
       OpenStruct.new({
                        fetchTime: '2021-07-23T10:03:10.394Z',
-                       audits: { something: audit_item }
+                       audits: OpenStruct.new({ something: audit_item })
                      })
     end
 
@@ -33,6 +33,28 @@ RSpec.describe FenrirView::Component::Accessibility do
       it 'returns an array of FenrirView::Component::Accessibility objects' do
         expect(subject.audit).to be_instance_of(Array)
         expect(subject.audit.first).to be_instance_of(FenrirView::Component::AccessibilityIssue)
+      end
+    end
+
+    describe '#screenshot' do
+      context 'with no screenshot' do
+        it 'returns nil' do
+          expect(subject.screenshot).to be_nil
+        end
+      end
+
+      context 'with a screenshot' do
+        let(:screenshot) { OpenStruct.new({ details: OpenStruct.new({ screenshot: OpenStruct.new({ data: '123' }) }) }) }
+        let(:report) do
+          OpenStruct.new({
+                           fetchTime: '2021-07-23T10:03:10.394Z',
+                           audits: OpenStruct.new({ something: audit_item, 'full-page-screenshot': screenshot })
+                         })
+        end
+
+        it 'returns the screenshot' do
+          expect(subject.screenshot).to be_instance_of(FenrirView::Component::AccessibilityScreenshot)
+        end
       end
     end
   end
@@ -55,6 +77,18 @@ RSpec.describe FenrirView::Component::Accessibility do
     describe '#audit' do
       it 'returns nil' do
         expect(subject.audit).to be_nil
+      end
+    end
+
+    describe '#audit_for_display' do
+      it 'returns nil' do
+        expect(subject.audit_for_display).to be_nil
+      end
+    end
+
+    describe '#screenshot' do
+      it 'returns nil' do
+        expect(subject.screenshot).to be_nil
       end
     end
   end

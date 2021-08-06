@@ -48,8 +48,30 @@ module FenrirView
         return unless accessibility_available?
 
         @audit ||= accessibility_report.audits.to_h.map do |_, issue|
-          FenrirView::Component::AccessibilityIssue.new(issue: issue)
-        end.select(&:display?)
+          FenrirView::Component::AccessibilityIssue.new(issue: issue, screenshot: screenshot)
+        end
+      end
+
+      def audit_for_display
+        return if audit.nil? || audit.length.zero?
+
+        @audit_for_display ||= audit.select(&:display?)
+      end
+
+      # Returns the base64 encoded screenshot (.data) as well as it's height and
+      # width (.height and .width).
+      #
+      # Note that because of the format of the report is built we have to call a
+      # method with hyphens in it, hence the use of public_send.
+      def screenshot
+        return if accessibility_report == {} ||
+                  !accessibility_report.audits.respond_to?('full-page-screenshot')
+
+        @screenshot ||= FenrirView::Component::AccessibilityScreenshot.new(
+          screenshot: accessibility_report.audits
+                                          .public_send('full-page-screenshot')
+                                          .details.screenshot
+        )
       end
 
       private

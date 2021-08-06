@@ -3,10 +3,13 @@
 module FenrirView
   class Component
     class AccessibilityIssue
-      attr_reader :issue
+      attr_reader :issue, :screenshot
 
-      delegate :id, :score, :scoreDisplayMode, :title, to: :issue
+      delegate :details, :id, :score, :scoreDisplayMode, :title, to: :issue
+      delegate :debugData, to: :details
+      delegate :extension, to: :screenshot, prefix: true
 
+      alias debug_data debugData
       alias score_display_mode scoreDisplayMode
 
       EXCLUDED_IDS = %w[
@@ -18,8 +21,9 @@ module FenrirView
       ].freeze
       EXCLUDED_DISPLAY_MODES = %w[informative manual notApplicable].freeze
 
-      def initialize(issue:)
+      def initialize(issue:, screenshot: nil)
         @issue = issue
+        @screenshot = screenshot
       end
 
       def display?
@@ -48,12 +52,24 @@ module FenrirView
       end
 
       def description
-        # The audit issues's description often has read more links marked up
+        # The audit issue's description often has read more links marked up
         # with Markdown. We'll use a bit of RegEx to turn them into HTML.
-        issue.description.gsub(%r{
+        CGI.escapeHTML(issue.description).gsub(%r{
           \[( [^\]]+)\]
           \(([^)]+)\)
         }x, '<a href="\2" target="_blank" rel="noopener noreferrer">\1</a>').html_safe
+      end
+
+      def screenshot?(detail)
+        !@screenshot.nil? && !detail.node.boundingRect.nil?
+      end
+
+      def cropped_screenshot(detail)
+        return unless screenshot?(detail)
+
+        @screenshot.cropped(
+          **detail.node.boundingRect.to_h.slice(:width, :height, :top, :left)
+        )
       end
     end
   end

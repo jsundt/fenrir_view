@@ -1,0 +1,14 @@
+<footer class="fenrir-view-accessibility-issue__details">
+  <dl>
+    <% @component.details.items.each do |item| %>
+      <dt><%= item.scriptUrl %></dt>
+      <dd>
+        <ul class="u-padding--t-25">
+          <% item.subItems.items.each do |sub_item| %>
+            <li><%= sub_item.error %></li>
+          <% end %>
+        </ul>
+      </dd>
+    <% end %>
+  </dl>
+</footer>

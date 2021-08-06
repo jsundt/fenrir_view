@@ -16,6 +16,7 @@ rails = case rails_version
         end
 
 gem "rails", rails
+gem "mini_magick"
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 6.0'
