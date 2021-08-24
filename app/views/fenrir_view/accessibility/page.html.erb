@@ -1,0 +1,31 @@
+<div class="u-padding--b-50">
+  <div class="container-fluid">
+    <div class="row u-padding--y-25">
+      <h2 class="col-xs-12"><%= @content.page.humanize %> Accessibility</h2>
+
+      <% if @content.desktop_report? %>
+        <section class="col-xs-12 col-md-8 u-margin--b-50">
+          <header class="u-margin--b-25">
+            <h3>Desktop Report</h3>
+          </header>
+
+          <% @content.desktop_report.audit_for_display.each do |audit| %>
+            <%= system_component('accessibility_issue', { issue: audit }) %>
+          <% end %>
+        </section>
+      <% end %>
+
+      <% if @content.mobile_report? %>
+        <section class="col-xs-12 col-md-8">
+          <header class="u-margin--b-25">
+            <h3>Mobile Report</h3>
+          </header>
+
+          <% @content.mobile_report.audit_for_display.each do |audit| %>
+            <%= system_component('accessibility_issue', { issue: audit }) %>
+          <% end %>
+        </section>
+      <% end %>
+    </div>
+  </div>
+</div>

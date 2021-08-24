@@ -98,7 +98,7 @@ module FenrirView
       end
 
       def yields(array)
-        @yields ||= array.map do |content|
+        array.map do |content|
           OpenStruct.new(
             key?: content[:key].present?,
             key: content.fetch(:key, nil)&.to_sym,
