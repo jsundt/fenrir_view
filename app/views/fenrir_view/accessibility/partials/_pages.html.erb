@@ -1,0 +1,11 @@
+<section class="col-xs-12 col-md-6">
+  <header>
+    <h2  class="u-margin--b-50">Page Reports</h2>
+  </header>
+
+  <ul class="list--multicol">
+    <% @content.page_reports.each do |page| %>
+      <li><%= link_to(page.humanize, accessibility_page_path(page)) %></li>
+    <% end %>
+  </ul>
+</section>

@@ -1,0 +1,27 @@
+<section class="col-xs-12 col-md-6">
+  <header>
+    <h2 class="u-margin--b-50">Components</h2>
+  </header>
+
+  <h3>Overall score</h3>
+  <p>This measure uses the average score of all components to give an indication
+    of their overall accessibility.</p>
+
+  <div class="row">
+    <div class="col-xs-10">
+      <progress id="component-progress" class="component-progress u-margin--b-25" value="<%= @content.overall_score.round %>" max="100">
+        <%= @content.overall_score.round %>%
+      </progress>
+    </div>
+    <label for="component-progress" class="col-xs-2">
+      <%= @content.overall_score.round %>%
+    </label>
+  </div>
+
+  <h3>Lowest <acronym title="accessibility">a11y</acronym> scores</h3>
+  <ol>
+    <% @content.sorted_scores.first(10).each do |component| %>
+      <li><strong><%= component.component.humanize %></strong>: <%= component.overview_score.round(1) %>%</li>
+    <% end %>
+  </ol>
+</section>
