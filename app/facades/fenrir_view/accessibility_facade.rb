@@ -12,6 +12,12 @@ module FenrirView
       sorted_scores.sum(&:overview_score) / sorted_scores.length
     end
 
+    def colour_issues_count
+      page_reports.sum do |page|
+        FenrirView::PageAccessibilityFacade.new(page: page).desktop_report.colour_issues_count
+      end
+    end
+
     def page_reports
       (desktop_report_paths + mobile_report_paths).map do |path|
         path

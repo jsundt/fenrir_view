@@ -59,6 +59,10 @@ module FenrirView
       overview_scores&.best_practices
     end
 
+    def colour_issues_count
+      accessibility_report.audits.public_send('color-contrast')&.details&.items&.length || 0
+    end
+
     def healthy_score?
       overview_score > 90
     end
