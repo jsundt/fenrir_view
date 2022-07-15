@@ -1,0 +1,21 @@
+<section class="col-xs-12 col-md-6">
+  <header>
+    <h2 class="u-margin--b-50">Pages</h2>
+  </header>
+
+  <h3>Combinded Stats</h3>
+  <p>These are generalised stats calculated across all desktop reports. You can
+    view Individual reports below.</p>
+
+  <dl>
+    <dt>Colour Issues</dt>
+    <dd><%= @content.colour_issues_count %></dd>
+  </dl>
+
+  <h3>Individual Reports</h3>
+  <ul class="list--multicol">
+    <% @content.page_reports.each do |page| %>
+      <li><%= link_to(page.humanize, accessibility_page_path(page)) %></li>
+    <% end %>
+  </ul>
+</section>

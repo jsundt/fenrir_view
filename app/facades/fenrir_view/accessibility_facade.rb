@@ -8,13 +8,23 @@ module FenrirView
       end.reject { |c| c.overview_score.nil? }.sort_by(&:overview_score)
     end
 
+    def overall_score
+      sorted_scores.sum(&:overview_score) / sorted_scores.length
+    end
+
+    def colour_issues_count
+      page_reports.sum do |page|
+        FenrirView::PageAccessibilityFacade.new(page: page).desktop_report.colour_issues_count
+      end
+    end
+
     def page_reports
       (desktop_report_paths + mobile_report_paths).map do |path|
         path
           .gsub(Rails.root.join('lib/design_system/accessibility/desktop/').to_s, '')
           .gsub(Rails.root.join('lib/design_system/accessibility/mobile/').to_s, '')
           .gsub('.json', '')
-      end.uniq
+      end.uniq.sort_by(&:humanize)
     end
 
     private
