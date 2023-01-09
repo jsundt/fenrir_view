@@ -5,11 +5,11 @@ require 'rails_helper'
 RSpec.describe FenrirView::PropertyTypes do
   let(:mock_instance) do
     lambda { |instance_props, component_props|
-      FenrirView::PropertyTypes.new({
+      FenrirView::PropertyTypes.new(
                                       component_class: CardFacade,
                                       component_properties: component_props,
                                       instance_properties: instance_props,
-                                    })
+                                    )
     }
   end
 
@@ -25,7 +25,7 @@ RSpec.describe FenrirView::PropertyTypes do
 
   describe 'Presenter initializes validator' do
     let(:card_facade_property_types) {
-      FenrirView::Presenter.component_for('component', 'card', {
+      FenrirView::Presenter.component_for(variant: 'component', slug: 'card', properties: {
         title: 'everything',
       }, validate: true).send(:property_types)
     }

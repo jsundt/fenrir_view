@@ -12,7 +12,7 @@ RSpec.describe FenrirView::Metrics do
     allow(subject).to receive(:puts).and_return(nil)
     allow(subject).to receive(:printf).and_return(nil)
     allow(subject).to receive(:metrics_file) do
-      Dir.mkdir('tmp') unless File.exists?('tmp')
+      Dir.mkdir('tmp') unless File.exist?('tmp')
 
       File.new(path_to_metrics_file, 'w')
     end
