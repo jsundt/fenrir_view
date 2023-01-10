@@ -5,7 +5,7 @@ module FenrirView
     def ui_component(slug, properties = {}, &_block)
       return nil if properties == false
 
-      component = FenrirView::Presenter.component_for('components', slug, properties, validate: true)
+      component = FenrirView::Presenter.component_for(variant: 'components', slug: slug, properties: properties, validate: true)
 
       if block_given?
         if component.respond_to?(:layout)
@@ -29,7 +29,7 @@ module FenrirView
     def system_component(slug, properties = {}, &_block)
       return nil if properties == false
 
-      component = FenrirView::Presenter.component_for('system', "fenrir_view_#{slug}", properties, validate: true)
+      component = FenrirView::Presenter.component_for(variant: 'system', slug: "fenrir_view_#{slug}", properties: properties, validate: true)
 
       component.render(controller.view_context) do
         capture { yield } if block_given?

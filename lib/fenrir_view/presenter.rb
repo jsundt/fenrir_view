@@ -9,7 +9,7 @@ module FenrirView
 
     attr_reader :variant, :slug, :properties
 
-    def initialize(variant, slug, properties = {}, validate: true)
+    def initialize(variant:, slug:, properties: {}, validate: true)
       @variant = variant
       @slug = slug
       @properties = default_properties.deep_merge(properties)
@@ -56,11 +56,11 @@ module FenrirView
     class MissingFacadeError < ArgumentError; end
 
     class << self
-      def component_for(*args)
-        klass = "#{args.second.to_s.camelize}Facade".safe_constantize
-        raise ::FenrirView::Presenter::MissingFacadeError.new("Could not find component: #{args.first.to_s}: #{args.second.to_s}") unless !!klass
+      def component_for(args)
+        klass = "#{args[:slug].to_s.camelize}Facade".safe_constantize
+        raise ::FenrirView::Presenter::MissingFacadeError.new("Could not find component: #{args[:variant].to_s}: #{args[:slug].to_s}") unless !!klass
 
-        klass.new(*args)
+        klass.new(**args)
       end
 
       def properties(*args)

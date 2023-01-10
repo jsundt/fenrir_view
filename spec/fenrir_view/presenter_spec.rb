@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe FenrirView::Presenter do
   describe 'Presenter class' do
-    let(:mock_presenter_class) { FenrirView::Presenter.new('component', 'base', {}, validate: false) }
+    let(:mock_presenter_class) { FenrirView::Presenter.new(variant: 'component', slug: 'base', properties: {}, validate: false) }
 
     it 'initializes with correct variables' do
       expect(mock_presenter_class.variant).to eq('component')
@@ -19,7 +19,7 @@ RSpec.describe FenrirView::Presenter do
 
   describe '#component_for initilizes facade inheriting presenter' do
     let(:dummy_card_facade) {
-      FenrirView::Presenter.component_for('component', 'card', { title: 'everything' }, validate: false)
+      FenrirView::Presenter.component_for(variant: 'component', slug: 'card', properties: { title: 'everything' }, validate: false)
     }
 
     it 'finds correct component facade' do
@@ -89,7 +89,7 @@ RSpec.describe FenrirView::Presenter do
 
     describe '#validate_properties' do
       let(:invalid_card_facade) {
-        FenrirView::Presenter.component_for('component', 'card', { not_a_property: 'everything' }, validate: false)
+        FenrirView::Presenter.component_for(variant: 'component', slug: 'card', properties: { not_a_property: 'everything' }, validate: false)
       }
 
       it 'validates correctly if validations are met' do

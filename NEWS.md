@@ -3,6 +3,11 @@
 Changes worth mentioning.
 
 ---
+## 1.3.1 - 2023-01-09
+- [Fix] Fixed keyword argument depreciation warnings for Ruby 3.
+- [Improvement] Updated webdrivers gem from 4.0 to 5.2.0, fixes issues running selenium specs on an M1 Mac
+- [Fix] Update config to fix CI build failure
+
 ## 1.3.0 - 2021-08-11
 - [Improvement] Add Accessibility Reports for pages
 - [Fix] Fixed bug in the component preview pages

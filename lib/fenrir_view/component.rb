@@ -96,7 +96,7 @@ module FenrirView
     private
 
     def component_facade
-      @component_facade ||= FenrirView::Presenter.component_for(variant, component_identifier, {}, validate: false)
+      @component_facade ||= FenrirView::Presenter.component_for(variant: variant, slug: component_identifier, properties: {}, validate: false)
     rescue FenrirView::Presenter::MissingFacadeError
       false
     end
